@@ -5,8 +5,8 @@ using UnityEngine;
 public class RewindPrototype : MonoBehaviour {
     private Stack<CharacterMemento> stateHistory = new Stack<CharacterMemento>();
     private float recordDelay = 0.05f;
-    private IEnumerator record;
-    private IEnumerator rewind;
+    private Coroutine record;
+    private Coroutine rewind;
     private bool isRecordRunning = false;
     private bool isRewindRunning = false;
     private Vector3 rewindVelocity;
@@ -14,31 +14,22 @@ public class RewindPrototype : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        record = Record();
-        rewind = Rewind();
         rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).magnitude > 0)
+        if (!isRecordRunning && !isRewindRunning)
         {
-            if(!isRecordRunning){
-                StartCoroutine(record);
-                isRecordRunning = true;
-            }
-        }
-        else
-        {
-            StopCoroutine(record);
-            isRecordRunning = false;
+            record = StartCoroutine(Record());
+            isRecordRunning = true;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             if (stateHistory.Count > 0) {
                 StopCoroutine(record);
                 isRecordRunning = false;
-                StartCoroutine(rewind);
+                rewind = StartCoroutine(Rewind());
                 rb.isKinematic = true;
                 isRewindRunning = true;
             }
@@ -70,6 +61,7 @@ public class RewindPrototype : MonoBehaviour {
 
     IEnumerator Rewind()
     {
+        print("---------------");
         Vector3 startPos = Vector3.zero;
         Vector3 nextPos = Vector3.zero;
         float i = 0;
@@ -77,12 +69,12 @@ public class RewindPrototype : MonoBehaviour {
         {
             if (stateHistory.Count > 0)
             {
-                if(i == 0){
+                if(i == 0){ 
                     startPos = transform.position;
                     nextPos = stateHistory.Pop().GetPos();
+                    print("pos : " + startPos + " nextpos : " + nextPos);
                 }
                 transform.position = Vector3.Lerp(startPos, nextPos, i);
-                //transform.position = stateHistory.Pop().GetPos();
             }
             else
             {
