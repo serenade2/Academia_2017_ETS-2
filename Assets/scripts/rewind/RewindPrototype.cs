@@ -3,97 +3,123 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RewindPrototype : MonoBehaviour {
-    private Stack<CharacterMemento> stateHistory = new Stack<CharacterMemento>();
+    private Stack<IRewindMemento> stateHistory = new Stack<IRewindMemento>();
+
     private float recordDelay = 0.05f;
+
+    Vector3 startPos;
+    Vector3 nextPos;
+
     private Coroutine record;
     private Coroutine rewind;
-    private bool isRecordRunning = false;
-    private bool isRewindRunning = false;
-    private Vector3 rewindVelocity;
     private Rigidbody rb;
+    public int memento = 0;
+    private RewindMementoFactory rewindMementoFactory = new RewindMementoFactory();
+    private bool isRewinding = false;
 
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
+
+        //Start recording
+        record = StartCoroutine(Record());
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (!isRecordRunning && !isRewindRunning)
+
+        if (Input.GetKeyDown(KeyCode.Joystick2Button4))
         {
-            record = StartCoroutine(Record());
-            isRecordRunning = true;
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (stateHistory.Count > 0) {
-                StopCoroutine(record);
-                isRecordRunning = false;
-                rewind = StartCoroutine(Rewind());
-                rb.isKinematic = true;
-                isRewindRunning = true;
+            //Stop recording
+            StopCoroutine(record);
+
+            //Start rewinding
+            rewind = StartCoroutine(Rewind());
+
+            //Deactivate physic
+            rb.isKinematic = true;
+            if (memento == 1)
+            {
+                GetComponent<RewindMovement>().CanMove(false);
             }
-        }else if(Input.GetKeyUp(KeyCode.R)){
+
+        }else if(Input.GetKeyUp(KeyCode.Joystick2Button4)){
+            //Stop rewinding
             StopCoroutine(rewind);
+
+            //Start recording
+            record = StartCoroutine(Record());
+
+            //Activate physic
             rb.isKinematic = false;
-            isRewindRunning = false;
+
+            if (memento == 1)
+            {
+                GetComponent<RewindMovement>().CanMove(true);
+            }
+
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick2Button1))
+        {
+            //Stop recording
+            StopCoroutine(record);
+
+            //Stop rewinding
+            if(rewind != null)
+                StopCoroutine(rewind);
+
+            if (memento == 1)
+            {
+                GetComponent<RewindMovement>().CanMove(false);
+            }
+
+        }
+        else if (Input.GetKeyUp(KeyCode.Joystick2Button1))
+        {
+            //Start recording
+            record = StartCoroutine(Record());
+
+            if (memento == 1)
+            {
+                GetComponent<RewindMovement>().CanMove(true);
+            }
+
         }
 
 	}
 
-    private CharacterMemento ToMemento()
-    {
-        return new CharacterMemento(transform.position);
-    }
-
-    private void FromMemento(CharacterMemento memento)
-    {
-        this.transform.position = memento.GetPos();
-    }
-
     IEnumerator Record()
     {
         while (true){
-            stateHistory.Push(ToMemento());
+            stateHistory.Push(rewindMementoFactory.MakeRewindMemento(memento,gameObject));
             yield return new WaitForSeconds(recordDelay);
         }
     }
 
     IEnumerator Rewind()
     {
-        print("---------------");
-        Vector3 startPos = Vector3.zero;
-        Vector3 nextPos = Vector3.zero;
-        float i = 0;
         while (true)
         {
             if (stateHistory.Count > 0)
             {
-                if(i == 0){ 
-                    startPos = transform.position;
-                    nextPos = stateHistory.Pop().GetPos();
-                    print("pos : " + startPos + " nextpos : " + nextPos);
-                }
-                transform.position = Vector3.Lerp(startPos, nextPos, i);
+                stateHistory.Pop().RestoreFromMemento(gameObject);
             }
             else
             {
+                //Stop rewinding
                 StopCoroutine(rewind);
-                isRewindRunning = false;
-            }
-            i += 0.25f;
-            if(i > 1){
-                i = 0;
+                if (memento == 1)
+                {
+                    GetComponent<RewindMovement>().CanMove(true);
+                }
+
+                rb.isKinematic = false;
             }
 
             yield return new WaitForSeconds(0.01f);
         }
     }
-
-    /*Play()
-    {
-       stateHistory
-    }*/
 
     void Pause()
     {
@@ -102,13 +128,7 @@ public class RewindPrototype : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (!isRewindRunning)
-        {
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal") * 2, rb.velocity.y, Input.GetAxis("Vertical") * 2);
-        }
-        else
-        {
-
-        }
+        if(memento == 0)
+            rb.velocity = new Vector3(Input.GetAxis("Horizontal1") * 1f, rb.velocity.y, Input.GetAxis("Vertical1") * 1f);
     }
 }

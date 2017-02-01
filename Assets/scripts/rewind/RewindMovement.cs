@@ -1,18 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class RewindMovement : MonoBehaviour {
     public float walkingSpeed = 2f;
-    private Rigidbody rb;
+    public NavMeshAgent agent;
+    public Transform[] pathNodes;
+    private bool hasChangedPath = false;
 
 	// Use this for initialization
 	void Start () {
-        rb = GetComponent<Rigidbody>();
+        agent.SetDestination(pathNodes[Random.Range(1, 5)].position);
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-	   // rb.velocity = new Vector3(Input.GetAxis("Horizontal") * walkingSpeed,rb.velocity.y,Input.GetAxis("Vertical") * walkingSpeed);
+        if (agent.remainingDistance == 0 && hasChangedPath == false)
+        {
+            hasChangedPath = true;
+            Invoke("MoveAgain",Random.Range(1,5));
+        }
 	}
+
+    public void CanMove(bool canMove)
+    {
+        if (canMove)
+        {
+            agent.Resume();
+        }
+        else
+        {
+            agent.Stop();
+        }
+    }
+
+    public void MoveAgain()
+    {
+        hasChangedPath = false;
+        agent.ResetPath();
+        agent.SetDestination(pathNodes[Random.Range(0, pathNodes.Length)].position);
+    }
 }
