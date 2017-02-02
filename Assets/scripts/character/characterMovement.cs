@@ -2,26 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class characterMovement : MonoBehaviour, IRewindable {
+public class CharacterMovement : MonoBehaviour, IRewindable
+{
     private bool canMove = true;
+    private Rigidbody rb;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (canMove)
-            transform.Translate(Input.GetAxis("Horizontal1") * Time.deltaTime, 0, Input.GetAxis("Vertical1") * Time.deltaTime);
-	}
+        {
+            rb.velocity = new Vector3(Input.GetAxis("Horizontal1"), rb.velocity.y, Input.GetAxis("Vertical1"));
+        }
+    }
 
     public void Rewind(bool isRewinding)
     {
-        if(isRewinding)
+        if (isRewinding)
+        {
             canMove = false;
+            rb.isKinematic = true;
+        }
         else
+        {
             canMove = true;
+            rb.isKinematic = false;
+        }
     }
 
     public void Pause(bool isPaused)

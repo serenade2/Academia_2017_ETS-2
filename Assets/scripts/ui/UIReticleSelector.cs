@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UISelection : MonoBehaviour {
+public class UIReticleSelector : MonoBehaviour {
     public GameObject reticle;
     public Color color;
     public LayerMask layer;
@@ -46,4 +46,3 @@ public class UISelection : MonoBehaviour {
         }
     }
 }
-

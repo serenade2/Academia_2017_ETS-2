@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RewindPrototype : MonoBehaviour {
+public class Rewindable : MonoBehaviour {
     List<IRewindable> rewindables = new List<IRewindable>(); //Contains every script that implements rewindable
 
     //Memento
-    private Stack<IRewindMemento> stateHistory = new Stack<IRewindMemento>();
+    private LinkedList<IRewindMemento> stateHistory = new LinkedList<IRewindMemento>();
     private RewindMementoFactory rewindMementoFactory = new RewindMementoFactory();
     public RewindMementoFactory.Type memento = 0; //The memento to use with the memento factory;
 
     private float recordDelay = 0.1f; //Recording frequency -> higher value = faster replay
+    private float recordMaxTime = 5f;
 
     //Coroutines
     private Coroutine record;
     private Coroutine rewind;
- 
+
     private bool isRewinding = false;
     private bool isRecording = false;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         //Start recording
         record = StartCoroutine(Record());
         isRecording = true;
@@ -30,30 +32,12 @@ public class RewindPrototype : MonoBehaviour {
         {
             rewindables.Add(rewindable);
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    }
 
-        if (Input.GetKeyDown(KeyCode.Joystick2Button4))
-        {
-            StartRewind();
-
-        }else if(Input.GetKeyUp(KeyCode.Joystick2Button4)){
-            StopRewind();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Joystick2Button1))
-        {
-            StartPause();
-
-        }
-        else if (Input.GetKeyUp(KeyCode.Joystick2Button1))
-        {
-            StopPause();
-        }
-
-	}
+    // Update is called once per frame
+    void Update()
+    {
+    }
 
     public void StartRewind()
     {
@@ -88,20 +72,22 @@ public class RewindPrototype : MonoBehaviour {
         }
     }
 
-    public void StartPause(){
+    public void StartPause()
+    {
         //Stop recording
         StopCoroutine(record);
 
         //Stop rewinding
-        if(rewind != null)
-        StopCoroutine(rewind);
+        if (rewind != null)
+            StopCoroutine(rewind);
         foreach (IRewindable rewindable in rewindables)
         {
             rewindable.Pause(true);
         }
     }
 
-    public void StopPause(){
+    public void StopPause()
+    {
         //Start recording
         record = StartCoroutine(Record());
         foreach (IRewindable rewindable in rewindables)
@@ -113,8 +99,15 @@ public class RewindPrototype : MonoBehaviour {
 
     IEnumerator Record()
     {
-        while (true){
-            stateHistory.Push(rewindMementoFactory.MakeRewindMemento(memento,gameObject));
+        while (true)
+        {
+            if (stateHistory.Count < recordMaxTime / recordDelay)
+                stateHistory.AddLast(rewindMementoFactory.MakeRewindMemento(memento, gameObject));
+            else
+            {
+                stateHistory.RemoveFirst();
+                stateHistory.AddLast(rewindMementoFactory.MakeRewindMemento(memento, gameObject));
+            }
             yield return new WaitForSeconds(recordDelay);
         }
     }
@@ -125,7 +118,8 @@ public class RewindPrototype : MonoBehaviour {
         {
             if (stateHistory.Count > 0)
             {
-                stateHistory.Pop().RestoreFromMemento(gameObject);
+                stateHistory.Last.Value.RestoreFromMemento(gameObject);
+                stateHistory.RemoveLast();
             }
             else
             {
