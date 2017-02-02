@@ -37,7 +37,7 @@ public class PlayerController : NetworkBehaviour
         }
         if ( Input.GetKeyDown(KeyCode.Space) )
         {
-            Fire();
+            CmdFire();
         }
         var x = Input.GetAxis("Horizontal") * Time.deltaTime * HorizontalSensitivity;
         var z = Input.GetAxis("Vertical") * Time.deltaTime * VerticalSensitivity;
@@ -46,13 +46,17 @@ public class PlayerController : NetworkBehaviour
         transform.Translate(0, 0, z);
     }
 
-    void Fire()
+    [Command]
+    void CmdFire()
     {
         // Create the Bullet from the Bullet Prefab
         GameObject bullet = (GameObject)Instantiate(BulletPrefab, BulletSpawn.position, BulletSpawn.rotation);
 
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * BulletVelocity;
+
+        // Spawn the bullet prefab on the server so that the other clients can see the bullet instantiation.
+        NetworkServer.Spawn(bullet);
 
         // Destroy the bullet after 2 seconds
         Destroy(bullet, 2.0f);
