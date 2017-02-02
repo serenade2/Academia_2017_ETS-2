@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TagAI : MonoBehaviour {
+public class TagCharacter : MonoBehaviour {
+
     public GameObject character;
     public TrailRenderer trail;
-    private Material material;
+    private Material material; //The GameObject material
     private Color startColor;
     private bool isTagged = false;
-    
 
-	// Use this for initialization
-	void Start () {
-		material = character.GetComponent<Renderer>().material;
+    // Use this for initialization
+    void Start()
+    {
+        material = character.GetComponent<Renderer>().material;
         startColor = character.GetComponent<Renderer>().material.color;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void Tag(Color color)
     {
