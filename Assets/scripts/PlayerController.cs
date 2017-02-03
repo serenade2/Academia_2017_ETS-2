@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/**
+The following code have been inpired by the basic networking tutorial provided by Unity3d.
+ source : https://unity3d.com/learn/tutorials/topics/multiplayer-networking
+¸*/
+
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
