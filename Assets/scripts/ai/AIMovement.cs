@@ -1,0 +1,93 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+
+public class AIMovement : MonoBehaviour, IRewindable {
+    public GameObject[] objectives;
+    private UnityEngine.AI.NavMeshAgent agent;
+    private bool hasChangedPath = false; //Verify if path has changed for a new one
+    private IEnumerator working;
+    private bool isWorking = false;
+
+    // Use this for initialization
+    void Start()
+    {
+        //Assign new coroutine
+        working = Working();
+
+        //Set agent
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent.SetDestination(objectives[Random.Range(1, objectives.Length)].transform.position);
+    }
+
+    // Update is called once per frame
+    void LateUpdate()
+    {
+
+        //When destination is reached
+        if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending)
+        {
+            hasChangedPath = true;
+
+            //Starts working timer
+            working = Working();
+            StartCoroutine(working);
+        }
+    }
+
+    public void ChangeDestination()
+    {
+        hasChangedPath = false;
+        agent.ResetPath();
+        agent.SetDestination(objectives[Random.Range(0, objectives.Length)].transform.position);
+    }
+
+    public void Rewind(bool isRewinding)
+    {
+        if (isRewinding) 
+        {
+            agent.Stop();
+            StopCoroutine(working);
+            isWorking = false;
+            hasChangedPath = false;
+        }
+        else
+        {
+            agent.Resume();
+        }
+    }
+
+    public void Pause(bool isPaused)
+    {
+        if (isPaused)
+        {
+            agent.Stop();
+            StopCoroutine(working);
+        }
+        else
+        {
+            agent.Resume();
+            if (isWorking)
+            {
+                StartCoroutine(working);
+            }
+        }
+    }
+
+    public void FastForward(bool isFastForwarding)
+    {
+
+    }
+
+    IEnumerator Working()
+    {
+        isWorking = true;
+        for (int i = 0; i < Random.Range(3,5); i++)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        ChangeDestination();
+        isWorking = false;
+    }
+}
