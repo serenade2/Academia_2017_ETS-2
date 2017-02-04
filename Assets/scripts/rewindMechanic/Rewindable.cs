@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Rewindable : MonoBehaviour {
+using UnityEngine.Networking;
+public class Rewindable : NetworkBehaviour {
     List<IRewindable> rewindables = new List<IRewindable>(); //Contains every script that implements rewindable
 
     //Memento

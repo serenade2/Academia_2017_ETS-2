@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 
-public class AIMovement : MonoBehaviour, IRewindable {
+public class AIMovement : NetworkBehaviour, IRewindable {
     public GameObject[] objectives;
     private UnityEngine.AI.NavMeshAgent agent;
     private bool hasChangedPath = false; //Verify if path has changed for a new one
@@ -11,20 +12,29 @@ public class AIMovement : MonoBehaviour, IRewindable {
     private bool isWorking = false;
 
     // Use this for initialization
-    void Start()
+    public override void OnStartServer()
     {
+        if (!isServer)
+        {
+            return;
+        }
         //Assign new coroutine
         working = Working();
 
         //Set agent
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.SetDestination(objectives[Random.Range(1, objectives.Length)].transform.position);
+
+        //NetworkServer.Spawn(gameObject);
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-
+        if (!isServer)
+        {
+            return;
+        }
         //When destination is reached
         if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending)
         {
@@ -38,6 +48,10 @@ public class AIMovement : MonoBehaviour, IRewindable {
 
     public void ChangeDestination()
     {
+        if (!isServer)
+        {
+            return;
+        }
         hasChangedPath = false;
         agent.ResetPath();
         agent.SetDestination(objectives[Random.Range(0, objectives.Length)].transform.position);
@@ -45,6 +59,10 @@ public class AIMovement : MonoBehaviour, IRewindable {
 
     public void Rewind(bool isRewinding)
     {
+        if (!isServer)
+        {
+            return;
+        }
         if (isRewinding) 
         {
             agent.Stop();
@@ -60,6 +78,10 @@ public class AIMovement : MonoBehaviour, IRewindable {
 
     public void Pause(bool isPaused)
     {
+        if (!isServer)
+        {
+            return;
+        }
         if (isPaused)
         {
             agent.Stop();
@@ -77,7 +99,10 @@ public class AIMovement : MonoBehaviour, IRewindable {
 
     public void FastForward(bool isFastForwarding)
     {
-
+        if (!isServer)
+        {
+            return;
+        }
     }
 
     IEnumerator Working()
