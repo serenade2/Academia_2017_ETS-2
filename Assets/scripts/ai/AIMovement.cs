@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 
-public class AIMovement : MonoBehaviour, IRewindable {
+public class AIMovement : NetworkBehaviour, IRewindable
+{
     public GameObject[] objectives;
     private UnityEngine.AI.NavMeshAgent agent;
     private bool hasChangedPath = false; //Verify if path has changed for a new one
@@ -13,6 +16,8 @@ public class AIMovement : MonoBehaviour, IRewindable {
     // Use this for initialization
     void Start()
     {
+        objectives = GameObject.FindGameObjectsWithTag("PathNode");
+
         //Assign new coroutine
         working = Working();
 
@@ -45,7 +50,7 @@ public class AIMovement : MonoBehaviour, IRewindable {
 
     public void Rewind(bool isRewinding)
     {
-        if (isRewinding) 
+        if (isRewinding)
         {
             agent.Stop();
             StopCoroutine(working);
@@ -83,7 +88,7 @@ public class AIMovement : MonoBehaviour, IRewindable {
     IEnumerator Working()
     {
         isWorking = true;
-        for (int i = 0; i < Random.Range(3,5); i++)
+        for (int i = 0; i < Random.Range(3, 5); i++)
         {
             yield return new WaitForSeconds(1f);
         }
