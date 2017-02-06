@@ -35,14 +35,17 @@ public class InteractionManager : MonoBehaviour {
 
     private void UpdateProgress() {
         float ratio = currentProgress / MAX_PROGRESS;
-        ProgressBar.rectTransform.localScale = new Vector3(ratio,1,1);
+        ProgressBar.fillAmount = ratio;
+        //ProgressBar.rectTransform.localScale = new Vector3(ratio,1,1);
     }
 
     public void inProgress(float progressFactor) {
+        
         currentProgress += progressFactor;
         if (currentProgress > MAX_PROGRESS) {
             currentProgress = MAX_PROGRESS;
             UpdateProgress();
+Debug.Log("inProgress");
             if (currentProgress == MAX_PROGRESS) {
                 resetProgress();
             }

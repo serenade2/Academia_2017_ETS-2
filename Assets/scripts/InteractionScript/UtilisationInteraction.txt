@@ -1,0 +1,8 @@
+Comment utiliser le UI d'intéraction :
+
+- Placer le TriggerZoneUI_V1 ou TriggerZoneUI_V2 sur un élément de votre jeux.
+- Tout devrais être configurer
+
+pour en crée un avec les élément interaction script : 
+
+	- Dans la hiérarchie  

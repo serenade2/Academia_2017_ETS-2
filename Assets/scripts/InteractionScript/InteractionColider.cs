@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractionColider : MonoBehaviour {
 
     public Canvas anCanvas;
-    public float ratio;
+    public float FillingRate;
 
 
     private void OnTriggerStay(Collider other)
@@ -15,10 +15,10 @@ public class InteractionColider : MonoBehaviour {
             if (Input.GetKey(KeyCode.E))
             {
                 Debug.Log("E");
-                anCanvas.GetComponent<InteractionManager>().inProgress(ratio);
+                anCanvas.GetComponent<InteractionManager>().inProgress(FillingRate);
             }
             else {
-                anCanvas.GetComponent<InteractionManager>().abandonedProgress();
+                anCanvas.GetComponent<InteractionManager>().abandonedProgress(); // arrete le remplisage
             }
         }
         
