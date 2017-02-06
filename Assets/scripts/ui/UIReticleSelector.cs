@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class UIReticleSelector : MonoBehaviour {
+public class UIReticleSelector : NetworkBehaviour {
     public GameObject reticle;
     public Color color;
     public LayerMask layer;
@@ -17,12 +18,12 @@ public class UIReticleSelector : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Input.GetAxis("Horizontal2") * Time.deltaTime * 3, 0, Input.GetAxis("Vertical2") * Time.deltaTime * 3, Space.World);
+        transform.Translate(Input.GetAxis("Horizontal1") * Time.deltaTime * 3, 0, Input.GetAxis("Vertical1") * Time.deltaTime * 3, Space.World);
         RaycastHit hit;
         if (Physics.Raycast(transform.position - transform.TransformDirection(Vector3.up * 0.1f), transform.TransformDirection(Vector3.back), out hit, 50f, layer))
         {
 
-            if (Input.GetKeyDown(KeyCode.Joystick2Button0))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
                 if (hit.collider.GetComponent<TagCharacter>().GetIsTagged())
                 {
@@ -38,7 +39,7 @@ public class UIReticleSelector : MonoBehaviour {
                     }
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button2))
             {
                 Destroy(hit.collider.gameObject.transform.parent.gameObject);
             }

@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class RewindManager : NetworkBehaviour
 {
     public List<Rewindable> rewinds = new List<Rewindable>();
+    public GameObject blackGlitch;
 
     // Use this for initialization
     public override void OnStartServer()
@@ -55,12 +56,16 @@ public class RewindManager : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
+            blackGlitch.SetActive(true);
+            Invoke("RemoveBlackGlitch",1f);
             foreach (Rewindable rewind in rewinds)
                 rewind.StartPause();
 
         }
         else if (Input.GetKeyUp(KeyCode.Joystick1Button1))
         {
+            CancelInvoke();
+            RemoveBlackGlitch();
             foreach (Rewindable rewind in rewinds)
                 rewind.StopPause();
         }
@@ -69,6 +74,11 @@ public class RewindManager : NetworkBehaviour
     public void AddRewindable(Rewindable rewindable)
     {
         rewinds.Add(rewindable);
+    }
+
+    public void RemoveBlackGlitch()
+    {
+        blackGlitch.SetActive(false);
     }
 }
 

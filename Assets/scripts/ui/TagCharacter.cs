@@ -27,14 +27,12 @@ public class TagCharacter : MonoBehaviour {
     {
         material.SetColor("_Color", color);
         isTagged = true;
-        trail.enabled = true;
     }
 
     public void UnTag()
     {
         material.SetColor("_Color", startColor);
         isTagged = false;
-        trail.enabled = false;
     }
 
     public bool GetIsTagged()

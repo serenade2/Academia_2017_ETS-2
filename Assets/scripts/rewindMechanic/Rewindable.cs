@@ -13,7 +13,7 @@ public class Rewindable : NetworkBehaviour
     public RewindMementoFactory.Type memento = 0; //The memento to use with the memento factory;
 
     private float recordDelay = 0.1f; //Recording frequency -> higher value = faster replay
-    private float recordMaxTime = 5f;
+    private float recordMaxTime = 10f;
 
     //Coroutines
     private Coroutine record;
