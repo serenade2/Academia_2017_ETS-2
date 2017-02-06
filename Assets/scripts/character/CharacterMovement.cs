@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+
 public class CharacterMovement : NetworkBehaviour, IRewindable
 {
     private bool canMove = true;
     private Rigidbody rb;
 
     // Use this for initialization
-    public override void OnStartClient()
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
@@ -16,21 +17,14 @@ public class CharacterMovement : NetworkBehaviour, IRewindable
     // Update is called once per frame
     void Update()
     {
-
-        if (!isClient)
+        if (!hasAuthority)
         {
             return;
         }
-
         if (canMove)
         {
-            Move();
+            rb.velocity = new Vector3(Input.GetAxis("Horizontal1"), rb.velocity.y, Input.GetAxis("Vertical1"));
         }
-    }
-
-    public void Move()
-    {
-       rb.velocity = new Vector3(Input.GetAxis("Horizontal1"), rb.velocity.y, Input.GetAxis("Vertical1")); 
     }
 
     public void Rewind(bool isRewinding)

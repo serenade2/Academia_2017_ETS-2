@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-public class Rewindable : NetworkBehaviour {
+
+public class Rewindable : NetworkBehaviour
+{
     List<IRewindable> rewindables = new List<IRewindable>(); //Contains every script that implements rewindable
 
     //Memento
@@ -17,7 +19,6 @@ public class Rewindable : NetworkBehaviour {
     private Coroutine record;
     private Coroutine rewind;
 
-    private bool isRewinding = false;
     private bool isRecording = false;
 
     // Use this for initialization
@@ -37,6 +38,23 @@ public class Rewindable : NetworkBehaviour {
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    [ClientRpc]
+    public void RpcStartRewind()
+    {
+        //Stop recording
+        StopCoroutine(record);
+        isRecording = false;
+
+        //Start rewinding
+        rewind = StartCoroutine(Rewind());
+
+        foreach (IRewindable rewindable in rewindables)
+        {
+            rewindable.Rewind(true);
+        }
     }
 
     public void StartRewind()
@@ -51,6 +69,25 @@ public class Rewindable : NetworkBehaviour {
         foreach (IRewindable rewindable in rewindables)
         {
             rewindable.Rewind(true);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcStopRewind()
+    {
+        //Stop rewinding
+        StopCoroutine(rewind);
+
+        //Start recording
+        if (!isRecording)
+        {
+            record = StartCoroutine(Record());
+            isRecording = true;
+        }
+
+        foreach (IRewindable rewindable in rewindables)
+        {
+            rewindable.Rewind(false);
         }
     }
 
@@ -69,6 +106,20 @@ public class Rewindable : NetworkBehaviour {
         foreach (IRewindable rewindable in rewindables)
         {
             rewindable.Rewind(false);
+        }
+    }
+
+    public void RpcStartPause()
+    {
+        //Stop recording
+        StopCoroutine(record);
+
+        //Stop rewinding
+        if (rewind != null)
+            StopCoroutine(rewind);
+        foreach (IRewindable rewindable in rewindables)
+        {
+            rewindable.Pause(true);
         }
     }
 
