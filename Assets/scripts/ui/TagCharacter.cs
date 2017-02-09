@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class TagCharacter : MonoBehaviour {
+public class TagCharacter : NetworkBehaviour {
 
-    public GameObject character;
-    public TrailRenderer trail;
     private Material material; //The GameObject material
     private Color startColor;
     private bool isTagged = false;
@@ -13,8 +12,8 @@ public class TagCharacter : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        material = character.GetComponent<Renderer>().material;
-        startColor = character.GetComponent<Renderer>().material.color;
+        material = GetComponent<Renderer>().material;
+        startColor = GetComponent<Renderer>().material.color;
     }
 
     // Update is called once per frame
@@ -23,20 +22,30 @@ public class TagCharacter : MonoBehaviour {
 
     }
 
+
     public void Tag(Color color)
     {
         material.SetColor("_Color", color);
+        RpcChangeState(color);
         isTagged = true;
     }
 
     public void UnTag()
     {
         material.SetColor("_Color", startColor);
+        RpcChangeState(startColor);
         isTagged = false;
     }
 
     public bool GetIsTagged()
     {
         return isTagged;
+    }
+
+    [ClientRpc]
+    public void RpcChangeState(Color color)
+    {
+        material.SetColor("_Color", color);
+        print("mango");
     }
 }

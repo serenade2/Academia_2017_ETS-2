@@ -27,6 +27,8 @@ GameObject:
   - component: {fileID: 114875784169594616}
   - component: {fileID: 114771719012278940}
   - component: {fileID: 114076805432861766}
+  - component: {fileID: 114637096378219090}
+  - component: {fileID: 114432209983852240}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -49,7 +51,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1608180749580176
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,9 +61,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4382801216079482}
   - component: {fileID: 65209994676379372}
-  - component: {fileID: 114047928313447074}
   m_Layer: 8
-  m_Name: Tag
+  m_Name: UICollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,19 +272,6 @@ TrailRenderer:
     textureMode: 1
   m_MinVertexDistance: 1
   m_Autodestruct: 0
---- !u!114 &114047928313447074
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1608180749580176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  character: {fileID: 1129365913663430}
-  trail: {fileID: 96316626610292812}
 --- !u!114 &114067304966362540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,6 +304,28 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114432209983852240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129365913663430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3774bcafa21ab4a449db80882b5d7507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114637096378219090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129365913663430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114771719012278940
 MonoBehaviour:
   m_ObjectHideFlags: 1
