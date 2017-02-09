@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterMovement : MonoBehaviour, IRewindable
+public class CharacterMovement : NetworkBehaviour, IRewindable
 {
     private bool canMove = true;
     private Rigidbody rb;
@@ -16,6 +17,10 @@ public class CharacterMovement : MonoBehaviour, IRewindable
     // Update is called once per frame
     void Update()
     {
+        if (!hasAuthority)
+        {
+            return;
+        }
         if (canMove)
         {
             rb.velocity = new Vector3(Input.GetAxis("Horizontal1"), rb.velocity.y, Input.GetAxis("Vertical1"));
