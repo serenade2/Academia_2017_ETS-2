@@ -45,7 +45,7 @@ public class InteractionManager : MonoBehaviour {
         if (currentProgress > MAX_PROGRESS) {
             currentProgress = MAX_PROGRESS;
             UpdateProgress();
-Debug.Log("inProgress");
+            Debug.Log("inProgress");
             if (currentProgress == MAX_PROGRESS) {
                 resetProgress();
             }

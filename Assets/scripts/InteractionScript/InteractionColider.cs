@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractionColider : MonoBehaviour {
 
     public Canvas anCanvas;
+    public string InputManette;
     public float FillingRate;
 
 
@@ -14,7 +15,7 @@ public class InteractionColider : MonoBehaviour {
             Debug.Log("stay");
             if (Input.GetKey(KeyCode.E))
             {
-                Debug.Log("E");
+                Debug.Log(InputManette);
                 anCanvas.GetComponent<InteractionManager>().inProgress(FillingRate);
             }
             else {
@@ -22,6 +23,11 @@ public class InteractionColider : MonoBehaviour {
             }
         }
         
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        anCanvas.GetComponent<InteractionManager>().abandonedProgress(); // arrete le remplisage
     }
 
 }
