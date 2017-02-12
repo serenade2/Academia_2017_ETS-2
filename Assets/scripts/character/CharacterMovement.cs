@@ -18,13 +18,10 @@ public class CharacterMovement : NetworkBehaviour, IRewindable
     void Update()
     {
         if (!hasAuthority)
-        {
             return;
-        }
+
         if (canMove)
-        {
             rb.velocity = new Vector3(Input.GetAxis("Horizontal1"), rb.velocity.y, Input.GetAxis("Vertical1"));
-        }
     }
 
     public void Rewind(bool isRewinding)

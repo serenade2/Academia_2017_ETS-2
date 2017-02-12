@@ -16,6 +16,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
     // Use this for initialization
     void Start()
     {
+        if (!hasAuthority)
+            return;
         objectives = GameObject.FindGameObjectsWithTag("PathNode");
 
         //Assign new coroutine
@@ -29,7 +31,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
     // Update is called once per frame
     void LateUpdate()
     {
-
+        if (!hasAuthority)
+            return;
         //When destination is reached
         if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending)
         {

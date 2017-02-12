@@ -7,6 +7,7 @@ public class TagCharacter : NetworkBehaviour {
 
     private Material material; //The GameObject material
     private Color startColor;
+    [SyncVar]
     private bool isTagged = false;
 
     // Use this for initialization
@@ -19,20 +20,20 @@ public class TagCharacter : NetworkBehaviour {
     // Update is called once per frame
     void Update()
     {
-
+        if (!hasAuthority)
+            print(isTagged);
     }
 
-
-    public void Tag(Color color)
+    [Command]
+    public void CmdTag(Color color)
     {
-        material.SetColor("_Color", color);
         RpcChangeState(color);
         isTagged = true;
     }
 
-    public void UnTag()
+    [Command]
+    public void CmdUnTag()
     {
-        material.SetColor("_Color", startColor);
         RpcChangeState(startColor);
         isTagged = false;
     }
@@ -45,7 +46,6 @@ public class TagCharacter : NetworkBehaviour {
     [ClientRpc]
     public void RpcChangeState(Color color)
     {
-        material.SetColor("_Color", color);
-        print("mango");
+        material.SetColor("_Color", color);;
     }
 }

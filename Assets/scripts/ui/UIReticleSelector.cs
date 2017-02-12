@@ -32,14 +32,14 @@ public class UIReticleSelector : NetworkBehaviour {
                     if (characterTag.GetIsTagged())
                     {
                         tags.Remove(characterTag);
-                        characterTag.UnTag();
+                        characterTag.CmdUnTag();
                     }
                     else
                     {
                         if (tags.Count <= 2)
                         {
                             tags.Add(characterTag);
-                            characterTag.Tag(color);
+                            characterTag.CmdTag(color);
                         }
                     }
                 }
@@ -52,7 +52,7 @@ public class UIReticleSelector : NetworkBehaviour {
                 if (hit.collider.transform.parent.GetComponent<DestroyCharacter>() != null)
                 {
                     characterDestroy = hit.collider.transform.parent.GetComponent<DestroyCharacter>();
-                    characterDestroy.RpcDestroy();
+                    characterDestroy.CmdDestroy();
                 }
             }
         }

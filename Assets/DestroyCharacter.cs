@@ -14,6 +14,11 @@ public class DestroyCharacter : NetworkBehaviour {
 	void Update () {
 		
 	}
+    [Command]
+    public void CmdDestroy()
+    {
+        RpcDestroy();
+    }
 
     [ClientRpc]
     public void RpcDestroy()

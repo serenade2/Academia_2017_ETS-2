@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/// <summary>
+/// Class that manage the inputs to rewind and pause. Also calls the respective functions in every gameobjects(client) that have the "Rewindable" script attached to it.
+/// </summary>
 public class RewindManager : NetworkBehaviour
 {
-    public List<Rewindable> rewinds = new List<Rewindable>();
+    private List<Rewindable> rewinds = new List<Rewindable>();
     public GameObject blackGlitch;
 
     // Use this for initialization
     public override void OnStartServer()
     {
+        //Finds and adds every gameobjects that has the "Rewindable" script attached to it.
         Rewindable[] rewindComponents = FindObjectsOfType(typeof(Rewindable)) as Rewindable[];
         foreach (Rewindable rewind in rewindComponents)
         {
@@ -25,31 +29,29 @@ public class RewindManager : NetworkBehaviour
         {
             foreach (Rewindable rewind in rewinds)
             {
-                //rewind.StartRewind();
-                if (rewind.isClient)
+                if (rewind.hasAuthority)
                 {
-                    rewind.RpcStartRewind();
+                    rewind.StartRewind();
                 }
                 else
                 {
-                    rewind.StartRewind();
+                    rewind.RpcStartRewind(rewind.netId);
                 }
             }
 
 
         }
         else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
-        {
+        { 
             foreach (Rewindable rewind in rewinds)
             {
-                //rewind.StartRewind();
-                if (rewind.isClient)
+                if (rewind.hasAuthority)
                 {
-                    rewind.RpcStopRewind();
+                    rewind.StopRewind();
                 }
                 else
                 {
-                    rewind.StopRewind();
+                    rewind.RpcStopRewind(rewind.netId);
                 }
             }
         }

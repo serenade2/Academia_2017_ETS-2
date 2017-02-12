@@ -13,7 +13,7 @@ public class Rewindable : NetworkBehaviour
     public RewindMementoFactory.Type memento = 0; //The memento to use with the memento factory;
 
     private float recordDelay = 0.1f; //Recording frequency -> higher value = faster replay
-    private float recordMaxTime = 10f;
+    private float recordMaxTime = 10f; //Max record time in seconds
 
     //Coroutines
     private Coroutine record;
@@ -24,6 +24,8 @@ public class Rewindable : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
+        if (!hasAuthority)
+            return;
         //Start recording
         record = StartCoroutine(Record());
         isRecording = true;
@@ -41,20 +43,13 @@ public class Rewindable : NetworkBehaviour
 
     }
 
+    //Start
     [ClientRpc]
-    public void RpcStartRewind()
+    public void RpcStartRewind(NetworkInstanceId netId)
     {
-        //Stop recording
-        StopCoroutine(record);
-        isRecording = false;
-
-        //Start rewinding
-        rewind = StartCoroutine(Rewind());
-
-        foreach (IRewindable rewindable in rewindables)
-        {
-            rewindable.Rewind(true);
-        }
+        if (isServer)
+            return;
+        StartRewind();
     }
 
     public void StartRewind()
@@ -72,23 +67,13 @@ public class Rewindable : NetworkBehaviour
         }
     }
 
+    //Stop
     [ClientRpc]
-    public void RpcStopRewind()
+    public void RpcStopRewind(NetworkInstanceId netId)
     {
-        //Stop rewinding
-        StopCoroutine(rewind);
-
-        //Start recording
-        if (!isRecording)
-        {
-            record = StartCoroutine(Record());
-            isRecording = true;
-        }
-
-        foreach (IRewindable rewindable in rewindables)
-        {
-            rewindable.Rewind(false);
-        }
+        if (isServer)
+            return;
+        StopRewind();
     }
 
     public void StopRewind()
@@ -106,20 +91,6 @@ public class Rewindable : NetworkBehaviour
         foreach (IRewindable rewindable in rewindables)
         {
             rewindable.Rewind(false);
-        }
-    }
-
-    public void RpcStartPause()
-    {
-        //Stop recording
-        StopCoroutine(record);
-
-        //Stop rewinding
-        if (rewind != null)
-            StopCoroutine(rewind);
-        foreach (IRewindable rewindable in rewindables)
-        {
-            rewindable.Pause(true);
         }
     }
 

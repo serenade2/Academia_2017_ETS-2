@@ -17,14 +17,6 @@ public class PlayerSpawner : NetworkBehaviour {
         {
             return;
         }
-        if (isServer)
-        {
-            //GameObject.Find("player1Camera").SetActive(false);
-        }
-        else
-        {
-            //GameObject.Find("player2Camera").SetActive(false);
-        }
         CmdSpawnPlayer(isServer, gameObject);
     }
 
@@ -41,9 +33,6 @@ public class PlayerSpawner : NetworkBehaviour {
         {
            // player = GameObject.Instantiate(player2Prefab, GameObject.Find("player2Spawn").transform.position, player1Prefab.transform.rotation);
         }
-
-        //NetworkServer.SpawnWithClientAuthority(player, gameObject);
-        //GameObject.Find("RewindManager").GetComponent<RewindManager>().AddRewindable(player.GetComponent<Rewindable>());
     }
 
     // Update is called once per frame
