@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - PathNode
+  - Hacker
+  - Watcher
   layers:
   - Default
   - TransparentFX
