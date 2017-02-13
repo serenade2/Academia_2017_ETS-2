@@ -58,6 +58,7 @@ public class RewindManager : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
+            GameObject.Find("NetworkManager").GetComponent<NetworkManager>().ServerChangeScene("MolinetteNetworking");
             blackGlitch.SetActive(true);
             Invoke("RemoveBlackGlitch",1f);
             foreach (Rewindable rewind in rewinds)
