@@ -19,6 +19,8 @@ public class InteractionManager : MonoBehaviour {
 
     public Image ProgressBar;
 
+    public ActivatableDoor activatableEvent;
+
     private float currentProgress = 0;
     private float MAX_PROGRESS = 100;
 
@@ -47,6 +49,7 @@ public class InteractionManager : MonoBehaviour {
             UpdateProgress();
             Debug.Log("inProgress");
             if (currentProgress == MAX_PROGRESS) {
+                completedAction();
                 resetProgress();
             }
         }
@@ -63,6 +66,12 @@ public class InteractionManager : MonoBehaviour {
         Debug.Log("Finish");
         currentProgress = 0;
     }
+
+    private void completedAction()
+    {
+        activatableEvent.Activate();
+    }
+
 
 
 }

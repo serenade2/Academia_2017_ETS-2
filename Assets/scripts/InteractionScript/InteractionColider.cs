@@ -8,18 +8,25 @@ public class InteractionColider : MonoBehaviour {
     public string InputManette;
     public float FillingRate;
 
+    private InteractionManager interactionManager;
+
+    public void Start()
+    {
+        interactionManager = GetComponent<InteractionManager>();
+    }
+
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player") {
+        if(other.tag == "Hacker") {
             Debug.Log("stay");
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetButton("Submit"))
             {
                 Debug.Log(InputManette);
-                anCanvas.GetComponent<InteractionManager>().inProgress(FillingRate);
+                interactionManager.inProgress(FillingRate);
             }
             else {
-                anCanvas.GetComponent<InteractionManager>().abandonedProgress(); // arrete le remplisage
+                interactionManager.abandonedProgress(); // arrete le remplisage
             }
         }
         
@@ -27,7 +34,7 @@ public class InteractionColider : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        anCanvas.GetComponent<InteractionManager>().abandonedProgress(); // arrete le remplisage
+        interactionManager.abandonedProgress(); // arrete le remplisage
     }
 
 }
