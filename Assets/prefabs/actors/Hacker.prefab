@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 114537435420920456}
   - component: {fileID: 114432552276789930}
   - component: {fileID: 114653911532649446}
+  - component: {fileID: 114483358960023520}
   m_Layer: 0
   m_Name: Hacker
   m_TagString: Hacker
@@ -223,6 +224,17 @@ MonoBehaviour:
     i15: 44
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114483358960023520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1445516490173184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf909524d27330459ac4f11b605a7db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114510157538114810
 MonoBehaviour:
   m_ObjectHideFlags: 1
