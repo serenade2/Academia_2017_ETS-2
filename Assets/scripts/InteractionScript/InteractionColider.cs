@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractionColider : MonoBehaviour {
-
-    public Canvas anCanvas;
-    public string InputManette;
-    public float FillingRate;
-
+    
     private InteractionManager interactionManager;
 
     public void Start()
     {
-        interactionManager = GetComponent<InteractionManager>();
+        interactionManager = GetComponentInParent<InteractionManager>();
     }
 
 
@@ -22,11 +18,10 @@ public class InteractionColider : MonoBehaviour {
             Debug.Log("stay");
             if (Input.GetButton("Submit"))
             {
-                Debug.Log(InputManette);
-                interactionManager.inProgress(FillingRate);
+                interactionManager.InProgress();
             }
             else {
-                interactionManager.abandonedProgress(); // arrete le remplisage
+                interactionManager.AbandonedProgress(); // arrete le remplisage
             }
         }
         
@@ -34,7 +29,7 @@ public class InteractionColider : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        interactionManager.abandonedProgress(); // arrete le remplisage
+        interactionManager.AbandonedProgress(); // arrete le remplisage
     }
 
 }

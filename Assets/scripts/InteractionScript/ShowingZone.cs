@@ -12,7 +12,7 @@ public class ShowingZone : MonoBehaviour {
     private void OnStartSetUp()
     {
         
-       if (elementToShow.active) {
+       if (elementToShow.activeInHierarchy) {
             elementToShow.SetActive(false);
         }
     }
