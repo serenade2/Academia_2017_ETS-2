@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 public class AICharacter : NetworkBehaviour
 {
-
+    public string HackerTag;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,4 +14,26 @@ public class AICharacter : NetworkBehaviour
 	void Update () {
 		
 	}
+
+    public void OnTriggerEnter(Collider col)
+    {
+        if (!col.gameObject.CompareTag(HackerTag))
+        {
+            return;
+        }
+
+        Hacker hacker = col.GetComponent<Hacker>();
+        hacker.AddAi(this.gameObject);
+    }
+
+    public void OnTriggerExit(Collider col)
+    {
+        if (!col.gameObject.CompareTag(HackerTag))
+        {
+            return;
+        }
+
+        Hacker hacker = col.GetComponent<Hacker>();
+        hacker.RemoveAi(this.gameObject);
+    }
 }
