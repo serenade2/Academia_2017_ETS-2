@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class Hacker : NetworkBehaviour
 {
     [Tooltip("The list that contains the Hackable AI")]
-    public LinkedList<GameObject> AiLinkedList;
+    public List<GameObject> AiList;
     [Tooltip("The radius that allow the hacker to take control of AI")]
     public float HackingRadius;
 
@@ -17,7 +17,7 @@ public class Hacker : NetworkBehaviour
 	public override void OnStartAuthority()
 	{
 	    if (!hasAuthority) return;
-		AiLinkedList = new LinkedList<GameObject>();
+		AiList = new List<GameObject>();
 	    if (HackingRadius > 0)
 	    {
 	        SphereCollider childSphereCollider = GetComponentInChildren<SphereCollider>();
@@ -47,7 +47,7 @@ public class Hacker : NetworkBehaviour
         else if (Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             //Debug.Log("A button Pressed");
-            if (AiLinkedList.Count > 0)
+            if (AiList.Count > 0)
             {
                 TakeOver(GetCurrentAi());
             }
@@ -62,12 +62,12 @@ public class Hacker : NetworkBehaviour
         // check if the gameObject we add is an AICharacter
         if (ai.GetComponent<AICharacter>() != null)
         {
-            if (AiLinkedList.Contains(ai))
+            if (AiList.Contains(ai))
             {
                 return;
             }
 
-            AiLinkedList.AddLast(ai);
+            AiList.Add(ai);
             //Debug.Log(ai.gameObject.name + " has been added");
             //Debug.Log("total elements in " + AiLinkedList.Count);
         }
@@ -76,30 +76,54 @@ public class Hacker : NetworkBehaviour
     public void RemoveAi(GameObject ai)
     {
         if (!hasAuthority) return;
-        AiLinkedList.Remove(ai);
+
+        //before removing the ai find at which position it was
+        //AiLinkedList.
+        
+        AiList.Remove(ai);
+
+        //update the current index
+        PreviousTarget();
+
         //Debug.Log(ai.gameObject.name + " has been removed!");
         //Debug.Log("total elements out " + AiLinkedList.Count);
     }
 
     public void NextTarget()
     {
-        if (AiLinkedList.Count > 0 && _currentIndex < AiLinkedList.Count)
+        if (AiList.Count > 0)
         {
-            _currentIndex++;
+            if(_currentIndex == AiList.Count)
+            {
+                _currentIndex = 0;
+            }
+            else
+            {
+                _currentIndex++;
+            }
         }
     }
 
     public void PreviousTarget()
     {
-        if (_currentIndex > 0)
+        _currentIndex--;
+
+        if(_currentIndex < 0)
         {
-            _currentIndex--;
-        } 
+            _currentIndex = AiList.Count - 1;
+        }
     }
 
     public GameObject GetCurrentAi()
     {
-        return AiLinkedList.Count > 0 ? AiLinkedList.ElementAt(_currentIndex) : null;
+        if(AiList.Count != 0)
+        {
+            return AiList.ElementAt(_currentIndex);
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public void TakeOver(GameObject targetGameObject)
