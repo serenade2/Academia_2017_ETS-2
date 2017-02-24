@@ -113,6 +113,9 @@ public class Hacker : NetworkBehaviour
         Vector3 targetWalkingDirection = targetGameObject.transform.forward;
         Transform targetTransform = targetGameObject.transform;
 
+        // Update on the client the mesh
+        UpdateHackerMesh(targetGameObject);
+        // update on the server the mesh
         CmdUpdateHackerMesh(targetGameObject);
 
         // Destroy the hacked target on the server and sync it on all the clients
@@ -135,6 +138,19 @@ public class Hacker : NetworkBehaviour
 
     [Command]
     public void CmdUpdateHackerMesh(GameObject targetGameObject)
+    {
+        MeshRenderer targetMeshRenderer = targetGameObject.GetComponent<MeshRenderer>();
+        MeshFilter targetMeshFilter = targetGameObject.GetComponent<MeshFilter>();
+
+        MeshRenderer currentMeshRenderer = GetComponent<MeshRenderer>();
+        MeshFilter currentMeshFilter = GetComponent<MeshFilter>();
+
+        // take the apparency of the AI
+        currentMeshRenderer.materials = targetMeshRenderer.materials;
+        currentMeshFilter.mesh = targetMeshFilter.mesh;
+    }
+
+    public void UpdateHackerMesh(GameObject targetGameObject)
     {
         MeshRenderer targetMeshRenderer = targetGameObject.GetComponent<MeshRenderer>();
         MeshFilter targetMeshFilter = targetGameObject.GetComponent<MeshFilter>();
