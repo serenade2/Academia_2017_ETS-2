@@ -20,8 +20,8 @@ public class Hacker : NetworkBehaviour
 		AiLinkedList = new LinkedList<GameObject>();
 	    if (HackingRadius > 0)
 	    {
-	        CharacterController car = GetComponent<CharacterController>();
-	        car.radius = HackingRadius;
+	        SphereCollider childSphereCollider = GetComponentInChildren<SphereCollider>();
+            childSphereCollider.radius = HackingRadius;
 	    }
 	    _currentIndex = 0;
     }
@@ -36,19 +36,24 @@ public class Hacker : NetworkBehaviour
 
 	    if (Input.GetKeyDown(KeyCode.Joystick1Button4))
 	    {
-	        Debug.Log("LB2 Pressed");
+	        //Debug.Log("LB2 Pressed");
             NextTarget();
 	    }
         else if (Input.GetKeyDown(KeyCode.Joystick1Button5))
 	    {
-	        Debug.Log("RB2 pressed");
+	        //Debug.Log("RB2 pressed");
             PreviousTarget();    
 	    }
-        else if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        else if (Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
-            Debug.Log("A button Pressed");
-            TakeOver(GetCurrentAi());
+            //Debug.Log("A button Pressed");
+            if (AiLinkedList.Count > 0)
+            {
+                TakeOver(GetCurrentAi());
+            }
         }
+
+        //Debug.Log(("total elements ") + AiLinkedList.Count);
 	}
    
     public void AddAi(GameObject ai)
@@ -57,8 +62,14 @@ public class Hacker : NetworkBehaviour
         // check if the gameObject we add is an AICharacter
         if (ai.GetComponent<AICharacter>() != null)
         {
+            if (AiLinkedList.Contains(ai))
+            {
+                return;
+            }
+
             AiLinkedList.AddLast(ai);
-            Debug.Log(ai.gameObject.name + " has been added");
+            //Debug.Log(ai.gameObject.name + " has been added");
+            //Debug.Log("total elements in " + AiLinkedList.Count);
         }
     }
    
@@ -66,12 +77,13 @@ public class Hacker : NetworkBehaviour
     {
         if (!hasAuthority) return;
         AiLinkedList.Remove(ai);
-        Debug.Log(ai.gameObject.name + " has been removed!");
+        //Debug.Log(ai.gameObject.name + " has been removed!");
+        //Debug.Log("total elements out " + AiLinkedList.Count);
     }
 
     public void NextTarget()
     {
-        if (_currentIndex < AiLinkedList.Count)
+        if (AiLinkedList.Count > 0 && _currentIndex < AiLinkedList.Count)
         {
             _currentIndex++;
         }
@@ -79,7 +91,7 @@ public class Hacker : NetworkBehaviour
 
     public void PreviousTarget()
     {
-        if (_currentIndex > AiLinkedList.Count)
+        if (_currentIndex > 0)
         {
             _currentIndex--;
         } 
@@ -97,13 +109,41 @@ public class Hacker : NetworkBehaviour
             return;
         }
             
-        // retreive the direction the ai was walking before getting possesed
+        // retrieve the direction the ai was walking before getting possessed
         Vector3 targetWalkingDirection = targetGameObject.transform.forward;
         Transform targetTransform = targetGameObject.transform;
-        // Destroy the hacked target
-        Destroy(targetGameObject);
+
+        CmdUpdateHackerMesh(targetGameObject);
+
+        // Destroy the hacked target on the server and sync it on all the clients
+        CmdDestroyAI(targetGameObject);
+
         // move the hacker at the same position of the ai
-        this.transform.position = targetGameObject.transform.position;
-        this.transform.rotation = targetGameObject.transform.rotation;
+        this.transform.position = targetTransform.position;
+        this.transform.rotation = targetTransform.rotation;
+        this.transform.localScale = targetTransform.localScale;
+    }
+
+    [Command]
+    public void CmdDestroyAI(GameObject ai)
+    {
+       // DestroyCharacter dest = ai.GetComponent<DestroyCharacter>();
+       // dest.RpcDestroy();
+       RemoveAi(ai);
+       Destroy(ai);
+    }
+
+    [Command]
+    public void CmdUpdateHackerMesh(GameObject targetGameObject)
+    {
+        MeshRenderer targetMeshRenderer = targetGameObject.GetComponent<MeshRenderer>();
+        MeshFilter targetMeshFilter = targetGameObject.GetComponent<MeshFilter>();
+
+        MeshRenderer currentMeshRenderer = GetComponent<MeshRenderer>();
+        MeshFilter currentMeshFilter = GetComponent<MeshFilter>();
+
+        // take the apparency of the AI
+        currentMeshRenderer.materials = targetMeshRenderer.materials;
+        currentMeshFilter.mesh = targetMeshFilter.mesh;
     }
 }

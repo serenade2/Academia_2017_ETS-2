@@ -22,7 +22,7 @@ public class AICharacter : NetworkBehaviour
             return;
         }
 
-        Hacker hacker = col.GetComponent<Hacker>();
+        Hacker hacker = col.GetComponentInParent<Hacker>();
         hacker.AddAi(this.gameObject);
     }
 
@@ -33,7 +33,7 @@ public class AICharacter : NetworkBehaviour
             return;
         }
 
-        Hacker hacker = col.GetComponent<Hacker>();
+        Hacker hacker = col.GetComponentInParent<Hacker>();
         hacker.RemoveAi(this.gameObject);
     }
 }

@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 114189411279143848}
   - component: {fileID: 114299385208424106}
   - component: {fileID: 114107537955794470}
+  - component: {fileID: 114111338478119698}
   m_Layer: 0
   m_Name: AICharacter
   m_TagString: Untagged
@@ -378,6 +379,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HackerTag: Hacker
+--- !u!114 &114111338478119698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1525966589198876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3774bcafa21ab4a449db80882b5d7507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114189411279143848
 MonoBehaviour:
   m_ObjectHideFlags: 1
