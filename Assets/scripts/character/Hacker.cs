@@ -36,14 +36,20 @@ public class Hacker : NetworkBehaviour
 
 	    if (Input.GetKeyDown(KeyCode.Joystick1Button4))
 	    {
-	        //Debug.Log("LB2 Pressed");
-            NextTarget();
+            //Debug.Log("LB2 Pressed");
+            // disable the previous cursor
+            CmdUpdateHackerCursor(false);
+            PreviousTarget();
+            // enable the cursor on the next ai
+            CmdUpdateHackerCursor(true);
 	    }
         else if (Input.GetKeyDown(KeyCode.Joystick1Button5))
 	    {
-	        //Debug.Log("RB2 pressed");
-            PreviousTarget();    
-	    }
+            //Debug.Log("RB2 pressed");
+            CmdUpdateHackerCursor(false);
+            NextTarget();
+            CmdUpdateHackerCursor(true);
+        }
         else if (Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             //Debug.Log("A button Pressed");
@@ -93,7 +99,7 @@ public class Hacker : NetworkBehaviour
     {
         if (AiList.Count > 0)
         {
-            if(_currentIndex == AiList.Count)
+            if(_currentIndex >= AiList.Count)
             {
                 _currentIndex = 0;
             }
@@ -185,5 +191,23 @@ public class Hacker : NetworkBehaviour
         // take the apparency of the AI
         currentMeshRenderer.materials = targetMeshRenderer.materials;
         currentMeshFilter.mesh = targetMeshFilter.mesh;
+    }
+
+    //[Command]
+    public void CmdUpdateHackerCursor(bool IsVisible)
+    {
+        GameObject currentAi = GetCurrentAi();
+        if(currentAi != null)
+        {
+            AICharacter aiCharacter = currentAi.GetComponent<AICharacter>();
+            if (IsVisible)
+            {
+                aiCharacter.EnableCursor();
+            }
+            else
+            {
+                aiCharacter.DisableCursor();
+            }
+        }
     }
 }
