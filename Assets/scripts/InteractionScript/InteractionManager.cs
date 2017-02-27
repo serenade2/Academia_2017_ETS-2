@@ -18,6 +18,10 @@ using UnityEngine.UI;
 public class InteractionManager : MonoBehaviour {
 
     public Image ProgressBar;
+    [Header("Interaction things")]
+    [Tooltip("Rate at which the progress bar progresses each tick")]
+    public float fillingRate;
+    public ActivatableDoor activatableDoor;
 
     private float currentProgress = 0;
     private float MAX_PROGRESS = 100;
@@ -39,30 +43,37 @@ public class InteractionManager : MonoBehaviour {
         //ProgressBar.rectTransform.localScale = new Vector3(ratio,1,1);
     }
 
-    public void inProgress(float progressFactor) {
+    public void InProgress() {
         
-        currentProgress += progressFactor;
+        currentProgress += fillingRate;
         if (currentProgress > MAX_PROGRESS) {
             currentProgress = MAX_PROGRESS;
             UpdateProgress();
             Debug.Log("inProgress");
-            if (currentProgress == MAX_PROGRESS) {
-                resetProgress();
+            if (currentProgress >= MAX_PROGRESS) {
+                CompletedAction();
+                ResetProgress();
             }
         }
         UpdateProgress();
     }
 
-    public void abandonedProgress() {
+    public void AbandonedProgress() {
         Debug.Log("abandonedProgress");
         currentProgress = 0;
         UpdateProgress();
     }
 
-    private void resetProgress() {
+    private void ResetProgress() {
         Debug.Log("Finish");
         currentProgress = 0;
     }
+
+    private void CompletedAction()
+    {
+        activatableDoor.Activate();
+    }
+
 
 
 }
