@@ -57,5 +57,6 @@ public class AICharacter : NetworkBehaviour
     public void EnableCursor()
     {
         hackerCursor.EnableCursor();
+        Debug.Log("Cursor on the " + this.gameObject.name + " should been activated");
     }
 }

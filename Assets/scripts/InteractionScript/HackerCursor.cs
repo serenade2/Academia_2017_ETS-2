@@ -47,6 +47,11 @@ public class HackerCursor : MonoBehaviour
         transform.Rotate(newSpeed * Time.deltaTime);
     }
 
+    public void SetTarget( GameObject ai)
+    {
+        Target = ai;
+    }
+
     public void DisableCursor()
     {
         // IsVisible = false;

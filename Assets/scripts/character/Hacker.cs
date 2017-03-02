@@ -29,26 +29,26 @@ public class Hacker : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	    if (!hasAuthority)
-	    {
-	        return;
-	    }
+        if (!hasAuthority)
+        {
+            return;
+        }
 
-	    if (Input.GetKeyDown(KeyCode.Joystick1Button4))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4))
 	    {
             //Debug.Log("LB2 Pressed");
             // disable the previous cursor
-            CmdUpdateHackerCursor(false);
+            UpdateHackerCursor(false);
             PreviousTarget();
             // enable the cursor on the next ai
-            CmdUpdateHackerCursor(true);
+            UpdateHackerCursor(true);
 	    }
         else if (Input.GetKeyDown(KeyCode.Joystick1Button5))
 	    {
             //Debug.Log("RB2 pressed");
-            CmdUpdateHackerCursor(false);
+            UpdateHackerCursor(false);
             NextTarget();
-            CmdUpdateHackerCursor(true);
+            UpdateHackerCursor(true);
         }
         else if (Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
@@ -149,21 +149,27 @@ public class Hacker : NetworkBehaviour
         CmdUpdateHackerMesh(targetGameObject);
 
         // Destroy the hacked target on the server and sync it on all the clients
-        DestroyAI(targetGameObject);
+        CmdDestroyAI(targetGameObject);
         // move the hacker at the same position of the ai
         this.transform.position = targetTransform.position;
         this.transform.rotation = targetTransform.rotation;
         this.transform.localScale = targetTransform.localScale;
     }
-
-    public void DestroyAI(GameObject ai)
+    
+    [Command]
+    public void CmdDestroyAI(GameObject ai)
     {
-       // DestroyCharacter dest = ai.GetComponent<DestroyCharacter>();
-       // dest.RpcDestroy();
-       RemoveAi(ai);
-        //Destroy(ai);
-       Network.Destroy(ai);
-       
+        RemoveAi(ai);
+        RpcDestroyAI(ai);
+        Destroy(ai);
+    }
+
+    [ClientRpc]
+    public void RpcDestroyAI(GameObject ai)
+    {
+        //ai.SetActive(true);
+        RemoveAi(ai);
+        Destroy(ai);
     }
 
     [Command]
@@ -190,11 +196,10 @@ public class Hacker : NetworkBehaviour
 
         // take the apparency of the AI
         currentMeshRenderer.materials = targetMeshRenderer.materials;
-        currentMeshFilter.mesh = targetMeshFilter.mesh;
+       currentMeshFilter.mesh = targetMeshFilter.mesh;
     }
 
-    //[Command]
-    public void CmdUpdateHackerCursor(bool IsVisible)
+    public void UpdateHackerCursor(bool IsVisible)
     {
         GameObject currentAi = GetCurrentAi();
         if(currentAi != null)
