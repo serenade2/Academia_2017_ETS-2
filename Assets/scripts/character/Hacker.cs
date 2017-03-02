@@ -149,21 +149,21 @@ public class Hacker : NetworkBehaviour
         CmdUpdateHackerMesh(targetGameObject);
 
         // Destroy the hacked target on the server and sync it on all the clients
-        CmdDestroyAI(targetGameObject);
-
+        DestroyAI(targetGameObject);
         // move the hacker at the same position of the ai
         this.transform.position = targetTransform.position;
         this.transform.rotation = targetTransform.rotation;
         this.transform.localScale = targetTransform.localScale;
     }
 
-    [Command]
-    public void CmdDestroyAI(GameObject ai)
+    public void DestroyAI(GameObject ai)
     {
        // DestroyCharacter dest = ai.GetComponent<DestroyCharacter>();
        // dest.RpcDestroy();
        RemoveAi(ai);
-       Destroy(ai);
+        //Destroy(ai);
+       Network.Destroy(ai);
+       
     }
 
     [Command]

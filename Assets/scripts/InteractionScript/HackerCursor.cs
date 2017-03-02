@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
-public class HackerCursor : NetworkBehaviour
+//using UnityEngine.Networking;
+public class HackerCursor : MonoBehaviour
 {
     [Tooltip("The game object at which the cursor will point")]
     public GameObject Target;
@@ -21,14 +21,17 @@ public class HackerCursor : NetworkBehaviour
     {
         Material cursorMaterial = Cursor.GetComponent<MeshRenderer>().material;
         cursorMaterial.color = CursorColor.color;
-        this.gameObject.SetActive(IsVisible);
+        Cursor.SetActive(IsVisible);
     }
 
     // Update is called once per frame
     void Update()
     {
         //this.gameObject.SetActive(IsVisible);
-
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        {
+            Cursor.SetActive(true);
+        }
         if(Target == null)
         {
             // make the parent cursor the target
@@ -47,12 +50,13 @@ public class HackerCursor : NetworkBehaviour
     public void DisableCursor()
     {
         // IsVisible = false;
-        this.gameObject.SetActive(false);
+        // Disable the cursor pointer
+        Cursor.SetActive(false);
     }
 
     public void EnableCursor()
     {
         //this.IsVisible = true;
-        this.gameObject.SetActive(true);
+        Cursor.SetActive(true);
     }
 }
