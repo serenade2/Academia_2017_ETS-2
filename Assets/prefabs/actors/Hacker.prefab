@@ -183,8 +183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf909524d27330459ac4f11b605a7db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HackingRadius: 10
+  AiList: []
+  HackingRadius: 5
   DecoyLifeTime: 3
+  _currentIndex: 0
 --- !u!114 &114510157538114810
 MonoBehaviour:
   m_ObjectHideFlags: 1

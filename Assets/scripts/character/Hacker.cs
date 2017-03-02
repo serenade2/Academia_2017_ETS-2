@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
-
+using UnityEngine.UI;
 public class Hacker : NetworkBehaviour
 {
     [Tooltip("The list that contains the Hackable AI")]
     public List<GameObject> AiList;
     [Tooltip("The radius that allow the hacker to take control of AI")]
     public float HackingRadius;
-
     public float DecoyLifeTime;
-    private int _currentIndex;
+    public int _currentIndex;
 	// Use this for initialization
 	public override void OnStartAuthority()
 	{
@@ -29,6 +28,11 @@ public class Hacker : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        //if(AiList.Count == 0 || _currentIndex == -1)
+        //{
+        //    _currentIndex = 0; // force the index to be minus one a null equivalent
+        //}
+
         if (!hasAuthority)
         {
             return;
@@ -85,7 +89,10 @@ public class Hacker : NetworkBehaviour
 
         //before removing the ai find at which position it was
         //AiLinkedList.
-        
+        if (!AiList.Contains(ai))
+        {
+            return;
+        }
         AiList.Remove(ai);
 
         //update the current index
@@ -99,13 +106,17 @@ public class Hacker : NetworkBehaviour
     {
         if (AiList.Count > 0)
         {
+            print("Nb elements" + AiList.Count);
+
             if(_currentIndex >= AiList.Count)
             {
                 _currentIndex = 0;
             }
             else
             {
+                print("Before index increment:" + _currentIndex);
                 _currentIndex++;
+                print("After incrementation : " + _currentIndex);
             }
         }
     }
@@ -116,7 +127,14 @@ public class Hacker : NetworkBehaviour
 
         if(_currentIndex < 0)
         {
-            _currentIndex = AiList.Count - 1;
+            if(AiList.Count > 0)
+            {
+                _currentIndex = AiList.Count - 1;
+            }
+            else
+            {
+                _currentIndex = 0;
+            }
         }
     }
 
@@ -194,7 +212,7 @@ public class Hacker : NetworkBehaviour
         MeshRenderer currentMeshRenderer = GetComponent<MeshRenderer>();
         MeshFilter currentMeshFilter = GetComponent<MeshFilter>();
 
-        // take the apparency of the AI
+        // take the apparency of the AI 
         currentMeshRenderer.materials = targetMeshRenderer.materials;
        currentMeshFilter.mesh = targetMeshFilter.mesh;
     }
