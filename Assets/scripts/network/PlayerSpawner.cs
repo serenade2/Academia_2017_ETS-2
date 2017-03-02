@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerSpawner : NetworkBehaviour {
-    public GameObject player1Prefab;
-    //public GameObject player2Prefab;
+    public GameObject hackerPrefab;
+    public GameObject watcherPrefab;
 
     private GameObject player;
 
@@ -33,17 +33,14 @@ public class PlayerSpawner : NetworkBehaviour {
     {
         if (!isPlayer2)
         {
-            player = GameObject.Instantiate(player1Prefab, GameObject.Find("player1Spawn").transform.position, player1Prefab.transform.rotation);
+            player = GameObject.Instantiate(hackerPrefab, GameObject.Find("player1Spawn").transform.position, hackerPrefab.transform.rotation);
             NetworkServer.SpawnWithClientAuthority(player, gameObject);
             GameObject.Find("RewindManager").GetComponent<RewindManager>().AddRewindable(player.GetComponent<Rewindable>());
         }
         else
         {
-           // player = GameObject.Instantiate(player2Prefab, GameObject.Find("player2Spawn").transform.position, player1Prefab.transform.rotation);
+         
         }
-
-        //NetworkServer.SpawnWithClientAuthority(player, gameObject);
-        //GameObject.Find("RewindManager").GetComponent<RewindManager>().AddRewindable(player.GetComponent<Rewindable>());
     }
 
     // Update is called once per frame

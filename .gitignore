@@ -290,3 +290,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Assets/CustomNetworkManager.cs
+Assets/CustomNetworkManager.cs.meta
