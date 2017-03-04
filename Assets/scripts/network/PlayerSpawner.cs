@@ -25,21 +25,22 @@ public class PlayerSpawner : NetworkBehaviour {
         {
             //GameObject.Find("player2Camera").SetActive(false);
         }
-        CmdSpawnPlayer(isServer, gameObject);
+        CmdSpawnPlayer(isServer);
     }
 
     [Command]
-    void CmdSpawnPlayer(bool isPlayer2, GameObject playerAuthority)
+    void CmdSpawnPlayer(bool isPlayer2)
     {
         if (!isPlayer2)
         {
             player = GameObject.Instantiate(hackerPrefab, GameObject.Find("player1Spawn").transform.position, hackerPrefab.transform.rotation);
             NetworkServer.SpawnWithClientAuthority(player, gameObject);
-            GameObject.Find("RewindManager").GetComponent<RewindManager>().AddRewindable(player.GetComponent<Rewindable>());
+			GameObject.Find("RewindManager(Clone)").GetComponent<RewindManager>().AddRewindable(player.GetComponent<Rewindable>());
         }
         else
         {
-         
+			player = GameObject.Instantiate(watcherPrefab, GameObject.Find("player2Spawn").transform.position, watcherPrefab.transform.rotation);
+			NetworkServer.Spawn(player);
         }
     }
 

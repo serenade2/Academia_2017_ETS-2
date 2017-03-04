@@ -9,44 +9,59 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1446401297943494}
+  m_RootGameObject: {fileID: 1457918936068302}
   m_IsPrefabParent: 1
---- !u!1 &1446401297943494
+--- !u!1 &1457918936068302
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4510994296941652}
-  - component: {fileID: 114799519175911224}
-  - component: {fileID: 114961677315376046}
+  - component: {fileID: 4749454331959500}
+  - component: {fileID: 114066182380965124}
+  - component: {fileID: 114268371767431144}
   m_Layer: 0
-  m_Name: PlayerSpawner
+  m_Name: Watcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4510994296941652
+--- !u!4 &4749454331959500
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1446401297943494}
+  m_GameObject: {fileID: 1457918936068302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 2.758319, y: 4.0006447, z: -1.9076641}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114799519175911224
+--- !u!114 &114066182380965124
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1446401297943494}
+  m_GameObject: {fileID: 1457918936068302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c04ac40adf7eb5a4bbabef5aae5b5f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewindManagerPrefab: {fileID: 1328234100468404, guid: ff6994edf7430424ebecfab216582297,
+    type: 2}
+  reticlePrefab: {fileID: 1369334446370686, guid: a439ad5b7327d5e4488318333d9f6faa,
+    type: 2}
+--- !u!114 &114268371767431144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1457918936068302}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
@@ -55,36 +70,21 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 124
-    i1: 60
-    i2: 215
-    i3: 82
-    i4: 148
-    i5: 124
-    i6: 241
-    i7: 148
-    i8: 41
-    i9: 154
-    i10: 148
-    i11: 198
-    i12: 94
-    i13: 110
-    i14: 144
-    i15: 83
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114961677315376046
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1446401297943494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79fd2d2e281727241acf01647637fffb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hackerPrefab: {fileID: 1129365913663430, guid: 50550ab15fc9c76428028e962408e248,
-    type: 2}
-  watcherPrefab: {fileID: 1457918936068302, guid: 48f3368eeb57dd140a67e907c152027e,
-    type: 2}
+    i0: 72
+    i1: 243
+    i2: 54
+    i3: 142
+    i4: 235
+    i5: 87
+    i6: 221
+    i7: 20
+    i8: 10
+    i9: 103
+    i10: 233
+    i11: 7
+    i12: 193
+    i13: 82
+    i14: 2
+    i15: 126
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0

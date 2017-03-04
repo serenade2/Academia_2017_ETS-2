@@ -46,6 +46,5 @@ public class TagCharacter : NetworkBehaviour {
     public void RpcChangeState(Color color)
     {
         material.SetColor("_Color", color);
-        print("mango");
     }
 }
