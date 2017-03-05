@@ -12,21 +12,18 @@ public class TakeOver : NetworkBehaviour
     public float HackingRadius;
     public float DecoyLifeTime;
     public int _currentIndex;
+    public GameObject CursorPrefab;
     private HackerCursor hackerCursor;
 
     // Use this for initialization
     public override void OnStartAuthority()
 	{
-        hackerCursor = GameObject.Find("Cursor").GetComponent<HackerCursor>();
+        GameObject cursor = GameObject.Instantiate(CursorPrefab);
+        hackerCursor = cursor.GetComponent<HackerCursor>();
 
-        if (hackerCursor != null)
-        {
-            //hackerCursor.Target = this.gameObject;
-            hackerCursor.Target = null;
-        }
-        
         if (!hasAuthority) return;
 		AiList = new List<GameObject>();
+
 	    if (HackingRadius > 0)
 	    {
 	        SphereCollider childSphereCollider = GetComponentInChildren<SphereCollider>();
@@ -38,11 +35,6 @@ public class TakeOver : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        //if(AiList.Count == 0 || _currentIndex == -1)
-        //{
-        //    _currentIndex = 0; // force the index to be minus one a null equivalent
-        //}
-
         if (!hasAuthority)
         {
             return;
@@ -69,8 +61,6 @@ public class TakeOver : NetworkBehaviour
                 StealIdentity(GetCurrentAi());
             }
         }
-
-        //Debug.Log(("total elements ") + AiLinkedList.Count);
 	}
    
     public void AddAi(GameObject ai)
@@ -89,8 +79,6 @@ public class TakeOver : NetworkBehaviour
             }
 
             AiList.Add(ai);
-            //Debug.Log(ai.gameObject.name + " has been added");
-            //Debug.Log("total elements in " + AiLinkedList.Count);
         }
     }
    
@@ -112,26 +100,19 @@ public class TakeOver : NetworkBehaviour
 
         //update the current index
         PreviousTarget();
-
-        //Debug.Log(ai.gameObject.name + " has been removed!");
-        //Debug.Log("total elements out " + AiLinkedList.Count);
     }
 
     public void NextTarget()
     {
         if (AiList.Count > 0)
         {
-            print("Nb elements" + AiList.Count);
-
             if(_currentIndex >= AiList.Count)
             {
                 _currentIndex = 0;
             }
             else
             {
-                print("Before index increment:" + _currentIndex);
                 _currentIndex++;
-                print("After incrementation : " + _currentIndex);
             }
         }
     }
