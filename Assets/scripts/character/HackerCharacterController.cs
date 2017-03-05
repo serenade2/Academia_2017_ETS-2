@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
 /// <summary>
 /// ThirdPerson controller for the Hacker
 /// </summary>
@@ -11,10 +10,8 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
 {
     public GameObject hackerCameraPrefab;
     public float speed = 10f;
-
     private bool canMove = true;
     private CharacterController ctrl;
-
 
     // Use this for initialization
     void Start()
@@ -35,8 +32,9 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
         {
             return;
         }
-        if (canMove)
-        {
+        
+	    if (canMove)
+	    {
             Vector3 input = new Vector3(Input.GetAxis("Horizontal1"), 0f, Input.GetAxis("Vertical1"));
             ctrl.SimpleMove(input * speed);
         }

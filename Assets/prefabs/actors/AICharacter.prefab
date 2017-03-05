@@ -29,6 +29,8 @@ GameObject:
   - component: {fileID: 114575362884521054}
   - component: {fileID: 114189411279143848}
   - component: {fileID: 114299385208424106}
+  - component: {fileID: 114107537955794470}
+  - component: {fileID: 114111338478119698}
   m_Layer: 0
   m_Name: AICharacter
   m_TagString: Untagged
@@ -94,8 +96,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1525966589198876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.96, y: 0.82, z: 2.91}
-  m_LocalScale: {x: 0.5099715, y: 1, z: 0.5323093}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4797935186610788}
   - {fileID: 4671941619831496}
@@ -189,7 +191,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: a935efe849a44ae429ebb2530fb856f2, type: 2}
+  - {fileID: 2100000, guid: ac6a9cb4eafc97a42a75e9bccdb22bed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -365,6 +367,30 @@ TrailRenderer:
     textureMode: 1
   m_MinVertexDistance: 1
   m_Autodestruct: 0
+--- !u!114 &114107537955794470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1525966589198876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3f71614fb8d3544399347da003bff41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HackerTag: Hacker
+  Cursor: {fileID: 1328997468785340, guid: e103c665e54f6c6479a3764c3b3afad3, type: 2}
+--- !u!114 &114111338478119698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1525966589198876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3774bcafa21ab4a449db80882b5d7507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114189411279143848
 MonoBehaviour:
   m_ObjectHideFlags: 1
