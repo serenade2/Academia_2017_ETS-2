@@ -5,14 +5,23 @@ using UnityEngine.Networking;
 
 public class CharacterMovement : NetworkBehaviour, IRewindable
 {
-    private bool canMove = true;
+    public GameObject hackerCameraPrefab;
     public float speed = 10f;
+
+    private bool canMove = true;
     private CharacterController ctrl;
+
 
     // Use this for initialization
     void Start()
     {
         this.ctrl = GetComponent<CharacterController>();
+
+        if (hasAuthority)
+        {
+            GameObject.Instantiate(hackerCameraPrefab);
+        }
+
     }
 
     // Update is called once per frame

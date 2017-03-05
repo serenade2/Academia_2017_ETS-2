@@ -6,8 +6,18 @@ using UnityEngine.Networking;
 public class Watcher : NetworkBehaviour {
 	public GameObject rewindManagerPrefab;
 	public GameObject reticlePrefab;
+    public GameObject watcherCameraPrefab;
+
 	private GameObject rewindManager;
 	private GameObject reticle;
+
+    void Start()
+    {
+        if (hasAuthority)
+        {
+            GameObject.Instantiate(watcherCameraPrefab);
+        }
+    }
 
 	// Use this for initialization
 	public override void OnStartServer () {

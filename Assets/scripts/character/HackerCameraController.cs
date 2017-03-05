@@ -5,7 +5,6 @@ using UnityEngine;
 /// <summary>
 /// Behavior of the Hacker's camera
 /// </summary>
-[ExecuteInEditMode]
 public class HackerCameraController : MonoBehaviour
 {
     public string targetTag;    // tag of the object the camera will follow

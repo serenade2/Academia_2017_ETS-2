@@ -9,47 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1184326867210834}
+  m_RootGameObject: {fileID: 1721591948023436}
   m_IsPrefabParent: 1
---- !u!1 &1184326867210834
+--- !u!1 &1721591948023436
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4953304621804522}
-  - component: {fileID: 20085180353286334}
-  - component: {fileID: 124488773479889692}
-  - component: {fileID: 92269156369125364}
-  - component: {fileID: 81479251775591966}
-  - component: {fileID: 114412270012477252}
+  - component: {fileID: 4400107834488712}
+  - component: {fileID: 20532209217961004}
+  - component: {fileID: 124981062329192710}
+  - component: {fileID: 92997288726470382}
+  - component: {fileID: 81103059967530202}
+  - component: {fileID: 114816108110910574}
   m_Layer: 0
-  m_Name: HackerCamera
+  m_Name: WatcherCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4953304621804522
+--- !u!4 &4400107834488712
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1184326867210834}
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
+  m_GameObject: {fileID: 1721591948023436}
+  m_LocalRotation: {x: 0.25881907, y: 0, z: 0, w: 0.9659259}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
---- !u!20 &20085180353286334
+--- !u!20 &20532209217961004
 Camera:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1184326867210834}
+  m_GameObject: {fileID: 1721591948023436}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -62,7 +62,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 17
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -78,37 +78,40 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!81 &81479251775591966
+--- !u!81 &81103059967530202
 AudioListener:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1184326867210834}
+  m_GameObject: {fileID: 1721591948023436}
   m_Enabled: 1
---- !u!92 &92269156369125364
+--- !u!92 &92997288726470382
 Behaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1184326867210834}
+  m_GameObject: {fileID: 1721591948023436}
   m_Enabled: 1
---- !u!114 &114412270012477252
+--- !u!114 &114816108110910574
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1184326867210834}
+  m_GameObject: {fileID: 1721591948023436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d639c7214c60a548a17296b8b9bffbf, type: 3}
+  m_Script: {fileID: 11500000, guid: f372de377d93bf94b911ccc17add2258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Hacker
-  cameraOffset: {x: 0, y: 3.5, z: -3.5}
---- !u!124 &124488773479889692
+  level: {fileID: 0}
+  offset: {x: 0, y: 0, z: 0}
+  radius: 45
+  translatSpeed: 4
+  rotateAngle: 30
+--- !u!124 &124981062329192710
 Behaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1184326867210834}
+  m_GameObject: {fileID: 1721591948023436}
   m_Enabled: 1

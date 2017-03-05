@@ -15,7 +15,15 @@ public class CameraNavigation : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        if (level == null)
+        {
+            GameObject room = GameObject.FindGameObjectWithTag("Room");
+            if (room != null)
+            {
+                this.level = room;
+            }
 
+        }
     }
 
     // Update is called once per frame

@@ -56,6 +56,8 @@ MonoBehaviour:
     type: 2}
   reticlePrefab: {fileID: 1369334446370686, guid: a439ad5b7327d5e4488318333d9f6faa,
     type: 2}
+  watcherCameraPrefab: {fileID: 1721591948023436, guid: 2e819e8b2adf0774a9e29b7d3efe95bc,
+    type: 2}
 --- !u!114 &114268371767431144
 MonoBehaviour:
   m_ObjectHideFlags: 1
