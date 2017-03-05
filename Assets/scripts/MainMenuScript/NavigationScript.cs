@@ -11,7 +11,28 @@ public class NavigationScript : MonoBehaviour {
     public GameObject option;
     public GameObject play;
 
+    public void toSelectPlay() {
+        play.SetActive(true);
+        option.SetActive(false);
+        main.SetActive(false);
+    }
 
+    public void toOption() {
+        play.SetActive(false);
+        option.SetActive(true);
+        main.SetActive(false);
+    }
+
+    public void quiter() {
+        Application.Quit();
+    }
+
+    public void back()
+    {
+        play.SetActive(false);
+        option.SetActive(false);
+        main.SetActive(true);
+    }
 
     public void prepareGame(Toggle t)
     {
@@ -38,16 +59,9 @@ public class NavigationScript : MonoBehaviour {
         //modifier son
         int volume = Mathf.RoundToInt(s.value);
 
-       
-
-
+        back();
     }
 
-    public void back() {
-        play.SetActive(false);
-        option.SetActive(false);
-        main.SetActive(true);
-    }
 
 
 }
