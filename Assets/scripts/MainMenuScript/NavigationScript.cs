@@ -12,17 +12,23 @@ public class NavigationScript : MonoBehaviour {
     public GameObject play;
 
 
-    public void prepareGame(Toggle t, InputField i) {
+
+    public void prepareGame(Toggle t)
+    {
         //modifier le network
         if (t.isOn)
         {
             //set network host
 
         }
-        else {
+        else
+        {
             // set network Client
 
+            InputField i = play.GetComponentInChildren<InputField>();
             String ipHost = i.text;
+            Debug.Log(ipHost);
+
         }
 
     }
