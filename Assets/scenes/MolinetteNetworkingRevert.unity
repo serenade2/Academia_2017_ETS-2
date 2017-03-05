@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -753,7 +753,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1209191725}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.97, y: 0.55, z: 0}
+  m_LocalPosition: {x: 1.97, y: 8.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -766,6 +766,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114379664863264352, guid: d055256da9f304243824876ce005ef8f,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4893293106550542, guid: d055256da9f304243824876ce005ef8f, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -798,6 +803,30 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114379664863264352, guid: d055256da9f304243824876ce005ef8f,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1445516490173184, guid: d182a31a7bf9c8442b0f4e766da6482c,
+        type: 2}
+    - target: {fileID: 114379664863264352, guid: d055256da9f304243824876ce005ef8f,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1328234100468404, guid: ff6994edf7430424ebecfab216582297,
+        type: 2}
+    - target: {fileID: 114379664863264352, guid: d055256da9f304243824876ce005ef8f,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 1457918936068302, guid: 48f3368eeb57dd140a67e907c152027e,
+        type: 2}
+    - target: {fileID: 114379664863264352, guid: d055256da9f304243824876ce005ef8f,
+        type: 2}
+      propertyPath: m_SpawnPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 1369334446370686, guid: a439ad5b7327d5e4488318333d9f6faa,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d055256da9f304243824876ce005ef8f, type: 2}
   m_IsPrefabParent: 0

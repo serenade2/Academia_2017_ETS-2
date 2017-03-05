@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79fd2d2e281727241acf01647637fffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hackerPrefab: {fileID: 1129365913663430, guid: 50550ab15fc9c76428028e962408e248,
+  hackerPrefab: {fileID: 1445516490173184, guid: d182a31a7bf9c8442b0f4e766da6482c,
     type: 2}
   watcherPrefab: {fileID: 1457918936068302, guid: 48f3368eeb57dd140a67e907c152027e,
     type: 2}
