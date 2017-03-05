@@ -12,10 +12,20 @@ public class Hacker : NetworkBehaviour
     public float HackingRadius;
     public float DecoyLifeTime;
     public int _currentIndex;
-	// Use this for initialization
-	public override void OnStartAuthority()
+    private HackerCursor hackerCursor;
+
+    // Use this for initialization
+    public override void OnStartAuthority()
 	{
-	    if (!hasAuthority) return;
+        hackerCursor = GameObject.Find("Cursor").GetComponent<HackerCursor>();
+
+        if (hackerCursor != null)
+        {
+            //hackerCursor.Target = this.gameObject;
+            hackerCursor.Target = null;
+        }
+        
+        if (!hasAuthority) return;
 		AiList = new List<GameObject>();
 	    if (HackingRadius > 0)
 	    {
@@ -38,25 +48,22 @@ public class Hacker : NetworkBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4)) // LB button pressed
 	    {
-            //Debug.Log("LB2 Pressed");
             // disable the previous cursor
             UpdateHackerCursor(false);
             PreviousTarget();
             // enable the cursor on the next ai
             UpdateHackerCursor(true);
 	    }
-        else if (Input.GetKeyDown(KeyCode.Joystick1Button5))
+        else if (Input.GetKeyDown(KeyCode.Joystick1Button5)) // RB Button pressed
 	    {
-            //Debug.Log("RB2 pressed");
             UpdateHackerCursor(false);
             NextTarget();
             UpdateHackerCursor(true);
         }
-        else if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+        else if (Input.GetKeyDown(KeyCode.Joystick1Button0))// A button pressed
         {
-            //Debug.Log("A button Pressed");
             if (AiList.Count > 0)
             {
                 TakeOver(GetCurrentAi());
@@ -76,6 +83,10 @@ public class Hacker : NetworkBehaviour
             {
                 return;
             }
+            if (hackerCursor.Target == null)
+            {
+                hackerCursor.Target = ai;
+            }
 
             AiList.Add(ai);
             //Debug.Log(ai.gameObject.name + " has been added");
@@ -92,6 +103,10 @@ public class Hacker : NetworkBehaviour
         if (!AiList.Contains(ai))
         {
             return;
+        }
+        if (GetCurrentAi().name.Equals(ai.name))
+        {
+            hackerCursor.SetTarget(null);
         }
         AiList.Remove(ai);
 
@@ -185,7 +200,6 @@ public class Hacker : NetworkBehaviour
     [ClientRpc]
     public void RpcDestroyAI(GameObject ai)
     {
-        //ai.SetActive(true);
         RemoveAi(ai);
         Destroy(ai);
     }
@@ -217,20 +231,13 @@ public class Hacker : NetworkBehaviour
        currentMeshFilter.mesh = targetMeshFilter.mesh;
     }
 
-    public void UpdateHackerCursor(bool IsVisible)
+    public void UpdateHackerCursor(bool visibleCondition)
     {
         GameObject currentAi = GetCurrentAi();
-        if(currentAi != null)
-        {
-            AICharacter aiCharacter = currentAi.GetComponent<AICharacter>();
-            if (IsVisible)
-            {
-                aiCharacter.EnableCursor();
-            }
-            else
-            {
-                aiCharacter.DisableCursor();
-            }
-        }
+
+        if (currentAi == null)
+            return;
+        hackerCursor.SetTarget(currentAi);
+        hackerCursor.IsVisible = visibleCondition;
     }
 }

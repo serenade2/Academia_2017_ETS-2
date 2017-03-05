@@ -41,12 +41,12 @@ GameObject:
   - component: {fileID: 65240962600430748}
   - component: {fileID: 23025515391157602}
   m_Layer: 0
-  m_Name: CursorPointer
+  m_Name: CursorArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4336105499852688
 Transform:
   m_ObjectHideFlags: 1
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  Cursor: {fileID: 1991485016530900}
+  CursorArrow: {fileID: 1991485016530900}
   CursorColor: {fileID: 2100000, guid: 7b8c403dc44b73e4e86ba236e218a3aa, type: 2}
   CursorOffset: {x: 0, y: 2, z: 0}
   RotationSpeed: {x: 0, y: 60, z: 0}
