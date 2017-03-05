@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-public class Hacker : NetworkBehaviour
+public class TakeOver : NetworkBehaviour
 {
     [Tooltip("The list that contains the Hackable AI")]
     public List<GameObject> AiList;
@@ -66,7 +66,7 @@ public class Hacker : NetworkBehaviour
         {
             if (AiList.Count > 0)
             {
-                TakeOver(GetCurrentAi());
+                StealIdentity(GetCurrentAi());
             }
         }
 
@@ -165,7 +165,7 @@ public class Hacker : NetworkBehaviour
         }
     }
 
-    public void TakeOver(GameObject targetGameObject)
+    public void StealIdentity(GameObject targetGameObject)
     {
         if (targetGameObject == null)
         {
