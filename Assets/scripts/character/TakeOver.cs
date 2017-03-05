@@ -20,14 +20,10 @@ public class TakeOver : NetworkBehaviour
 	{
         GameObject cursor = GameObject.Instantiate(CursorPrefab);
         hackerCursor = cursor.GetComponent<HackerCursor>();
-        if (hackerCursor != null)
-        {
-            //hackerCursor.Target = this.gameObject;
-            hackerCursor.Target = null;
-        }
-        
+
         if (!hasAuthority) return;
 		AiList = new List<GameObject>();
+
 	    if (HackingRadius > 0)
 	    {
 	        SphereCollider childSphereCollider = GetComponentInChildren<SphereCollider>();
@@ -110,17 +106,13 @@ public class TakeOver : NetworkBehaviour
     {
         if (AiList.Count > 0)
         {
-            print("Nb elements" + AiList.Count);
-
             if(_currentIndex >= AiList.Count)
             {
                 _currentIndex = 0;
             }
             else
             {
-                print("Before index increment:" + _currentIndex);
                 _currentIndex++;
-                print("After incrementation : " + _currentIndex);
             }
         }
     }
