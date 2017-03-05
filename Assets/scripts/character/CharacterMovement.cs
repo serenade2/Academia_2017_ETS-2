@@ -6,12 +6,13 @@ using UnityEngine.Networking;
 public class CharacterMovement : NetworkBehaviour, IRewindable
 {
     private bool canMove = true;
-    private Rigidbody rb;
+    public float speed = 10f;
+    private CharacterController ctrl;
 
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        this.ctrl = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
@@ -23,7 +24,8 @@ public class CharacterMovement : NetworkBehaviour, IRewindable
         }
         if (canMove)
         {
-            rb.velocity = new Vector3(Input.GetAxis("Horizontal1"), rb.velocity.y, Input.GetAxis("Vertical1"));
+            Vector3 input = new Vector3(Input.GetAxis("Horizontal1"), 0f, Input.GetAxis("Vertical1"));
+            ctrl.SimpleMove(input * speed);
         }
     }
 
@@ -32,12 +34,10 @@ public class CharacterMovement : NetworkBehaviour, IRewindable
         if (isRewinding)
         {
             canMove = false;
-            rb.isKinematic = true;
         }
         else
         {
             canMove = true;
-            rb.isKinematic = false;
         }
     }
 

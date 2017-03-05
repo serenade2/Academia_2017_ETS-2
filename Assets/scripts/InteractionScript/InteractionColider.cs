@@ -3,23 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractionColider : MonoBehaviour {
+    
+    private InteractionManager interactionManager;
 
-    public Canvas anCanvas;
-    public string InputManette;
-    public float FillingRate;
+    public void Start()
+    {
+        interactionManager = GetComponentInParent<InteractionManager>();
+    }
 
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player") {
+        if(other.tag == "Hacker") {
             Debug.Log("stay");
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetButton("Submit"))
             {
-                Debug.Log(InputManette);
-                anCanvas.GetComponent<InteractionManager>().inProgress(FillingRate);
+                interactionManager.InProgress();
             }
             else {
-                anCanvas.GetComponent<InteractionManager>().abandonedProgress(); // arrete le remplisage
+                interactionManager.AbandonedProgress(); // arrete le remplisage
             }
         }
         
@@ -27,7 +29,7 @@ public class InteractionColider : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        anCanvas.GetComponent<InteractionManager>().abandonedProgress(); // arrete le remplisage
+        interactionManager.AbandonedProgress(); // arrete le remplisage
     }
 
 }
