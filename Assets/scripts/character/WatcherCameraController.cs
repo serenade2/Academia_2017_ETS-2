@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class CameraNavigation : MonoBehaviour
+public class WatcherCameraController : MonoBehaviour
 {
     public GameObject level;
     public Vector3 offset = Vector3.zero;
