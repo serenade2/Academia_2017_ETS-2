@@ -8,10 +8,16 @@ using System;
 
 public class NavigationScript : MonoBehaviour {
 
+
     public GameObject main;
     public GameObject option;
     public GameObject play;
     public NetworkManager network;
+
+    //public void Awake()
+    //{
+    //    DontDestroyOnLoad(gameObject);
+    //}
 
     public void toSelectPlay() {
         play.SetActive(true);
@@ -42,19 +48,21 @@ public class NavigationScript : MonoBehaviour {
         if (t.isOn)
         {
             //set network host
+
             network.StartHost();
         }
         else
         {
             // set network Client
-
+            
             InputField i = play.GetComponentInChildren<InputField>();
             String ipHost = i.text;
             Debug.Log(ipHost);
             network.SetMatchHost(ipHost, 7777,false);
             network.StartClient();
+            
         }
-
+        play.SetActive(false);
     }
 
 
