@@ -8,10 +8,12 @@ using UnityEngine.Networking;
 public class AIMovement : NetworkBehaviour, IRewindable
 {
     public GameObject[] objectives;
+	public LinkedList<GameObject> objectiveHistory = new LinkedList<GameObject>();
     private UnityEngine.AI.NavMeshAgent agent;
     private bool hasChangedPath = false; //Verify if path has changed for a new one
     private IEnumerator working;
     private bool isWorking = false;
+	private GameObject currentObjective;
 
     // Use this for initialization
     void Start()
@@ -23,6 +25,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
 
         //Set agent
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+		currentObjective = objectives [Random.Range (1, objectives.Length)].transform.position;
         agent.SetDestination(objectives[Random.Range(1, objectives.Length)].transform.position);
     }
 

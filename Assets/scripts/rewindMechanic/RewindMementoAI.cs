@@ -6,19 +6,19 @@ using UnityEngine;
 public class RewindMementoAI : IRewindMemento
 {
     Vector3 position;
-    Vector3 destination;
-    NavMeshAgent navMesh;
+    /*Vector3 destination;
+    NavMeshAgent navMesh;*/
 
     public RewindMementoAI(GameObject rewindable)
     {
-        navMesh = rewindable.GetComponent<NavMeshAgent>();
+        //navMesh = rewindable.GetComponent<NavMeshAgent>();
         position = rewindable.transform.position;
-        destination = navMesh.destination;
+        //destination = navMesh.destination;
     }
 
     public void RestoreFromMemento(GameObject rewindable)
     {
         rewindable.transform.position = position;
-        navMesh.SetDestination(destination);
+        //navMesh.SetDestination(destination);
     }
 }
