@@ -75,7 +75,7 @@ public class TakeOver : NetworkBehaviour
             }
             if (hackerCursor.Target == null)
             {
-                hackerCursor.Target = ai;
+                hackerCursor.SetTarget(ai);
             }
 
             AiList.Add(ai);
@@ -104,16 +104,18 @@ public class TakeOver : NetworkBehaviour
 
     public void NextTarget()
     {
-        if (AiList.Count > 0)
+        if (_currentIndex < AiList.Count)
         {
-            if(_currentIndex >= AiList.Count)
+            _currentIndex ++;
+
+            if(_currentIndex == AiList.Count)
             {
                 _currentIndex = 0;
             }
-            else
-            {
-                _currentIndex++;
-            }
+        }
+        else
+        {
+            _currentIndex = 0;
         }
     }
 
@@ -215,7 +217,7 @@ public class TakeOver : NetworkBehaviour
     public void UpdateHackerCursor(bool visibleCondition)
     {
         GameObject currentAi = GetCurrentAi();
-
+       
         if (currentAi == null)
             return;
         hackerCursor.SetTarget(currentAi);
