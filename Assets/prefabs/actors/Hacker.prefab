@@ -280,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AiList: []
   HackingRadius: 5
-  DecoyLifeTime: 0
+  DecoyLifeTime: 5
   _currentIndex: 0
   CursorPrefab: {fileID: 1328997468785340, guid: e103c665e54f6c6479a3764c3b3afad3,
     type: 2}
