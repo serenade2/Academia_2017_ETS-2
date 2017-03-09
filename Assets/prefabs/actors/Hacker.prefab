@@ -284,6 +284,8 @@ MonoBehaviour:
   _currentIndex: 0
   CursorPrefab: {fileID: 1328997468785340, guid: e103c665e54f6c6479a3764c3b3afad3,
     type: 2}
+  DecoyPrefab: {fileID: 1188406860426082, guid: d17f625a643f48f4a9009a57334de672,
+    type: 2}
 --- !u!114 &114951472944832330
 MonoBehaviour:
   m_ObjectHideFlags: 1

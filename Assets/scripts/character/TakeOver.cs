@@ -14,6 +14,7 @@ public class TakeOver : NetworkBehaviour
     public float DecoyLifeTime = 5.0f;
     public int _currentIndex;
     public GameObject CursorPrefab;
+    public GameObject DecoyPrefab;
     private HackerCursor hackerCursor;
 
     // Use this for initialization
@@ -157,8 +158,8 @@ public class TakeOver : NetworkBehaviour
         Transform targetTransform = targetGameObject.transform;
 
         //TODO add an accessor in the class that use the NavMeshAgent to retreive the original ai speed 
-        SpawnDecoy(this.gameObject, targetTransform.position, targetTransform.rotation, DecoyLifeTime, 50.0f);
-        CmdSpawnDecoy(this.gameObject, targetTransform.position, targetTransform.rotation, DecoyLifeTime, 50.0f);
+        SpawnDecoy(this.gameObject, this.transform.position, this.transform.rotation, DecoyLifeTime, 1.0f);
+        CmdSpawnDecoy(this.gameObject, this.transform.position, this.transform.rotation, DecoyLifeTime, 1.0f);
 
         // Update on the client the mesh
         UpdateHackerMesh(targetGameObject);
@@ -192,48 +193,24 @@ public class TakeOver : NetworkBehaviour
     /// <param name="walkSpeed">The speed at which the decoy will move</param>
     public void SpawnDecoy(GameObject decoy, Vector3 targetPosition, Quaternion targetQuaternion, float lifeTime, float walkSpeed)
     {
-        GameObject spawnedDecoy = GameObject.Instantiate(decoy);
+        //GameObject spawnedDecoy = GameObject.Instantiate(decoy);
+        Vector3 decoyDirection = decoy.transform.forward;
+        GameObject spawnedDecoy = GameObject.Instantiate(DecoyPrefab, targetPosition, targetQuaternion);
         
         spawnedDecoy.name = "DECOY_" + decoy.name;
-        spawnedDecoy.transform.parent = null;
-        DetachDecoyComponents(spawnedDecoy);    
-
-        Vector3 direction = targetPosition - decoy.transform.position;
-        spawnedDecoy.transform.rotation = targetQuaternion;
-        //TODO make the decoy walk in the same direction the original agent was facing.
-        spawnedDecoy.transform.Translate(direction * walkSpeed * Time.deltaTime);
+        DecoyMovement decoyBehaviour = spawnedDecoy.GetComponent<DecoyMovement>();
+        
+        decoyBehaviour.InitialiseDecoy(decoyDirection, lifeTime, walkSpeed);
+        decoyBehaviour.TakeApparency(this.gameObject);
+        decoyBehaviour.SetIsComplete(true);
+        decoyBehaviour.EliminateDecoy(lifeTime); //TODO try removing the coupling
         //TODO play the desintegrate animation
-
-        // then eliminate the decoy!
-        try
-        {
-            Destroy(spawnedDecoy, lifeTime);
-        }
-        catch (System.Exception ex)
-        {
-            print(ex.Message);
-        }
     }
 
     [Command]
     public void CmdSpawnDecoy(GameObject decoy, Vector3 targetPosition, Quaternion targetQuaternion, float lifeTime, float walkSpeed)
     {
         SpawnDecoy(decoy, targetPosition, targetQuaternion, lifeTime, walkSpeed);
-    }
-
-    private void DetachDecoyComponents(GameObject spawnedDecoy)
-    {
-        try
-        {
-            Destroy(spawnedDecoy.GetComponentInChildren<SphereCollider>());
-            Destroy(spawnedDecoy.GetComponent<TakeOver>());
-            Destroy(spawnedDecoy.GetComponent<HackerCharacterController>());
-            spawnedDecoy.GetComponent<CharacterController>().enabled = false;
-        }
-        catch(System.Exception ex)
-        {
-            print(ex.Message);
-        }
     }
     
     [Command]
