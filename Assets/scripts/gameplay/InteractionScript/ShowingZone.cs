@@ -17,12 +17,19 @@ public class ShowingZone : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        elementToShow.SetActive(true);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Hacker")
+        {
+            elementToShow.SetActive(true);
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        elementToShow.SetActive(false);
+        if (other.tag == "Hacker")
+        {
+            elementToShow.SetActive(false);
+        }
     }
 }

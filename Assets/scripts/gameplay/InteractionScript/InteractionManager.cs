@@ -29,18 +29,11 @@ public class InteractionManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         UpdateProgress();
-
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     private void UpdateProgress() {
         float ratio = currentProgress / MAX_PROGRESS;
         ProgressBar.fillAmount = ratio;
-        //ProgressBar.rectTransform.localScale = new Vector3(ratio,1,1);
     }
 
     public void InProgress() {
@@ -49,7 +42,7 @@ public class InteractionManager : MonoBehaviour {
         if (currentProgress > MAX_PROGRESS) {
             currentProgress = MAX_PROGRESS;
             UpdateProgress();
-            Debug.Log("inProgress");
+            
             if (currentProgress >= MAX_PROGRESS) {
                 CompletedAction();
                 ResetProgress();
@@ -59,13 +52,11 @@ public class InteractionManager : MonoBehaviour {
     }
 
     public void AbandonedProgress() {
-        Debug.Log("abandonedProgress");
         currentProgress = 0;
         UpdateProgress();
     }
 
     private void ResetProgress() {
-        Debug.Log("Finish");
         currentProgress = 0;
     }
 
@@ -73,7 +64,4 @@ public class InteractionManager : MonoBehaviour {
     {
         activatableDoor.Activate();
     }
-
-
-
 }
