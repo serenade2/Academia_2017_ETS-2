@@ -12,7 +12,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
     private bool hasChangedPath = false; //Verify if path has changed for a new one
     private IEnumerator working;
     private bool isWorking = false;
-
+    private Animator animatorController;
     // Use this for initialization
     void Start()
     {
@@ -24,12 +24,14 @@ public class AIMovement : NetworkBehaviour, IRewindable
         //Set agent
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.SetDestination(objectives[Random.Range(1, objectives.Length)].transform.position);
+        animatorController = GetComponent<Animator>(); 
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-
+        animatorController.SetFloat("Speed", agent.desiredVelocity.sqrMagnitude);
+       
         //When destination is reached
         if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending)
         {
