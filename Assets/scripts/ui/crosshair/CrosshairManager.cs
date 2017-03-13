@@ -5,52 +5,204 @@ using UnityEngine.UI;
 
 public class CrosshairManager : MonoBehaviour {
 
-    public RawImage test;
+    private RawImage crossHair;
 
     float maxWidth;
     float maxHeight;
 
+    public string horizontal;
+    public string vertical;
+    public int multiplicator;
+    public bool debugModeIsActive;
+
     Vector2 input;
+
+    bool tuchWallNorth;
+    bool tuchWallSouth;
+    bool tuchWallEast;
+    bool tuchWallWest;
 
 
     // Use this for initialization
     void Start () {
-        test.rectTransform.position = new Vector2(0f,0f);
         maxWidth = GetComponentInParent<Canvas>().pixelRect.width;
         maxHeight = GetComponentInParent<Canvas>().pixelRect.height;
+
+        crossHair = Resources.Load("UI/Crosshair") as RawImage;
+        crossHair.rectTransform.position = new Vector3(maxWidth/2f, maxHeight / 2f, 0);
+
+        tuchWallNorth = false;
+        tuchWallSouth = false;
+        tuchWallEast = false;
+        tuchWallWest = false;
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.anyKeyDown) {
-            
+
+        walltouching();
+        wallMovingPermission();
+
+        debugMode();
+    }
+
+    /// <summary>
+    /// gestion si un mur est toucher
+    /// </summary>
+    private void walltouching()
+    {
+        if (crossHair.rectTransform.position.x <= 0)
+        {
+            tuchWallWest = true;
+        }
+        else
+        {
+            tuchWallWest = false;
         }
 
-        Debug.Log(Input.GetAxis("Horizontal1"));
-        Debug.DrawLine(test.rectTransform.position,new Vector3(Input.GetAxis("Horizontal1"), 0,  Input.GetAxis("Vertical1")));
+        if (crossHair.rectTransform.position.x >= maxWidth)
+        {
+            tuchWallEast = true;
+        }
+        else
+        {
+            tuchWallEast = false;
+        }
 
+        if (crossHair.rectTransform.position.y <= 0)
+        {
+            tuchWallSouth = true;
+        }
+        else
+        {
+            tuchWallSouth = false;
+        }
 
+        if (crossHair.rectTransform.position.y >= maxHeight)
+        {
+            tuchWallNorth = true;
+        }
+        else
+        {
+            tuchWallNorth = false;
+        }
 
-        //    if (test.rectTransform.position.x >= 0)
-        //{
-        //    if (Input.GetAxis("Horizontal1") > 0)
-        //    {
+    }
 
-        //        input = new Vector2(test.rectTransform.position.x + Input.GetAxis("Horizontal1"), test.rectTransform.position.y + Input.GetAxis("Vertical1"));
-        //    }
-        //    else {
+    /// <summary>
+    /// si l'input est positif 
+    /// </summary>
+    /// <param name="f"></param>
+    /// <returns></returns>
+    private bool isPositiveInput(float f) {
+        if (f >= 0)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
 
-        //    }
+    }
 
-        //}
-        //else {
-        //    input = new Vector2(test.rectTransform.position.x + Input.GetAxis("Horizontal1"), test.rectTransform.position.y +Input.GetAxis("Vertical1"));
-        //}
+    /// <summary>
+    /// production du vecteur de déplacement
+    /// </summary>
+    /// <param name="i"></param>
+    /// <returns></returns>
+    private Vector2 borderDeplacement(string i) {
+        Vector2 move;
+        switch (i)
+        {
+            case "North":
+                move = new Vector2(crossHair.rectTransform.position.x + (Input.GetAxis(horizontal) * multiplicator), maxHeight);
+                break;
+            case "South":
+                move = new Vector2(crossHair.rectTransform.position.x + (Input.GetAxis(horizontal) * multiplicator), 0);
+                break;
+            case "East":
+                move = new Vector2(maxWidth, crossHair.rectTransform.position.y + (Input.GetAxis(vertical) * multiplicator));
+                break;
+            case "West":
+                move = new Vector2(0, crossHair.rectTransform.position.y + (Input.GetAxis(vertical) * multiplicator));
+                break;
+            default:
+                move = new Vector2(crossHair.rectTransform.position.x + (Input.GetAxis(horizontal) * multiplicator), crossHair.rectTransform.position.y + (Input.GetAxis(vertical) * multiplicator));
+                break;
+        }
+        return move;
+    }
 
-        input = new Vector2(test.rectTransform.position.x + Input.GetAxis("Horizontal1"), test.rectTransform.position.y + Input.GetAxis("Vertical1"));
+    /// <summary>
+    /// permet de dire quelle est la permission de mouvement
+    /// </summary>
+    private void wallMovingPermission() {
+        if (tuchWallNorth)
+        {
+            if (isPositiveInput(Input.GetAxis(vertical)))
+            {
+                input = borderDeplacement("North");
+            }
+            else
+            {
+                input = borderDeplacement("");
+            }
+        }
+        else if (tuchWallSouth)
+        {
+            if (!isPositiveInput(Input.GetAxis(vertical)))
+            {
+                input = borderDeplacement("South");
+            }
+            else
+            {
+                input = borderDeplacement("");
+            }
+        }
+        else if (tuchWallEast)
+        {
+            if (isPositiveInput(Input.GetAxis(horizontal)))
+            {
+                input = borderDeplacement("East");
+            }
+            else
+            {
+                input = borderDeplacement("");
+            }
+        }
+        else if (tuchWallWest)
+        {
+            if (!isPositiveInput(Input.GetAxis(horizontal)))
+            {
+                input = borderDeplacement("West");
+            }
+            else
+            {
+                input = borderDeplacement("");
+            }
+        }
+        else
+        {
+            input = borderDeplacement("");
+        }
+        crossHair.rectTransform.position = input;
+    }
 
+    /// <summary>
+    /// debug mode
+    /// </summary>
+    private void debugMode() {
+        if (debugModeIsActive) {
+            Debug.DrawLine(crossHair.rectTransform.position, new Vector3(Input.GetAxis(horizontal), 0, Input.GetAxis(vertical)));
 
-        test.rectTransform.position = input;
+            Debug.Log("tuchWallWest : " + tuchWallWest);
+            Debug.Log("tuchWallEast : " + tuchWallEast);
+            Debug.Log("tuchWallSouth : " + tuchWallSouth);
+            Debug.Log("tuchWallNouth : " + tuchWallNorth);
+        }
         
     }
 }
+
+
