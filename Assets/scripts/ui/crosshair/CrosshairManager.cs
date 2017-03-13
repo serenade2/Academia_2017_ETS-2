@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CrosshairManager : MonoBehaviour {
 
-    private RawImage crossHair;
+    public RawImage crossHair;
 
     float maxWidth;
     float maxHeight;
@@ -23,26 +23,40 @@ public class CrosshairManager : MonoBehaviour {
     bool tuchWallWest;
 
 
+    RaycastHit test;
+    float dist;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         maxWidth = GetComponentInParent<Canvas>().pixelRect.width;
         maxHeight = GetComponentInParent<Canvas>().pixelRect.height;
 
-        crossHair = Resources.Load("UI/Crosshair") as RawImage;
-        crossHair.rectTransform.position = new Vector3(maxWidth/2f, maxHeight / 2f, 0);
+        crossHair.rectTransform.position = new Vector3(maxWidth / 2f, maxHeight / 2f, 0);
 
         tuchWallNorth = false;
         tuchWallSouth = false;
         tuchWallEast = false;
         tuchWallWest = false;
-        
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         walltouching();
         wallMovingPermission();
+
+        Vector3 forward = crossHair.transform.TransformDirection(Vector3.forward) * 100;
+
+        Debug.DrawRay(crossHair.transform.position, forward, Color.green);
+
+        if (Physics.Raycast(transform.position, forward, out test))
+        {
+            dist = test.distance;
+            Debug.Log(dist + " " + test.collider.gameObject.name);
+        }
 
         debugMode();
     }
