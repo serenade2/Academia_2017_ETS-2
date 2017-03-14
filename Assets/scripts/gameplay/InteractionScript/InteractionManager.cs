@@ -60,8 +60,9 @@ public class InteractionManager : MonoBehaviour {
         currentProgress = 0;
     }
 
+
     private void CompletedAction()
     {
-        activatableDoor.Activate();
+        ObjectiveManager.Instance.CmdCompleteObjective(activatableDoor.gameObject);
     }
 }
