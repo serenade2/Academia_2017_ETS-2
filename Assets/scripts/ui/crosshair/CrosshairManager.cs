@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CrosshairManager : MonoBehaviour {
 
     public RawImage crossHair;
+    public Camera cam;
 
     float maxWidth;
     float maxHeight;
@@ -48,9 +49,13 @@ public class CrosshairManager : MonoBehaviour {
         walltouching();
         wallMovingPermission();
 
-        Vector3 forward = crossHair.transform.TransformDirection(Vector3.forward) * 100;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        Vector3 forward = crossHair.transform.TransformDirection(Vector3.forward) * 10;
 
         Debug.DrawRay(crossHair.transform.position, forward, Color.green);
+
+        Debug.DrawRay(cam.transform.position, forward, Color.red);
 
         if (Physics.Raycast(transform.position, forward, out test))
         {
@@ -208,7 +213,7 @@ public class CrosshairManager : MonoBehaviour {
     /// </summary>
     private void debugMode() {
         if (debugModeIsActive) {
-            Debug.DrawLine(crossHair.rectTransform.position, new Vector3(Input.GetAxis(horizontal), 0, Input.GetAxis(vertical)));
+            Debug.DrawLine(crossHair.rectTransform.position, new Vector3(0, 0, 0));
 
             Debug.Log("tuchWallWest : " + tuchWallWest);
             Debug.Log("tuchWallEast : " + tuchWallEast);
