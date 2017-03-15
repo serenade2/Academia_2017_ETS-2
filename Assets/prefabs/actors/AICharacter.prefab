@@ -32,7 +32,7 @@ GameObject:
   - component: {fileID: 114111338478119698}
   - component: {fileID: 114370019712306598}
   - component: {fileID: 136509726971883462}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AICharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 92238862278422160}
   - component: {fileID: 124558563053533102}
   - component: {fileID: 81108768133032348}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -67,7 +67,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4797935186610788}
   - component: {fileID: 136579948433432538}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: UICollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4671941619831496}
   - component: {fileID: 96579758552372104}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33317532095129554}
   - component: {fileID: 135067578035124858}
   - component: {fileID: 23948074969629236}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HackingCollisionRadius
   m_TagString: Hacker
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4420125156182642}
   - component: {fileID: 136735306391017226}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: UICollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 114458670815915374}
   - component: {fileID: 114744680937371558}
   - component: {fileID: 114862458932353596}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hacker
   m_TagString: Hacker
   m_Icon: {fileID: 0}
@@ -280,8 +280,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AiList: []
   HackingRadius: 5
-  DecoyLifeTime: 0
+  DecoyLifeTime: 5
   _currentIndex: 0
+  CursorPrefab: {fileID: 1328997468785340, guid: e103c665e54f6c6479a3764c3b3afad3,
+    type: 2}
+  DecoyPrefab: {fileID: 1188406860426082, guid: d17f625a643f48f4a9009a57334de672,
+    type: 2}
 --- !u!114 &114951472944832330
 MonoBehaviour:
   m_ObjectHideFlags: 1

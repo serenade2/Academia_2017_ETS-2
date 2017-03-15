@@ -17,23 +17,23 @@ public class AICharacter : NetworkBehaviour
 
     public void OnTriggerEnter(Collider col)
     {
-        if (!col.gameObject.CompareTag(HackerTag))
+        if (!col.gameObject.name.Equals("HackingCollisionRadius"))
         {
             return;
         }
 
-        Hacker hacker = col.GetComponentInParent<Hacker>();
+        TakeOver hacker = col.GetComponentInParent<TakeOver>();
         hacker.AddAi(this.gameObject);
     }
 
     public void OnTriggerExit(Collider col)
-    {
-        if (!col.gameObject.CompareTag(HackerTag))
+    { 
+        if (!col.gameObject.name.Equals("HackingCollisionRadius"))
         {
             return;
         }
 
-        Hacker hacker = col.GetComponentInParent<Hacker>();
+        TakeOver hacker = col.GetComponentInParent<TakeOver>();
 
         hacker.RemoveAi(this.gameObject);
     }
