@@ -6,7 +6,7 @@ public class Objective : MonoBehaviour {
 	private bool isUsed = false;
 	private int userCount = 0;
 	private int maxUser = 3;
-	private int[] restrictions = [0,0,0];
+	private int[] restrictions = { 0, 0, 0 };
 
 	// Use this for initialization
 	void Start () {

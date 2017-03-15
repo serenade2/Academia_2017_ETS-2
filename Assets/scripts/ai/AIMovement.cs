@@ -9,6 +9,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
 {
     public GameObject[] objectives;
 	public LinkedList<GameObject> objectiveHistory = new LinkedList<GameObject>();
+    public bool rewindMode = false;
     private UnityEngine.AI.NavMeshAgent agent;
     private bool hasChangedPath = false; //Verify if path has changed for a new one
     private IEnumerator working;
@@ -25,8 +26,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
 
         //Set agent
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-		currentObjective = objectives [Random.Range (1, objectives.Length)].transform.position;
-        agent.SetDestination(objectives[Random.Range(1, objectives.Length)].transform.position);
+		currentObjective = objectives [Random.Range (1, objectives.Length)];
+        agent.SetDestination(currentObjective.transform.position);
     }
 
     // Update is called once per frame
@@ -48,7 +49,16 @@ public class AIMovement : NetworkBehaviour, IRewindable
     {
         hasChangedPath = false;
         agent.ResetPath();
-        agent.SetDestination(objectives[Random.Range(0, objectives.Length)].transform.position);
+        currentObjective = objectives[Random.Range(1, objectives.Length)];
+        agent.SetDestination(currentObjective.transform.position);
+    }
+
+    public void ChangeDestination(GameObject objective)
+    {
+        hasChangedPath = false;
+        agent.ResetPath();
+        currentObjective = objective;
+        agent.SetDestination(currentObjective.transform.position);
     }
 
     public void Rewind(bool isRewinding)
@@ -97,5 +107,10 @@ public class AIMovement : NetworkBehaviour, IRewindable
         }
         ChangeDestination();
         isWorking = false;
+    }
+
+    public GameObject GetCurrentObjective()
+    {
+        return currentObjective;
     }
 }
