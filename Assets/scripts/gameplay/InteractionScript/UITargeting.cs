@@ -16,7 +16,9 @@ public class UITargeting : MonoBehaviour {
 
     private void LateUpdate()
     {
-       
+        if(Camera.main == null)
+            return;
+
         transform.LookAt(Camera.main.transform.position);
         transform.Rotate(Vector3.up, 180);
     }

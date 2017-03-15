@@ -1,32 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
-public class Hacker : NetworkBehaviour
+public class TakeOver : NetworkBehaviour
 {
     [Tooltip("The list that contains the Hackable AI")]
     public List<GameObject> AiList;
     [Tooltip("The radius that allow the hacker to take control of AI")]
     public float HackingRadius;
-    public float DecoyLifeTime;
+    public float DecoyLifeTime = 5.0f;
     public int _currentIndex;
+    public GameObject CursorPrefab;
+    public GameObject DecoyPrefab;
     private HackerCursor hackerCursor;
 
     // Use this for initialization
     public override void OnStartAuthority()
 	{
-        hackerCursor = GameObject.Find("Cursor").GetComponent<HackerCursor>();
+        GameObject cursor = GameObject.Instantiate(CursorPrefab);
+        hackerCursor = cursor.GetComponent<HackerCursor>();
 
-        if (hackerCursor != null)
-        {
-            //hackerCursor.Target = this.gameObject;
-            hackerCursor.Target = null;
-        }
-        
         if (!hasAuthority) return;
 		AiList = new List<GameObject>();
+
 	    if (HackingRadius > 0)
 	    {
 	        SphereCollider childSphereCollider = GetComponentInChildren<SphereCollider>();
@@ -38,11 +37,6 @@ public class Hacker : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        //if(AiList.Count == 0 || _currentIndex == -1)
-        //{
-        //    _currentIndex = 0; // force the index to be minus one a null equivalent
-        //}
-
         if (!hasAuthority)
         {
             return;
@@ -66,11 +60,9 @@ public class Hacker : NetworkBehaviour
         {
             if (AiList.Count > 0)
             {
-                TakeOver(GetCurrentAi());
+                StealIdentity(GetCurrentAi());
             }
         }
-
-        //Debug.Log(("total elements ") + AiLinkedList.Count);
 	}
    
     public void AddAi(GameObject ai)
@@ -85,12 +77,10 @@ public class Hacker : NetworkBehaviour
             }
             if (hackerCursor.Target == null)
             {
-                hackerCursor.Target = ai;
+                hackerCursor.SetTarget(ai);
             }
 
             AiList.Add(ai);
-            //Debug.Log(ai.gameObject.name + " has been added");
-            //Debug.Log("total elements in " + AiLinkedList.Count);
         }
     }
    
@@ -112,26 +102,17 @@ public class Hacker : NetworkBehaviour
 
         //update the current index
         PreviousTarget();
-
-        //Debug.Log(ai.gameObject.name + " has been removed!");
-        //Debug.Log("total elements out " + AiLinkedList.Count);
     }
 
     public void NextTarget()
     {
-        if (AiList.Count > 0)
+        if (_currentIndex < AiList.Count)
         {
-            print("Nb elements" + AiList.Count);
+            _currentIndex ++;
 
             if(_currentIndex >= AiList.Count)
             {
                 _currentIndex = 0;
-            }
-            else
-            {
-                print("Before index increment:" + _currentIndex);
-                _currentIndex++;
-                print("After incrementation : " + _currentIndex);
             }
         }
     }
@@ -165,7 +146,7 @@ public class Hacker : NetworkBehaviour
         }
     }
 
-    public void TakeOver(GameObject targetGameObject)
+    public void StealIdentity(GameObject targetGameObject)
     {
         if (targetGameObject == null)
         {
@@ -176,17 +157,60 @@ public class Hacker : NetworkBehaviour
         Vector3 targetWalkingDirection = targetGameObject.transform.forward;
         Transform targetTransform = targetGameObject.transform;
 
+        //TODO add an accessor in the class that use the NavMeshAgent to retreive the original ai speed 
+        SpawnDecoy(this.gameObject, this.transform.position, this.transform.rotation, DecoyLifeTime, 1.0f);
+        CmdSpawnDecoy(this.gameObject, this.transform.position, this.transform.rotation, DecoyLifeTime, 1.0f);
+
         // Update on the client the mesh
         UpdateHackerMesh(targetGameObject);
         // update on the server the mesh
         CmdUpdateHackerMesh(targetGameObject);
 
-        // Destroy the hacked target on the server and sync it on all the clients
-        CmdDestroyAI(targetGameObject);
+        try
+        {
+            // Destroy the hacked target on the server and sync it on all the clients
+            CmdDestroyAI(targetGameObject);
+        }
+        catch (Exception ex)
+        {
+            print(ex.Message);
+        }
+
         // move the hacker at the same position of the ai
         this.transform.position = targetTransform.position;
         this.transform.rotation = targetTransform.rotation;
         this.transform.localScale = targetTransform.localScale;
+    }
+
+
+    /// <summary>
+    /// Spawn a fake Agent that walk in the direction of the previous agent
+    /// before he desintegrate.
+    /// </summary>
+    /// <param name="decoy">The decoy agent that is created in the scene</param>
+    /// <param name="target">The direction at which the decoy will walk towards</param>
+    /// <param name="lifeTime">The time elapsed before the decoy dies</param>
+    /// <param name="walkSpeed">The speed at which the decoy will move</param>
+    public void SpawnDecoy(GameObject decoy, Vector3 targetPosition, Quaternion targetQuaternion, float lifeTime, float walkSpeed)
+    {
+        //GameObject spawnedDecoy = GameObject.Instantiate(decoy);
+        Vector3 decoyDirection = decoy.transform.forward;
+        GameObject spawnedDecoy = GameObject.Instantiate(DecoyPrefab, targetPosition, targetQuaternion);
+        
+        spawnedDecoy.name = "DECOY_" + decoy.name;
+        DecoyMovement decoyBehaviour = spawnedDecoy.GetComponent<DecoyMovement>();
+        
+        decoyBehaviour.InitialiseDecoy(decoyDirection, lifeTime, walkSpeed);
+        decoyBehaviour.TakeApparency(this.gameObject);
+        decoyBehaviour.SetIsComplete(true);
+        decoyBehaviour.EliminateDecoy(lifeTime); //TODO try removing the coupling
+        //TODO play the desintegrate animation
+    }
+
+    [Command]
+    public void CmdSpawnDecoy(GameObject decoy, Vector3 targetPosition, Quaternion targetQuaternion, float lifeTime, float walkSpeed)
+    {
+        SpawnDecoy(decoy, targetPosition, targetQuaternion, lifeTime, walkSpeed);
     }
     
     [Command]
@@ -207,15 +231,7 @@ public class Hacker : NetworkBehaviour
     [Command]
     public void CmdUpdateHackerMesh(GameObject targetGameObject)
     {
-        MeshRenderer targetMeshRenderer = targetGameObject.GetComponent<MeshRenderer>();
-        MeshFilter targetMeshFilter = targetGameObject.GetComponent<MeshFilter>();
-
-        MeshRenderer currentMeshRenderer = GetComponent<MeshRenderer>();
-        MeshFilter currentMeshFilter = GetComponent<MeshFilter>();
-
-        // take the apparency of the AI
-        currentMeshRenderer.materials = targetMeshRenderer.materials;
-        currentMeshFilter.mesh = targetMeshFilter.mesh;
+        UpdateHackerMesh(targetGameObject);
     }
 
     public void UpdateHackerMesh(GameObject targetGameObject)
@@ -228,13 +244,13 @@ public class Hacker : NetworkBehaviour
 
         // take the apparency of the AI 
         currentMeshRenderer.materials = targetMeshRenderer.materials;
-       currentMeshFilter.mesh = targetMeshFilter.mesh;
+        currentMeshFilter.mesh = targetMeshFilter.mesh;
     }
 
     public void UpdateHackerCursor(bool visibleCondition)
     {
         GameObject currentAi = GetCurrentAi();
-
+       
         if (currentAi == null)
             return;
         hackerCursor.SetTarget(currentAi);

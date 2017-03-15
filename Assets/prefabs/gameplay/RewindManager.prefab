@@ -53,7 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewinds: []
-  blackGlitch: {fileID: 0}
+  blackGlitch: {fileID: 1947093061813412, guid: d18fa389f98240d4a8ae96b721513c8d,
+    type: 2}
 --- !u!114 &114745411820482370
 MonoBehaviour:
   m_ObjectHideFlags: 1
