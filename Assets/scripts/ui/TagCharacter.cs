@@ -12,6 +12,7 @@ public class TagCharacter : NetworkBehaviour {
     // Use this for initialization
     void Start()
     {
+
         material = GetComponent<Renderer>().material;
         startColor = GetComponent<Renderer>().material.color;
     }

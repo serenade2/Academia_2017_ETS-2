@@ -6,13 +6,21 @@ using UnityEngine.UI;
 public class CrosshairManager : MonoBehaviour {
 
     public RawImage crossHair;
-    public Camera cam;
+    public Camera worldCamera;
+    public Canvas worldCanvas;
+
+    RaycastHit hit;
+    public LayerMask layer;
+    TagCharacter characterTag;
+    private List<TagCharacter> tags = new List<TagCharacter>();
+    public Color color;
+
 
     float maxWidth;
     float maxHeight;
 
-    public string horizontal;
-    public string vertical;
+    private string horizontal = "Horizontal1";
+    private string vertical = "Vertical1";
     public int multiplicator;
     public bool debugModeIsActive;
 
@@ -49,19 +57,7 @@ public class CrosshairManager : MonoBehaviour {
         walltouching();
         wallMovingPermission();
 
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        Vector3 forward = crossHair.transform.TransformDirection(Vector3.forward) * 10;
-
-        Debug.DrawRay(crossHair.transform.position, forward, Color.green);
-
-        Debug.DrawRay(cam.transform.position, forward, Color.red);
-
-        if (Physics.Raycast(transform.position, forward, out test))
-        {
-            dist = test.distance;
-            Debug.Log(dist + " " + test.collider.gameObject.name);
-        }
 
         debugMode();
     }
@@ -208,6 +204,36 @@ public class CrosshairManager : MonoBehaviour {
         crossHair.rectTransform.position = input;
     }
 
+    private void tagEvent()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+        {
+            Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, 50f, layer))
+            {
+                if (hit.collider.transform.parent.GetComponent<TagCharacter>() != null)
+                {
+                    characterTag = hit.collider.transform.parent.GetComponent<TagCharacter>();
+                    if (characterTag.GetIsTagged())
+                    {
+                        tags.Remove(characterTag);
+                        characterTag.UnTag();
+                    }
+                    else
+                    {
+                        if (tags.Count <= 2)
+                        {
+                            tags.Add(characterTag);
+                            characterTag.Tag(color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
     /// <summary>
     /// debug mode
     /// </summary>
@@ -219,9 +245,25 @@ public class CrosshairManager : MonoBehaviour {
             Debug.Log("tuchWallEast : " + tuchWallEast);
             Debug.Log("tuchWallSouth : " + tuchWallSouth);
             Debug.Log("tuchWallNouth : " + tuchWallNorth);
+           
+
+            // test raycast
+
+            Vector3 forward = crossHair.transform.TransformDirection(Vector3.forward) * 100;
+
+            Debug.DrawRay(crossHair.transform.position, forward, Color.green);
+
+
+            Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
+
+            Debug.DrawRay(ray.origin, ray.direction * 100);
         }
         
     }
+
+
+
+
 }
 
 
