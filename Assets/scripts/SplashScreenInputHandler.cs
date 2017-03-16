@@ -72,6 +72,15 @@ public class SplashScreenInputHandler : MonoBehaviour {
     {
         SceneManager.LoadScene(nextSceneIndex);
     }
+
+    void OnDestroy()
+    {
+        // remove the delegate reference to avoid memory leaks
+        if (GameStateManager.isActive)
+        {
+            GameStateManager.Instance.OnStateChange -= OnStateChangeDelegate;
+        }
+    }
 }
 
 #if UNITY_EDITOR
