@@ -8,6 +8,8 @@ TagManager:
   - Hacker
   - Watcher
   - Room
+  - Objective
+  - ObjectiveCollider
   layers:
   - Default
   - TransparentFX

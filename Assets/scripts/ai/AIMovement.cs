@@ -7,20 +7,63 @@ using UnityEngine.Networking;
 
 public class AIMovement : NetworkBehaviour, IRewindable
 {
+    public enum AIType { GUARD, SCIENTIST, CIVY };
+    public AIType aiType = AIType.GUARD;
+    public int objectivePerAI;
     public GameObject[] objectives;
-	public LinkedList<int> objectiveHistory = new LinkedList<int>();
+	private LinkedList<int> objectiveHistory = new LinkedList<int>();
     private UnityEngine.AI.NavMeshAgent agent;
     private bool hasChangedPath = false; //Verify if path has changed for a new one
-    private IEnumerator working;
-    private bool isWorking = false;
 	private int currentObjectiveIndex;
     private bool isRewinding;
+    public int nbObjectives = 0;
 
     // Use this for initialization
     public void Start()
     {
+        objectives = new GameObject[objectivePerAI];
 
-        objectives = GameObject.FindGameObjectsWithTag("PathNode");
+        //Get this AI objectives to patrol
+        GameObject[] allObjectives = GameObject.FindGameObjectsWithTag("Objective");
+        shuffleGameObjectArray(allObjectives);
+        foreach(GameObject objective in allObjectives) {
+            if (nbObjectives < objectivePerAI)
+            {
+                Objective objectiveScript = objective.GetComponent<Objective>();
+                if (aiType == AIType.GUARD)
+                {
+                    if(objectiveScript.GetRestrictions()[0] == 1)
+                    {
+                        if (objectiveScript.AddUser())
+                        {
+                            objectives[nbObjectives] = objective;
+                            nbObjectives++;
+                        }
+                    }
+                }
+                else if(aiType == AIType.SCIENTIST)
+                {
+                    if (objectiveScript.GetRestrictions()[1] == 1)
+                    {
+                        if (objectiveScript.AddUser())
+                        {
+                            objectives[nbObjectives] = objective;
+                            nbObjectives++;
+                        }
+                    }
+                }
+                else{
+                    if (objectiveScript.GetRestrictions()[2] == 1)
+                    {
+                        if (objectiveScript.AddUser())
+                        {
+                            objectives[nbObjectives] = objective;
+                            nbObjectives++;
+                        }
+                    }
+                }
+            }
+        }
 
         //Set agent
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -50,24 +93,21 @@ public class AIMovement : NetworkBehaviour, IRewindable
                 ChangeDestination();
             }
         }
-
-        /*if (agent.desiredVelocity.magnitude > 0)
-            transform.rotation = Quaternion.LookRotation(agent.desiredVelocity, transform.up);*/
             
     }
 
     public void ChangeDestination()
     {
         hasChangedPath = false;
-        currentObjectiveIndex = Random.Range(1, objectives.Length);
-        agent.SetDestination(objectives[currentObjectiveIndex].transform.position);
+        currentObjectiveIndex = Random.Range(0, nbObjectives);
+        agent.SetDestination(objectives[currentObjectiveIndex].GetComponent<Objective>().GetUsingPos().position);
     }
 
     public void ChangeDestination(int objectiveIndex)
     {
         hasChangedPath = false;
         currentObjectiveIndex = objectiveIndex;
-        agent.SetDestination(objectives[currentObjectiveIndex].transform.position);
+        agent.SetDestination(objectives[currentObjectiveIndex].GetComponent<Objective>().GetUsingPos().position);
     }
 
     public void Rewind(bool isRewinding)
@@ -100,6 +140,21 @@ public class AIMovement : NetworkBehaviour, IRewindable
     public void FastForward(bool isFastForwarding)
     {
 
+    }
+
+    public void shuffleGameObjectArray(GameObject[] array)
+    {
+        List<GameObject> tempList = new List<GameObject>(); 
+        foreach(GameObject obj in array)
+        {
+            tempList.Add(obj);
+        }
+        for(int i = 0; i < array.Length; i++)
+        {
+            int tempIndex = Random.Range(0, tempList.Count-1);
+            array[i] = tempList[tempIndex];
+            tempList.RemoveAt(tempIndex);
+        }
     }
 
     public int GetCurrentObjectiveIndex()

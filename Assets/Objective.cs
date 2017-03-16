@@ -7,7 +7,8 @@ public class Objective : NetworkBehaviour {
 	private bool isUsed = false;
 	private int userCount = 0;
 	private int maxUser = 3;
-	private int[] restrictions = { 0, 0, 0 };
+	public int[] restrictions = { 0, 0, 0 };
+    public Transform usingPos;
 
 	// Use this for initialization
 	void Start () {
@@ -19,19 +20,36 @@ public class Objective : NetworkBehaviour {
 		
 	}
 
-    public int GetUserCount()
+    public int[] GetRestrictions()
     {
-        return userCount;
+        return restrictions;
     }
 
     public bool GetIsUsed()
     {
         return isUsed;
     }
-
-    public void AddUser()
+    public void SetIsUsed(bool isUsed)
     {
-        userCount++;
+        this.isUsed = isUsed;
+    }
+
+    public bool AddUser()
+    {
+        if (userCount < maxUser)
+        {
+            userCount++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public Transform GetUsingPos()
+    {
+        return usingPos;
     }
 
 
