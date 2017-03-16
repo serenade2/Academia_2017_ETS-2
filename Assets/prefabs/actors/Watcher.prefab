@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rewindManagerPrefab: {fileID: 1328234100468404, guid: ff6994edf7430424ebecfab216582297,
     type: 2}
-  reticlePrefab: {fileID: 1369334446370686, guid: a439ad5b7327d5e4488318333d9f6faa,
+  reticlePrefab: {fileID: 1013655221375040, guid: 13392a053a2f281499941202190cb75c,
     type: 2}
   watcherCameraPrefab: {fileID: 1721591948023436, guid: 2e819e8b2adf0774a9e29b7d3efe95bc,
     type: 2}

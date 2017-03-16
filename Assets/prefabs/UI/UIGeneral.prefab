@@ -106,14 +106,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crossHair: {fileID: 114341197990684174}
-  worldCamera: {fileID: 0}
   worldCanvas: {fileID: 223201079189929406}
   layer:
     serializedVersion: 2
     m_Bits: 256
-  color: {r: 0.029898347, g: 0.1248956, b: 0.5808823, a: 0}
+  color: {r: 0.07418874, g: 0.97794116, b: 0, a: 0.497}
   multiplicator: 10
-  debugModeIsActive: 0
+  debugModeIsActive: 1
 --- !u!114 &114853827947344968
 MonoBehaviour:
   m_ObjectHideFlags: 1

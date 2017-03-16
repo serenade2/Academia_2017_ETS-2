@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class CrosshairManager : MonoBehaviour {
 
     public RawImage crossHair;
-    public Camera worldCamera;
+    private Camera worldCamera;
     public Canvas worldCanvas;
 
     RaycastHit hit;
@@ -19,8 +20,8 @@ public class CrosshairManager : MonoBehaviour {
     float maxWidth;
     float maxHeight;
 
-    private string horizontal = "Horizontal1";
-    private string vertical = "Vertical1";
+    private string horizontal = "RHorizontal1";
+    private string vertical = "RVertical1";
     public int multiplicator;
     public bool debugModeIsActive;
 
@@ -43,6 +44,8 @@ public class CrosshairManager : MonoBehaviour {
 
         crossHair.rectTransform.position = new Vector3(maxWidth / 2f, maxHeight / 2f, 0);
 
+        worldCamera = Camera.main;
+
         tuchWallNorth = false;
         tuchWallSouth = false;
         tuchWallEast = false;
@@ -50,13 +53,14 @@ public class CrosshairManager : MonoBehaviour {
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
 
         walltouching();
         wallMovingPermission();
-
+        tagEvent();
 
 
         debugMode();
@@ -208,23 +212,31 @@ public class CrosshairManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
+            debugLog("1");
             Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
+            debugLog(ray.ToString());
+            debugLog("physique ray cast : " + Physics.Raycast(ray.origin, ray.direction, out hit, 50f, layer).ToString());
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 50f, layer))
             {
+                debugLog(hit.ToString());
                 if (hit.collider.transform.parent.GetComponent<TagCharacter>() != null)
                 {
+                    debugLog("hit collider");
                     characterTag = hit.collider.transform.parent.GetComponent<TagCharacter>();
                     if (characterTag.GetIsTagged())
                     {
                         tags.Remove(characterTag);
                         characterTag.UnTag();
+                        debugLog("tag remove");
                     }
                     else
                     {
+                        debugLog("tag set");
                         if (tags.Count <= 2)
                         {
                             tags.Add(characterTag);
                             characterTag.Tag(color);
+                            Debug.Log("Tagged");
                         }
                     }
                 }
@@ -253,14 +265,26 @@ public class CrosshairManager : MonoBehaviour {
 
             Debug.DrawRay(crossHair.transform.position, forward, Color.green);
 
-
+            //Debug.Log(worldCamera);
             Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
 
-            Debug.DrawRay(ray.origin, ray.direction * 100);
-        }
-        
+            
+
+            Debug.DrawRay(ray.origin, ray.direction * 50f, Color.red);
+        } 
     }
 
+
+    /// <summary>
+    /// debug mode
+    /// </summary>
+    private void debugLog(string s)
+    {
+        if (debugModeIsActive)
+        {
+            Debug.Log(s);
+        }
+    }
 
 
 

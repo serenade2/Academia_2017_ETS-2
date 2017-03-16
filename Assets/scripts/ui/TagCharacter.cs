@@ -26,16 +26,22 @@ public class TagCharacter : NetworkBehaviour {
 
     public void Tag(Color color)
     {
+        Debug.Log("tag");
         material.SetColor("_Color", color);
+
         RpcChangeState(color);
+        Debug.Log("tag");
         isTagged = true;
+        Debug.Log("tagFin");
     }
 
     public void UnTag()
     {
+        Debug.Log("untag");
         material.SetColor("_Color", startColor);
         RpcChangeState(startColor);
         isTagged = false;
+        Debug.Log("untagFin");
     }
 
     public bool GetIsTagged()
@@ -46,6 +52,7 @@ public class TagCharacter : NetworkBehaviour {
     [ClientRpc]
     public void RpcChangeState(Color color)
     {
+        Debug.Log(color);
         material.SetColor("_Color", color);
     }
 }

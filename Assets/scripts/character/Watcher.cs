@@ -25,7 +25,7 @@ public class Watcher : NetworkBehaviour {
 		rewindManager = Instantiate (rewindManagerPrefab);
 		reticle = Instantiate (reticlePrefab, GameObject.Find ("player2Spawn").transform.position, reticlePrefab.transform.rotation);
 		NetworkServer.Spawn (rewindManager);
-		NetworkServer.Spawn (reticle);
+		//NetworkServer.Spawn (reticle);
 	}
 	
 	// Update is called once per frame
