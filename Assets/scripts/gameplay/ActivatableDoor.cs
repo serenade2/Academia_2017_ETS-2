@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class ActivatableDoor : MonoBehaviour, IActivatable {
+public class ActivatableDoor : NetworkBehaviour {
 
     public float fadeTime = 3f;
 
@@ -21,7 +22,8 @@ public class ActivatableDoor : MonoBehaviour, IActivatable {
         fadeTo.a = 0f;
     }
 
-    public void Activate()
+    [ClientRpc]
+    public void RpcActivate()
     {
         StartCoroutine(Fade());
     }
@@ -39,5 +41,12 @@ public class ActivatableDoor : MonoBehaviour, IActivatable {
 
         door.SetActive(false);
 
+    }
+
+
+    [Command]
+    public void CmdActivate()
+    {
+        RpcActivate();
     }
 }
