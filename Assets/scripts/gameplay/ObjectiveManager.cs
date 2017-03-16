@@ -10,8 +10,6 @@ public class ObjectiveManager : NetworkBehaviour
     protected ObjectiveManager() { }        // make it protected so no one can instantiate it themselves
     private static ObjectiveManager instance = null;
 
-    private InteractionManager[] objectives;
-
     public static bool isActive
     {
         get { return instance != null; }
@@ -41,7 +39,7 @@ public class ObjectiveManager : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-	    objectives = GameObject.FindObjectsOfType<InteractionManager>();
+
 	}
 
     [Command]
