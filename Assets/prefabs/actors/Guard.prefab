@@ -4789,7 +4789,7 @@ ParticleSystem:
         m_RotationOrder: 4
       minMaxState: 0
     rateOverDistance:
-      scalar: 5
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:

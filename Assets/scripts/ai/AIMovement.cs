@@ -30,8 +30,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
     // Update is called once per frame
     void LateUpdate()
     {
-        animatorController.SetFloat("Speed", agent.desiredVelocity.sqrMagnitude);
-       
+        animatorController.SetFloat("Speed", agent.desiredVelocity.magnitude);
+        //print("DesiredVelocity SqrMagnitude:" + agent.desiredVelocity.sqrMagnitude);
         //When destination is reached
         if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending)
         {

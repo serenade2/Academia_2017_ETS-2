@@ -68,14 +68,14 @@ public class TakeOver : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button4)) // LB button pressed
 	    {
             // disable the previous cursor
-            UpdateHackerCursor(false);
+            //UpdateHackerCursor(false);
             PreviousTarget();
             // enable the cursor on the next ai
             UpdateHackerCursor(true);
 	    }
         else if (Input.GetKeyDown(KeyCode.Joystick1Button5)) // RB Button pressed
 	    {
-            UpdateHackerCursor(false);
+            //UpdateHackerCursor(false);
             NextTarget();
             UpdateHackerCursor(true);
         }
