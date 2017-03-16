@@ -5,24 +5,31 @@ using UnityEngine;
 
 public class RewindMementoAI : IRewindMemento
 {
-    Vector3 position;
-    GameObject currentObjective;
-    Vector3 destination;
-    NavMeshAgent navMesh;
+    private Vector3 position;
+    private int currentObjectiveIndex;
+    private AIMovement aiMovement;
 
     public RewindMementoAI(GameObject rewindable)
     {
-        /*navMesh = rewindable.GetComponent<NavMeshAgent>();
+        aiMovement = rewindable.GetComponent<AIMovement>();
         position = rewindable.transform.position;
-        destination = navMesh.destination;*/
-        position = rewindable.transform.position;
-        currentObjective = rewindable.GetComponent<AIMovement>().GetCurrentObjective();
+        currentObjectiveIndex = aiMovement.GetCurrentObjectiveIndex();
     }
 
     public void RestoreFromMemento(GameObject rewindable)
     {
         rewindable.transform.position = position;
-        rewindable.GetComponent<AIMovement>().ChangeDestination(currentObjective);
-        //navMesh.SetDestination(destination);
+        rewindable.GetComponent<AIMovement>().ChangeDestination(currentObjectiveIndex);
+
+        //Add objectives made after rewind
+        LinkedList<int> objectiveHistory = aiMovement.GetObjectiveHistory();
+        if (objectiveHistory.Count > 0){
+            if (objectiveHistory.Last.Value != currentObjectiveIndex && objectiveHistory.First.Value != currentObjectiveIndex)
+                    objectiveHistory.AddFirst(currentObjectiveIndex);
+        }
+        else
+        {
+            objectiveHistory.AddFirst(currentObjectiveIndex);
+        }
     }
 }

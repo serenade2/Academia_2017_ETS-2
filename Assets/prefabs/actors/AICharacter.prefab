@@ -30,7 +30,6 @@ GameObject:
   - component: {fileID: 114299385208424106}
   - component: {fileID: 114107537955794470}
   - component: {fileID: 114111338478119698}
-  - component: {fileID: 114370019712306598}
   - component: {fileID: 136509726971883462}
   m_Layer: 11
   m_Name: AICharacter
@@ -97,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1525966589198876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.43, y: 2.731, z: 4.67}
+  m_LocalPosition: {x: 0.43, y: 1.31, z: 4.67}
   m_LocalScale: {x: 0.7, y: 0.9, z: 0.7}
   m_Children:
   - {fileID: 4797935186610788}
@@ -378,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 3
+  m_TransformSyncMode: 1
   m_SendInterval: 0.033333335
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
@@ -396,17 +395,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114370019712306598
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1525966589198876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3774bcafa21ab4a449db80882b5d7507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114575362884521054
@@ -468,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e6f5b6d0906ce4b90b371cde44f5ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  memento: 0
+  memento: 1
 --- !u!124 &124558563053533102
 Behaviour:
   m_ObjectHideFlags: 1
@@ -496,7 +484,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1830795167030494}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -510,7 +498,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1525966589198876}
   m_Enabled: 1
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 3
   m_Acceleration: 1000
   avoidancePriority: 50
   m_AngularSpeed: 0

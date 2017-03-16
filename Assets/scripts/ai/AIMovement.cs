@@ -8,70 +8,79 @@ using UnityEngine.Networking;
 public class AIMovement : NetworkBehaviour, IRewindable
 {
     public GameObject[] objectives;
-	public LinkedList<GameObject> objectiveHistory = new LinkedList<GameObject>();
-    public bool rewindMode = false;
+	public LinkedList<int> objectiveHistory = new LinkedList<int>();
     private UnityEngine.AI.NavMeshAgent agent;
     private bool hasChangedPath = false; //Verify if path has changed for a new one
     private IEnumerator working;
     private bool isWorking = false;
-	private GameObject currentObjective;
+	private int currentObjectiveIndex;
+    private bool isRewinding;
 
     // Use this for initialization
-    void Start()
+    public void Start()
     {
-        objectives = GameObject.FindGameObjectsWithTag("PathNode");
 
-        //Assign new coroutine
-        working = Working();
+        objectives = GameObject.FindGameObjectsWithTag("PathNode");
 
         //Set agent
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-		currentObjective = objectives [Random.Range (1, objectives.Length)];
-        agent.SetDestination(currentObjective.transform.position);
+        agent.updateRotation = true;
+
+        ChangeDestination();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-
         //When destination is reached
-        if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending)
+        if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending && !isRewinding)
         {
             hasChangedPath = true;
 
-            //Starts working timer
-            working = Working();
-            StartCoroutine(working);
+            if(objectiveHistory.Count > 0)
+            {
+                objectiveHistory.RemoveFirst();
+                if (objectiveHistory.Count > 0)
+                    ChangeDestination(objectiveHistory.First.Value);
+                else
+                    ChangeDestination();
+            }
+            else
+            {
+                ChangeDestination();
+            }
         }
+
+        /*if (agent.desiredVelocity.magnitude > 0)
+            transform.rotation = Quaternion.LookRotation(agent.desiredVelocity, transform.up);*/
+            
     }
 
     public void ChangeDestination()
     {
         hasChangedPath = false;
-        agent.ResetPath();
-        currentObjective = objectives[Random.Range(1, objectives.Length)];
-        agent.SetDestination(currentObjective.transform.position);
+        currentObjectiveIndex = Random.Range(1, objectives.Length);
+        agent.SetDestination(objectives[currentObjectiveIndex].transform.position);
     }
 
-    public void ChangeDestination(GameObject objective)
+    public void ChangeDestination(int objectiveIndex)
     {
         hasChangedPath = false;
-        agent.ResetPath();
-        currentObjective = objective;
-        agent.SetDestination(currentObjective.transform.position);
+        currentObjectiveIndex = objectiveIndex;
+        agent.SetDestination(objectives[currentObjectiveIndex].transform.position);
     }
 
     public void Rewind(bool isRewinding)
     {
         if (isRewinding)
         {
+            isRewinding = true;
             agent.Stop();
-            StopCoroutine(working);
-            isWorking = false;
             hasChangedPath = false;
         }
         else
         {
+            isRewinding = false;
             agent.Resume();
         }
     }
@@ -81,15 +90,10 @@ public class AIMovement : NetworkBehaviour, IRewindable
         if (isPaused)
         {
             agent.Stop();
-            StopCoroutine(working);
         }
         else
         {
             agent.Resume();
-            if (isWorking)
-            {
-                StartCoroutine(working);
-            }
         }
     }
 
@@ -98,19 +102,13 @@ public class AIMovement : NetworkBehaviour, IRewindable
 
     }
 
-    IEnumerator Working()
+    public int GetCurrentObjectiveIndex()
     {
-        isWorking = true;
-        for (int i = 0; i < Random.Range(3, 5); i++)
-        {
-            yield return new WaitForSeconds(1f);
-        }
-        ChangeDestination();
-        isWorking = false;
+        return currentObjectiveIndex;
     }
 
-    public GameObject GetCurrentObjective()
+    public LinkedList<int> GetObjectiveHistory()
     {
-        return currentObjective;
+        return objectiveHistory;
     }
 }

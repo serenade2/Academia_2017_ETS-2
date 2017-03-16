@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Objective : MonoBehaviour {
+public class Objective : NetworkBehaviour {
 	private bool isUsed = false;
 	private int userCount = 0;
 	private int maxUser = 3;
@@ -17,4 +18,21 @@ public class Objective : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public int GetUserCount()
+    {
+        return userCount;
+    }
+
+    public bool GetIsUsed()
+    {
+        return isUsed;
+    }
+
+    public void AddUser()
+    {
+        userCount++;
+    }
+
+
 }
