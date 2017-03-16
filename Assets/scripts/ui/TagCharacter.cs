@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class TagCharacter : NetworkBehaviour {
-
+    public GameObject model;
     private Material material; //The GameObject material
     private Color startColor;
     private bool isTagged = false;
@@ -13,8 +13,8 @@ public class TagCharacter : NetworkBehaviour {
     void Start()
     {
 
-        material = GetComponent<Renderer>().material;
-        startColor = GetComponent<Renderer>().material.color;
+        material = model.GetComponent<Renderer>().material;
+        startColor = model.GetComponent<Renderer>().material.color;
     }
 
     // Update is called once per frame
