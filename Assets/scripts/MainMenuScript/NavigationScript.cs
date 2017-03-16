@@ -20,15 +20,15 @@ public class NavigationScript : MonoBehaviour {
     //}
 
     public void toSelectPlay() {
-        play.SetActive(true);
-        option.SetActive(false);
-        main.SetActive(false);
+        play.gameObject.SetActive(true);
+        option.gameObject.SetActive(false);
+        main.gameObject.SetActive(false);
     }
 
     public void toOption() {
-        play.SetActive(false);
-        option.SetActive(true);
-        main.SetActive(false);
+        play.gameObject.SetActive(false);
+        option.gameObject.SetActive(true);
+        main.gameObject.SetActive(false);
     }
 
     public void quiter() {
@@ -37,9 +37,9 @@ public class NavigationScript : MonoBehaviour {
 
     public void back()
     {
-        play.SetActive(false);
-        option.SetActive(false);
-        main.SetActive(true);
+        play.gameObject.SetActive(false);
+        option.gameObject.SetActive(false);
+        main.gameObject.SetActive(true);
     }
 
     public void prepareGame(Toggle t)
