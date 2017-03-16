@@ -10,13 +10,13 @@ public class AIMovement : NetworkBehaviour, IRewindable
     public enum AIType { GUARD, SCIENTIST, CIVY };
     public AIType aiType = AIType.GUARD;
     public int objectivePerAI;
-    public GameObject[] objectives;
+    private GameObject[] objectives;
 	private LinkedList<int> objectiveHistory = new LinkedList<int>();
     private UnityEngine.AI.NavMeshAgent agent;
     private bool hasChangedPath = false; //Verify if path has changed for a new one
 	private int currentObjectiveIndex;
     private bool isRewinding;
-    public int nbObjectives = 0;
+    private int nbObjectives = 0;
 
     // Use this for initialization
     public void Start()

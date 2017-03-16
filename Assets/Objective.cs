@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class Objective : NetworkBehaviour {
 	private bool isUsed = false;
 	private int userCount = 0;
-	private int maxUser = 3;
+	public int maxUser = 3;
 	public int[] restrictions = { 0, 0, 0 };
     public Transform usingPos;
 
