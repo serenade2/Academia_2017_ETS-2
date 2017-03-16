@@ -15,12 +15,30 @@ public class TakeOver : NetworkBehaviour
     public int _currentIndex;
     public GameObject CursorPrefab;
     public GameObject DecoyPrefab;
-    private HackerCursor hackerCursor;
+    public GameObject HackedGuardPrefab;
+    public GameObject HackedScientistPrefab;
+    public GameObject HackedEngineerPrefab;
 
+    private HackerCursor hackerCursor;
+    private GameObject _hackedGuard;
+    private GameObject _hackedScientist;
+    private GameObject _hackedEngineer;
     // Use this for initialization
     public override void OnStartAuthority()
 	{
         GameObject cursor = GameObject.Instantiate(CursorPrefab);
+
+
+        if (HackedGuardPrefab != null && HackedScientistPrefab != null && HackedEngineerPrefab != null)
+        {
+            InitializeHackerModels();
+        }
+        else
+        {
+            Debug.LogError("HackerGuardPrefab, HackedScientistPrefab or HackedEngineerPrefab is Missing!\n Please attach all the prefabs to the hacker in the editor");
+        }
+        
+
         hackerCursor = cursor.GetComponent<HackerCursor>();
 
         if (!hasAuthority) return;
@@ -32,6 +50,11 @@ public class TakeOver : NetworkBehaviour
             childSphereCollider.radius = HackingRadius;
 	    }
 	    _currentIndex = 0;
+    }
+
+    public override void OnStartServer()
+    {
+        InitializeHackerModels();
     }
 	
 	// Update is called once per frame
@@ -45,18 +68,18 @@ public class TakeOver : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button4)) // LB button pressed
 	    {
             // disable the previous cursor
-            UpdateHackerCursor(false);
+            //UpdateHackerCursor(false);
             PreviousTarget();
             // enable the cursor on the next ai
             UpdateHackerCursor(true);
 	    }
         else if (Input.GetKeyDown(KeyCode.Joystick1Button5)) // RB Button pressed
 	    {
-            UpdateHackerCursor(false);
+            //UpdateHackerCursor(false);
             NextTarget();
             UpdateHackerCursor(true);
         }
-        else if (Input.GetKeyDown(KeyCode.Joystick1Button0))// A button pressed
+        else if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.A))// A button pressed
         {
             if (AiList.Count > 0)
             {
@@ -161,10 +184,13 @@ public class TakeOver : NetworkBehaviour
         SpawnDecoy(this.gameObject, this.transform.position, this.transform.rotation, DecoyLifeTime, 1.0f);
         CmdSpawnDecoy(this.gameObject, this.transform.position, this.transform.rotation, DecoyLifeTime, 1.0f);
 
-        // Update on the client the mesh
-        UpdateHackerMesh(targetGameObject);
-        // update on the server the mesh
-        CmdUpdateHackerMesh(targetGameObject);
+        UpdatedHackedPrefabs(targetGameObject);
+        CmdUpdateHackedPrefab(targetGameObject);
+
+        //// Update on the client the mesh
+        //UpdateHackerMesh(targetGameObject);
+        //// update on the server the mesh
+        //CmdUpdateHackerMesh(targetGameObject);
 
         try
         {
@@ -228,24 +254,24 @@ public class TakeOver : NetworkBehaviour
         Destroy(ai);
     }
 
-    [Command]
-    public void CmdUpdateHackerMesh(GameObject targetGameObject)
-    {
-        UpdateHackerMesh(targetGameObject);
-    }
+    //[Command]
+    //public void CmdUpdateHackerMesh(GameObject targetGameObject)
+    //{
+    //    UpdateHackerMesh(targetGameObject);
+    //}
 
-    public void UpdateHackerMesh(GameObject targetGameObject)
-    {
-        MeshRenderer targetMeshRenderer = targetGameObject.GetComponent<MeshRenderer>();
-        MeshFilter targetMeshFilter = targetGameObject.GetComponent<MeshFilter>();
+    //public void UpdateHackerMesh(GameObject targetGameObject)
+    //{
+    //    MeshRenderer targetMeshRenderer = targetGameObject.GetComponent<MeshRenderer>();
+    //    MeshFilter targetMeshFilter = targetGameObject.GetComponent<MeshFilter>();
 
-        MeshRenderer currentMeshRenderer = GetComponent<MeshRenderer>();
-        MeshFilter currentMeshFilter = GetComponent<MeshFilter>();
+    //    MeshRenderer currentMeshRenderer = GetComponent<MeshRenderer>();
+    //    MeshFilter currentMeshFilter = GetComponent<MeshFilter>();
 
-        // take the apparency of the AI 
-        currentMeshRenderer.materials = targetMeshRenderer.materials;
-        currentMeshFilter.mesh = targetMeshFilter.mesh;
-    }
+    //    // take the apparency of the AI 
+    //    currentMeshRenderer.materials = targetMeshRenderer.materials;
+    //    currentMeshFilter.mesh = targetMeshFilter.mesh;
+    //}
 
     public void UpdateHackerCursor(bool visibleCondition)
     {
@@ -256,4 +282,60 @@ public class TakeOver : NetworkBehaviour
         hackerCursor.SetTarget(currentAi);
         hackerCursor.IsVisible = visibleCondition;
     }
+
+    private void InitializeHackerModels()
+    {
+        _hackedGuard = GameObject.Instantiate(HackedGuardPrefab, this.transform.position, this.transform.rotation);
+        _hackedScientist = GameObject.Instantiate(HackedScientistPrefab, this.transform.position, this.transform.rotation);
+        _hackedEngineer = GameObject.Instantiate(HackedEngineerPrefab, this.transform.position, this.transform.rotation);
+
+        _hackedGuard.transform.parent = this.gameObject.transform;
+        _hackedGuard.transform.localScale = this.gameObject.transform.lossyScale;
+
+        _hackedScientist.transform.parent = this.gameObject.transform;
+        _hackedScientist.transform.localScale = this.gameObject.transform.lossyScale;
+
+        _hackedEngineer.transform.parent = this.gameObject.transform;
+        _hackedEngineer.transform.localScale = this.gameObject.transform.lossyScale;
+
+        // disable the models at the game start 
+        _hackedGuard.SetActive(false);
+        _hackedScientist.SetActive(false);
+        _hackedEngineer.SetActive(false);
+    }
+
+    public void UpdatedHackedPrefabs(GameObject targetGameObject)
+    {
+        //TODO Remove the renderer component on the hacker and create a hacker default mesh and assign it on a gameObject
+        //this.GetComponent<MeshRenderer>().enabled = false; 
+        //Activate the HackedGuardPrefab instead!
+        if (targetGameObject.name.ToLower().Contains("guard"))
+        {
+            _hackedGuard.SetActive(true);
+            _hackedScientist.SetActive(false);
+            _hackedEngineer.SetActive(false);
+        }
+        else if (targetGameObject.name.ToLower().Contains("scientist"))
+        {
+            _hackedGuard.SetActive(false);
+            _hackedScientist.SetActive(true);
+            _hackedEngineer.SetActive(false);
+        }
+        else if (targetGameObject.name.ToLower().Contains("engineer"))
+        {
+            _hackedGuard.SetActive(false);
+            _hackedScientist.SetActive(false);
+            _hackedEngineer.SetActive(true);
+        }
+        else
+        {
+            Debug.LogError("No Ai has the following keyphrase in their name, : guard, scientist, engineer");
+        }
+    }
+
+    [Command]
+    public void CmdUpdateHackedPrefab(GameObject targetGameObject)
+    {
+        UpdatedHackedPrefabs(targetGameObject);    
+    } 
 }

@@ -7,58 +7,124 @@ using UnityEngine.Networking;
 
 public class AIMovement : NetworkBehaviour, IRewindable
 {
-    public GameObject[] objectives;
+    public enum AIType { GUARD, SCIENTIST, ENGINEER };
+    public AIType aiType = AIType.GUARD;
+    public int objectivePerAI;
+    private GameObject[] objectives;
+	private LinkedList<int> objectiveHistory = new LinkedList<int>();
     private UnityEngine.AI.NavMeshAgent agent;
     private bool hasChangedPath = false; //Verify if path has changed for a new one
-    private IEnumerator working;
-    private bool isWorking = false;
+	private int currentObjectiveIndex;
+    private bool isRewinding;
+    private int nbObjectives = 0;
+    private Animator animatorController;
 
     // Use this for initialization
-    void Start()
+    public void Start()
     {
-        objectives = GameObject.FindGameObjectsWithTag("PathNode");
+        objectives = new GameObject[objectivePerAI];
 
-        //Assign new coroutine
-        working = Working();
+        //Get this AI objectives to patrol
+        GameObject[] allObjectives = GameObject.FindGameObjectsWithTag("Objective");
+        shuffleGameObjectArray(allObjectives);
+        foreach(GameObject objective in allObjectives) {
+            if (nbObjectives < objectivePerAI)
+            {
+                Objective objectiveScript = objective.GetComponent<Objective>();
+                if (aiType == AIType.GUARD)
+                {
+                    if(objectiveScript.GetRestrictions()[0] == 1)
+                    {
+                        if (objectiveScript.AddUser())
+                        {
+                            objectives[nbObjectives] = objective;
+                            nbObjectives++;
+                        }
+                    }
+                }
+                else if(aiType == AIType.SCIENTIST)
+                {
+                    if (objectiveScript.GetRestrictions()[1] == 1)
+                    {
+                        if (objectiveScript.AddUser())
+                        {
+                            objectives[nbObjectives] = objective;
+                            nbObjectives++;
+                        }
+                    }
+                }
+                else{
+                    if (objectiveScript.GetRestrictions()[2] == 1)
+                    {
+                        if (objectiveScript.AddUser())
+                        {
+                            objectives[nbObjectives] = objective;
+                            nbObjectives++;
+                        }
+                    }
+                }
+            }
+        }
 
         //Set agent
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        agent.SetDestination(objectives[Random.Range(1, objectives.Length)].transform.position);
+        agent.updateRotation = true;
+
+        animatorController = GetComponent<Animator>();
+        ChangeDestination();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-
+        animatorController.SetFloat("Speed", agent.desiredVelocity.magnitude);
+        //print("DesiredVelocity SqrMagnitude:" + agent.desiredVelocity.sqrMagnitude);
         //When destination is reached
-        if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending)
+        if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending && !isRewinding)
         {
             hasChangedPath = true;
 
-            //Starts working timer
-            working = Working();
-            StartCoroutine(working);
+            if(objectiveHistory.Count > 0)
+            {
+                objectiveHistory.RemoveFirst();
+                if (objectiveHistory.Count > 0)
+                    ChangeDestination(objectiveHistory.First.Value);
+                else
+                    ChangeDestination();
+            }
+            else
+            {
+                ChangeDestination();
+            }
         }
+            
     }
 
     public void ChangeDestination()
     {
         hasChangedPath = false;
-        agent.ResetPath();
-        agent.SetDestination(objectives[Random.Range(0, objectives.Length)].transform.position);
+        currentObjectiveIndex = Random.Range(0, nbObjectives);
+        agent.SetDestination(objectives[currentObjectiveIndex].GetComponent<Objective>().GetUsingPos().position);
+    }
+
+    public void ChangeDestination(int objectiveIndex)
+    {
+        hasChangedPath = false;
+        currentObjectiveIndex = objectiveIndex;
+        agent.SetDestination(objectives[currentObjectiveIndex].GetComponent<Objective>().GetUsingPos().position);
     }
 
     public void Rewind(bool isRewinding)
     {
         if (isRewinding)
         {
+            isRewinding = true;
             agent.Stop();
-            StopCoroutine(working);
-            isWorking = false;
             hasChangedPath = false;
         }
         else
         {
+            isRewinding = false;
             agent.Resume();
         }
     }
@@ -68,15 +134,10 @@ public class AIMovement : NetworkBehaviour, IRewindable
         if (isPaused)
         {
             agent.Stop();
-            StopCoroutine(working);
         }
         else
         {
             agent.Resume();
-            if (isWorking)
-            {
-                StartCoroutine(working);
-            }
         }
     }
 
@@ -85,14 +146,28 @@ public class AIMovement : NetworkBehaviour, IRewindable
 
     }
 
-    IEnumerator Working()
+    public void shuffleGameObjectArray(GameObject[] array)
     {
-        isWorking = true;
-        for (int i = 0; i < Random.Range(3, 5); i++)
+        List<GameObject> tempList = new List<GameObject>(); 
+        foreach(GameObject obj in array)
         {
-            yield return new WaitForSeconds(1f);
+            tempList.Add(obj);
         }
-        ChangeDestination();
-        isWorking = false;
+        for(int i = 0; i < array.Length; i++)
+        {
+            int tempIndex = Random.Range(0, tempList.Count-1);
+            array[i] = tempList[tempIndex];
+            tempList.RemoveAt(tempIndex);
+        }
+    }
+
+    public int GetCurrentObjectiveIndex()
+    {
+        return currentObjectiveIndex;
+    }
+
+    public LinkedList<int> GetObjectiveHistory()
+    {
+        return objectiveHistory;
     }
 }
