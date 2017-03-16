@@ -51,6 +51,11 @@ public class TakeOver : NetworkBehaviour
 	    }
 	    _currentIndex = 0;
     }
+
+    public override void OnStartServer()
+    {
+        InitializeHackerModels();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -74,7 +79,7 @@ public class TakeOver : NetworkBehaviour
             NextTarget();
             UpdateHackerCursor(true);
         }
-        else if (Input.GetKeyDown(KeyCode.Joystick1Button0))// A button pressed
+        else if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.A))// A button pressed
         {
             if (AiList.Count > 0)
             {
@@ -301,7 +306,8 @@ public class TakeOver : NetworkBehaviour
 
     public void UpdatedHackedPrefabs(GameObject targetGameObject)
     {
-        this.GetComponent<MeshRenderer>().enabled = false;
+        //TODO Remove the renderer component on the hacker and create a hacker default mesh and assign it on a gameObject
+        //this.GetComponent<MeshRenderer>().enabled = false; 
         //Activate the HackedGuardPrefab instead!
         if (targetGameObject.name.ToLower().Contains("guard"))
         {
