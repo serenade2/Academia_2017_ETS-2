@@ -286,6 +286,12 @@ MonoBehaviour:
     type: 2}
   DecoyPrefab: {fileID: 1188406860426082, guid: d17f625a643f48f4a9009a57334de672,
     type: 2}
+  HackedGuardPrefab: {fileID: 1902665357846428, guid: 02c6e9b2dc11cd44580a2ca87dfef909,
+    type: 2}
+  HackedScientistPrefab: {fileID: 1285316108151198, guid: e451a374371318b429142a324fb9a30b,
+    type: 2}
+  HackedEngineerPrefab: {fileID: 1847382793096318, guid: 950cc5f76aa3d4c48bf85cbc11d31af7,
+    type: 2}
 --- !u!114 &114951472944832330
 MonoBehaviour:
   m_ObjectHideFlags: 1

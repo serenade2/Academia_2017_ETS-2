@@ -253,10 +253,10 @@ public class CrosshairManager : MonoBehaviour {
         if (debugModeIsActive) {
             Debug.DrawLine(crossHair.rectTransform.position, new Vector3(0, 0, 0));
 
-            Debug.Log("tuchWallWest : " + tuchWallWest);
-            Debug.Log("tuchWallEast : " + tuchWallEast);
-            Debug.Log("tuchWallSouth : " + tuchWallSouth);
-            Debug.Log("tuchWallNouth : " + tuchWallNorth);
+            //Debug.Log("tuchWallWest : " + tuchWallWest);
+            //Debug.Log("tuchWallEast : " + tuchWallEast);
+            //Debug.Log("tuchWallSouth : " + tuchWallSouth);
+            //Debug.Log("tuchWallNouth : " + tuchWallNorth);
            
 
             // test raycast

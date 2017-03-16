@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class AIMovement : NetworkBehaviour, IRewindable
 {
-    public enum AIType { GUARD, SCIENTIST, CIVY };
+    public enum AIType { GUARD, SCIENTIST, ENGINEER };
     public AIType aiType = AIType.GUARD;
     public int objectivePerAI;
     private GameObject[] objectives;
@@ -17,6 +17,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
 	private int currentObjectiveIndex;
     private bool isRewinding;
     private int nbObjectives = 0;
+    private Animator animatorController;
 
     // Use this for initialization
     public void Start()
@@ -69,12 +70,15 @@ public class AIMovement : NetworkBehaviour, IRewindable
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = true;
 
+        animatorController = GetComponent<Animator>();
         ChangeDestination();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        animatorController.SetFloat("Speed", agent.desiredVelocity.magnitude);
+        //print("DesiredVelocity SqrMagnitude:" + agent.desiredVelocity.sqrMagnitude);
         //When destination is reached
         if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending && !isRewinding)
         {
