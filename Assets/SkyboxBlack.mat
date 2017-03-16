@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: New Render Texture
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION
+  m_Name: SkyboxBlack
+  m_Shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -71,6 +71,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
+        name: _AtmosphereThickness
+      second: 0.2
+    - first:
         name: _BumpScale
       second: 1
     - first:
@@ -83,6 +86,9 @@ Material:
         name: _DstBlend
       second: 0
     - first:
+        name: _Exposure
+      second: 0
+    - first:
         name: _GlossMapScale
       second: 1
     - first:
@@ -90,7 +96,7 @@ Material:
       second: 0.5
     - first:
         name: _GlossyReflections
-      second: 1
+      second: 0
     - first:
         name: _Metallic
       second: 0
@@ -113,6 +119,12 @@ Material:
         name: _SrcBlend
       second: 1
     - first:
+        name: _SunDisk
+      second: 2
+    - first:
+        name: _SunSize
+      second: 0.004
+    - first:
         name: _UVSec
       second: 0
     - first:
@@ -124,4 +136,10 @@ Material:
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _GroundColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _SkyTint
       second: {r: 0, g: 0, b: 0, a: 1}

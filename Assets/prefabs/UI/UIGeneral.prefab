@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114130535263892034}
   - component: {fileID: 114853827947344968}
   - component: {fileID: 114804111283263776}
+  - component: {fileID: 114141252717856226}
   m_Layer: 0
   m_Name: UIGeneral
   m_TagString: Untagged
@@ -68,6 +69,38 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114141252717856226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013655221375040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 19
+    i1: 57
+    i2: 42
+    i3: 5
+    i4: 58
+    i5: 47
+    i6: 40
+    i7: 20
+    i8: 153
+    i9: 148
+    i10: 18
+    i11: 2
+    i12: 25
+    i13: 12
+    i14: 183
+    i15: 92
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114341197990684174
 MonoBehaviour:
   m_ObjectHideFlags: 1
