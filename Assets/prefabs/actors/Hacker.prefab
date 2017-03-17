@@ -292,6 +292,8 @@ MonoBehaviour:
     type: 2}
   HackedEngineerPrefab: {fileID: 1847382793096318, guid: 950cc5f76aa3d4c48bf85cbc11d31af7,
     type: 2}
+  HackerDefaultPrefab: {fileID: 1709916967882484, guid: df7ed1fa6816f9f4081b8922fb3a2887,
+    type: 2}
 --- !u!114 &114951472944832330
 MonoBehaviour:
   m_ObjectHideFlags: 1
