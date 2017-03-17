@@ -1,0 +1,36 @@
+mtllib ./room_floor_obj.mtl
+g floorAndroof
+v 0 10 -28
+v -21 10 -28
+v -21 10 0
+v 0 10 0
+v 0 0 0
+v -21 0 0
+v -21 0 -28
+v 0 0 -28
+
+vn 0 -1 0
+vn 0 -1 0
+vn 0 -1 0
+vn 0 -1 0
+vn 0 1 0
+vn 0 1 0
+vn 0 1 0
+vn 0 1 0
+
+vt 21 0
+vt 0 0
+vt 0 28
+vt 21 28
+vt 0 28
+vt 21 28
+vt 21 0
+vt 0 0
+
+g Default_Prototype
+usemtl Default_Prototype
+usemap Default_Prototype
+f 2/2/2 1/1/1 3/3/3
+f 3/3/3 1/1/1 4/4/4
+f 6/6/6 5/5/5 7/7/7
+f 7/7/7 5/5/5 8/8/8
