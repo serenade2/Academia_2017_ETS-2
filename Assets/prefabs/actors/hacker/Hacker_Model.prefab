@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 4916983105071300}
   - component: {fileID: 95825686060486274}
   m_Layer: 0
-  m_Name: P1_TEST1
+  m_Name: Hacker_Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1514,7 +1514,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1709916967882484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6124849, y: 1.91, z: -7.4584084}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4466231044398610}
