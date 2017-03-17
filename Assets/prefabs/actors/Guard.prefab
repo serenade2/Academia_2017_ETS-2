@@ -1858,7 +1858,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1640969648344630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.61, z: 0}
+  m_LocalPosition: {x: 0, y: 0.61, z: 1.55}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4624558165599184}
@@ -2689,8 +2689,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.2, y: 5, z: 1.6}
+  m_Center: {x: 0, y: 2.1, z: 0}
 --- !u!81 &81422608575186234
 AudioListener:
   m_ObjectHideFlags: 1
@@ -2876,6 +2876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  model: {fileID: 1393597753771976}
 --- !u!114 &114670867324890348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2948,7 +2949,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.58
-  m_Height: 5
+  m_Height: 6
   m_Direction: 1
   m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!137 &137087793039283354
@@ -3272,7 +3273,7 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 4711341885702552}
   m_AABB:
-    m_Center: {x: -0.00000003958121, y: 0.38977528, z: -0.34029648}
+    m_Center: {x: -0.00000003958121, y: 0.38977528, z: -0.34029675}
     m_Extent: {x: 2.0144992, y: 1.0058712, z: 3.16661}
   m_DirtyAABB: 0
 --- !u!137 &137498822386265868
@@ -4201,7 +4202,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1640969648344630}
   m_Enabled: 1
   m_Radius: 0.5
-  m_Speed: 6
+  m_Speed: 2
   m_Acceleration: 1000
   avoidancePriority: 50
   m_AngularSpeed: 360

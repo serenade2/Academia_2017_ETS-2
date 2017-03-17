@@ -10,6 +10,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
     public enum AIType { GUARD, SCIENTIST, ENGINEER };
     public AIType aiType = AIType.GUARD;
     public int objectivePerAI;
+    [SerializeField]
     private GameObject[] objectives;
 	private LinkedList<int> objectiveHistory = new LinkedList<int>();
     private UnityEngine.AI.NavMeshAgent agent;
@@ -22,6 +23,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
     // Use this for initialization
     public void Start()
     {
+        if (!hasAuthority)
+            return;
         objectives = new GameObject[objectivePerAI];
 
         //Get this AI objectives to patrol
@@ -77,6 +80,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
     // Update is called once per frame
     void LateUpdate()
     {
+        if (!hasAuthority)
+            return;
         animatorController.SetFloat("Speed", agent.desiredVelocity.magnitude);
         //print("DesiredVelocity SqrMagnitude:" + agent.desiredVelocity.sqrMagnitude);
         //When destination is reached

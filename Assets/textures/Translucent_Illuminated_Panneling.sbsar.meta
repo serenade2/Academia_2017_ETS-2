@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: dfeb3fa261457493b97e11877c36eddd
-timeCreated: 1489687037
+guid: 67a6d2e6a14dac345a610032ee15bc7b
+timeCreated: 1489697175
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -10,10 +10,24 @@ SubstanceImporter:
     prototypeName: Translucent_Illuminated_Panneling
     shaderName: 
     shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP _SPECULARHIGHLIGHTS_OFF
+    shaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP
     renderQueue: -1
-    lightmapFlags: 2
+    lightmapFlags: 1
     inputs:
+    - name: Receeding_LED_Colour
+      value:
+        scalar[0]: 0.375
+        scalar[1]: 0.22610295
+        scalar[2]: 0.22610295
+        scalar[3]: 1
+        texture: {instanceID: 0}
+    - name: GlowingGridlineColour
+      value:
+        scalar[0]: 0
+        scalar[1]: 0.6689658
+        scalar[2]: 1
+        scalar[3]: 1
+        texture: {instanceID: 0}
     - name: $outputsize
       value:
         scalar[0]: 8
@@ -23,42 +37,28 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: $randomseed
       value:
-        scalar[0]: 7889
+        scalar[0]: 0
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
-    - name: GlowingGridlineColour
-      value:
-        scalar[0]: 0
-        scalar[1]: 1
-        scalar[2]: 0.8758622
-        scalar[3]: 1
-        texture: {instanceID: 0}
-    - name: Receeding_LED_Colour
-      value:
-        scalar[0]: 0.33088237
-        scalar[1]: 0.08339176
-        scalar[2]: 0.02676255
-        scalar[3]: 1
-        texture: {instanceID: 0}
     - name: Amount_of_GlowingLines
       value:
-        scalar[0]: 0.341
+        scalar[0]: 0.468
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: Amount_of_Glowing_LEDs
       value:
-        scalar[0]: 0
+        scalar[0]: 0.091
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: Damage
       value:
-        scalar[0]: 1
+        scalar[0]: 0
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -66,7 +66,7 @@ SubstanceImporter:
     materialInformation:
       serializedVersion: 5
       offset: {x: 0, y: 0}
-      scale: {x: 0.1, y: 0.1}
+      scale: {x: 0.2, y: 0.2}
       generateMipmaps: 1
       generateAllOutputs: 0
       animationUpdateRate: 42
@@ -77,13 +77,13 @@ SubstanceImporter:
           name: _BumpMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.1, y: 0.1}
+          scale: {x: 0.2, y: 0.2}
           offset: {x: 0, y: 0}
       - first:
           name: _DetailAlbedoMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0, y: 0}
+          scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       - first:
           name: _DetailMask
@@ -101,25 +101,25 @@ SubstanceImporter:
           name: _EmissionMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.1, y: 0.1}
+          scale: {x: 0.2, y: 0.2}
           offset: {x: 0, y: 0}
       - first:
           name: _MainTex
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.1, y: 0.1}
+          scale: {x: 0.2, y: 0.2}
           offset: {x: 0, y: 0}
       - first:
           name: _MetallicGlossMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.1, y: 0.1}
+          scale: {x: 0.2, y: 0.2}
           offset: {x: 0, y: 0}
       - first:
           name: _OcclusionMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.1, y: 0.1}
+          scale: {x: 0.2, y: 0.2}
           offset: {x: 0, y: 0}
       - first:
           name: _ParallaxMap
@@ -166,7 +166,7 @@ SubstanceImporter:
         second: 0
       - first:
           name: _SpecularHighlights
-        second: 0
+        second: 1
       - first:
           name: _SrcBlend
         second: 1
@@ -179,10 +179,10 @@ SubstanceImporter:
       colors:
       - first:
           name: _Color
-        second: {r: 0.5735294, g: 0.56087804, b: 0.56087804, a: 1}
+        second: {r: 0.6838235, g: 0.6838235, b: 0.6838235, a: 1}
       - first:
           name: _EmissionColor
-        second: {r: 2, g: 2, b: 2, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
     textureParameters:
     - name: Translucent_Illuminated_Panneling_basecolor
       alphaSource: 6
@@ -205,11 +205,6 @@ SubstanceImporter:
       aniso: 1
       wrapMode: 0
     - name: Translucent_Illuminated_Panneling_height
-      alphaSource: 0
-      filterMode: 1
-      aniso: 1
-      wrapMode: 0
-    - name: Translucent_Illuminated_Panneling_roughness
       alphaSource: 0
       filterMode: 1
       aniso: 1
