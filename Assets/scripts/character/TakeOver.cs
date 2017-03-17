@@ -228,7 +228,7 @@ public class TakeOver : NetworkBehaviour
         DecoyMovement decoyBehaviour = spawnedDecoy.GetComponent<DecoyMovement>();
         
         decoyBehaviour.InitialiseDecoy(decoyDirection, lifeTime, walkSpeed);
-        decoyBehaviour.TakeApparency(this.gameObject);
+        //decoyBehaviour.TakeApparency(this.gameObject);
         decoyBehaviour.SetIsComplete(true);
         decoyBehaviour.EliminateDecoy(lifeTime); //TODO try removing the coupling
         //TODO play the desintegrate animation
