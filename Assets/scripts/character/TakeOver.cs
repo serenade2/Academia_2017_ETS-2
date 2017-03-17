@@ -286,22 +286,22 @@ public class TakeOver : NetworkBehaviour
 
     private void InitializeHackerModels()
     {
-        //_hacker = GameObject.Instantiate(HackerDefaultPrefab, this.transform.position, this.transform.rotation);
+        _hacker = GameObject.Instantiate(HackerDefaultPrefab, this.transform.position, this.transform.rotation);
         _hackedGuard = GameObject.Instantiate(HackedGuardPrefab, this.transform.position, this.transform.rotation);
         _hackedScientist = GameObject.Instantiate(HackedScientistPrefab, this.transform.position, this.transform.rotation);
         _hackedEngineer = GameObject.Instantiate(HackedEngineerPrefab, this.transform.position, this.transform.rotation);
 
-        //_hacker.transform.parent = this.gameObject.transform;
+        _hacker.transform.parent = this.gameObject.transform;
         //_hacker.transform.localScale = this.gameObject.transform.lossyScale;
 
         _hackedGuard.transform.parent = this.gameObject.transform;
-        _hackedGuard.transform.localScale = this.gameObject.transform.lossyScale;
+        //_hackedGuard.transform.localScale = this.gameObject.transform.lossyScale;
 
         _hackedScientist.transform.parent = this.gameObject.transform;
-        _hackedScientist.transform.localScale = this.gameObject.transform.lossyScale;
+        //_hackedScientist.transform.localScale = this.gameObject.transform.lossyScale;
 
         _hackedEngineer.transform.parent = this.gameObject.transform;
-        _hackedEngineer.transform.localScale = this.gameObject.transform.lossyScale;
+        //_hackedEngineer.transform.localScale = this.gameObject.transform.lossyScale;
 
         // disable the models at the game start 
         _hackedGuard.SetActive(false);
@@ -316,21 +316,21 @@ public class TakeOver : NetworkBehaviour
         //Activate the HackedGuardPrefab instead!
         if (targetGameObject.name.ToLower().Contains("guard"))
         {
-            //_hacker.SetActive(false);
+            _hacker.SetActive(false);
             _hackedGuard.SetActive(true);
             _hackedScientist.SetActive(false);
             _hackedEngineer.SetActive(false);
         }
         else if (targetGameObject.name.ToLower().Contains("scientist"))
         {
-            //_hacker.SetActive(false);
+            _hacker.SetActive(false);
             _hackedGuard.SetActive(false);
             _hackedScientist.SetActive(true);
             _hackedEngineer.SetActive(false);
         }
         else if (targetGameObject.name.ToLower().Contains("engineer"))
         {
-            //_hacker.SetActive(false);
+            _hacker.SetActive(false);
             _hackedGuard.SetActive(false);
             _hackedScientist.SetActive(false);
             _hackedEngineer.SetActive(true);
