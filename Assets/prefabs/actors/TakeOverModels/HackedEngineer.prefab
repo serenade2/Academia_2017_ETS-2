@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 95298897661082444}
   - component: {fileID: 114366975250659912}
   - component: {fileID: 114424443028802492}
+  - component: {fileID: 114362329870465196}
   - component: {fileID: 23470745524653064}
   - component: {fileID: 114784969717636868}
   m_Layer: 0
@@ -1034,7 +1035,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 860a26b229ccc6d4f96dbffbdbff3a34, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1137,6 +1138,25 @@ TrailRenderer:
     textureMode: 1
   m_MinVertexDistance: 1
   m_Autodestruct: 0
+--- !u!114 &114362329870465196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1223670985103376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95298897661082444}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114366975250659912
 MonoBehaviour:
   m_ObjectHideFlags: 1
