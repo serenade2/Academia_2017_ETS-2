@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 114735424769522268}
   - component: {fileID: 23553906903298938}
   - component: {fileID: 114933553815798710}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Engineer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +545,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515956930890112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.56, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4548835282980872}
@@ -909,7 +909,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1732881900477522}
-  m_LocalRotation: {x: 0.6111003, y: -0.32521257, z: 0.65438366, w: 0.30426204}
+  m_LocalRotation: {x: 0.61110026, y: -0.32521254, z: 0.6543836, w: 0.304262}
   m_LocalPosition: {x: -0.05878442, y: 0.13533472, z: -0.0041038347}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1282,9 +1282,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.58
-  m_Height: 5
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Center: {x: 0, y: 1.08, z: 0}
 --- !u!137 &137095453006008692
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

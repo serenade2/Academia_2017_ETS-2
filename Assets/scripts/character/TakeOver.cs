@@ -181,6 +181,8 @@ public class TakeOver : NetworkBehaviour
         Vector3 targetWalkingDirection = targetGameObject.transform.forward;
         Transform targetTransform = targetGameObject.transform;
 
+
+
         //TODO add an accessor in the class that use the NavMeshAgent to retreive the original ai speed 
         SpawnDecoy(this.gameObject, this.transform.position, this.transform.rotation, DecoyLifeTime, 1.0f);
         CmdSpawnDecoy(this.gameObject, this.transform.position, this.transform.rotation, DecoyLifeTime, 1.0f);
@@ -206,7 +208,7 @@ public class TakeOver : NetworkBehaviour
         // move the hacker at the same position of the ai
         this.transform.position = targetTransform.position;
         this.transform.rotation = targetTransform.rotation;
-        this.transform.localScale = targetTransform.localScale;
+        //this.transform.localScale = targetTransform.localScale;
     }
 
 
