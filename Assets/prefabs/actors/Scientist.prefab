@@ -1054,6 +1054,7 @@ GameObject:
   - component: {fileID: 95591501453409376}
   - component: {fileID: 114378790563943170}
   - component: {fileID: 114317023948180694}
+  - component: {fileID: 114030562243745682}
   - component: {fileID: 195933256004176024}
   - component: {fileID: 114545189004435834}
   - component: {fileID: 114040897610950596}
@@ -1526,7 +1527,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1714357601546212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.61, z: 0}
+  m_LocalPosition: {x: 12.68, y: 0.61, z: -14.8}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4222289573980280}
@@ -2789,6 +2790,25 @@ TrailRenderer:
     textureMode: 1
   m_MinVertexDistance: 1
   m_Autodestruct: 0
+--- !u!114 &114030562243745682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1714357601546212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95591501453409376}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114040897610950596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2844,7 +2864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
-    m_Value: 0
+    m_Value: 13
   m_AssetId:
     i0: 241
     i1: 246
@@ -2889,6 +2909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiType: 1
   objectivePerAI: 3
+  objectives: []
 --- !u!114 &114949874561151872
 MonoBehaviour:
   m_ObjectHideFlags: 1
