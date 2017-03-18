@@ -15,7 +15,7 @@ public class CrosshairManager : MonoBehaviour {
     TagCharacter characterTag;
     private List<TagCharacter> tags = new List<TagCharacter>();
     public Color color;
-
+    DestroyCharacter characterDestroy;
 
     float maxWidth;
     float maxHeight;
@@ -26,12 +26,6 @@ public class CrosshairManager : MonoBehaviour {
     public bool debugModeIsActive;
 
     Vector2 input;
-
-    bool tuchWallNorth;
-    bool tuchWallSouth;
-    bool tuchWallEast;
-    bool tuchWallWest;
-
 
     RaycastHit test;
     float dist;
@@ -53,11 +47,6 @@ public class CrosshairManager : MonoBehaviour {
 
         uiGeneralCanvas.worldCamera = worldCamera;
 
-        tuchWallNorth = false;
-        tuchWallSouth = false;
-        tuchWallEast = false;
-        tuchWallWest = false;
-
     }
 
 
@@ -71,8 +60,26 @@ public class CrosshairManager : MonoBehaviour {
         crossHair.rectTransform.position = newPosition;
 
         tagEvent();
+        destroyEvent();
         debugMode();
     }
+
+    private void destroyEvent()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+        {
+            Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, 50f, layer))
+            {
+                if (hit.collider.transform.parent.GetComponent<DestroyCharacter>() != null)
+                {
+                    characterDestroy = hit.collider.transform.parent.GetComponent<DestroyCharacter>();
+                    characterDestroy.RpcDestroy();
+                }
+            }
+        }
+    }
+
 
     private void tagEvent()
     {
