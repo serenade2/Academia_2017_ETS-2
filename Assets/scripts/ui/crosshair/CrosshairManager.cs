@@ -8,7 +8,7 @@ public class CrosshairManager : MonoBehaviour {
 
     public RawImage crossHair;
     private Camera worldCamera;
-    public Canvas worldCanvas;
+    private Canvas uiGeneralCanvas;
 
     RaycastHit hit;
     public LayerMask layer;
@@ -39,12 +39,19 @@ public class CrosshairManager : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        maxWidth = GetComponentInParent<Canvas>().pixelRect.width;
-        maxHeight = GetComponentInParent<Canvas>().pixelRect.height;
+        uiGeneralCanvas = GetComponentInParent<Canvas>();
+       
+
+
+        maxWidth = uiGeneralCanvas.pixelRect.width;
+        maxHeight = uiGeneralCanvas.pixelRect.height;
 
         crossHair.rectTransform.position = new Vector3(maxWidth / 2f, maxHeight / 2f, 0);
-
+        
+        // TODO change main camera
         worldCamera = Camera.main;
+
+        uiGeneralCanvas.worldCamera = worldCamera;
 
         tuchWallNorth = false;
         tuchWallSouth = false;
