@@ -27,12 +27,6 @@ public class CrosshairManager : MonoBehaviour {
 
     Vector2 input;
 
-    bool tuchWallNorth;
-    bool tuchWallSouth;
-    bool tuchWallEast;
-    bool tuchWallWest;
-
-
     RaycastHit test;
     float dist;
 
@@ -45,18 +39,19 @@ public class CrosshairManager : MonoBehaviour {
         crossHair.rectTransform.position = new Vector3(maxWidth / 2f, maxHeight / 2f, 0);
 
         worldCamera = Camera.main;
+    }
 
-        tuchWallNorth = false;
-        tuchWallSouth = false;
-        tuchWallEast = false;
-        tuchWallWest = false;
-
+    void OnRectTransformDimensionsChange()
+    {
+        maxWidth = GetComponentInParent<Canvas>().pixelRect.width;
+        maxHeight = GetComponentInParent<Canvas>().pixelRect.height;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        // restrict crosshair movement to the screen size
         float newX = Mathf.Clamp(crossHair.rectTransform.position.x + (Input.GetAxis(horizontal) * multiplicator), 0f, maxWidth);
         float newY = Mathf.Clamp(crossHair.rectTransform.position.y + (Input.GetAxis(vertical) * multiplicator), 0f, maxHeight);
         Vector2 newPosition = new Vector2(newX, newY);
@@ -110,13 +105,7 @@ public class CrosshairManager : MonoBehaviour {
     /// </summary>
     private void debugMode() {
         if (debugModeIsActive) {
-            Debug.DrawLine(crossHair.rectTransform.position, new Vector3(0, 0, 0));
-
-            //Debug.Log("tuchWallWest : " + tuchWallWest);
-            //Debug.Log("tuchWallEast : " + tuchWallEast);
-            //Debug.Log("tuchWallSouth : " + tuchWallSouth);
-            //Debug.Log("tuchWallNouth : " + tuchWallNorth);
-           
+            Debug.DrawLine(crossHair.rectTransform.position, new Vector3(0, 0, 0));       
 
             // test raycast
 
