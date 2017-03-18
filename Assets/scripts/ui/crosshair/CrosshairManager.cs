@@ -39,8 +39,12 @@ public class CrosshairManager : MonoBehaviour {
         crossHair.rectTransform.position = new Vector3(maxWidth / 2f, maxHeight / 2f, 0);
 
         worldCamera = Camera.main;
+    }
 
-
+    void OnRectTransformDimensionsChange()
+    {
+        maxWidth = GetComponentInParent<Canvas>().pixelRect.width;
+        maxHeight = GetComponentInParent<Canvas>().pixelRect.height;
     }
 
 
