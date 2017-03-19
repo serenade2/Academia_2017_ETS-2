@@ -9,7 +9,7 @@ public class CrosshairManager : MonoBehaviour {
     public RawImage crossHair;
     private Camera worldCamera;
     private Canvas uiGeneralCanvas;
-    public Canvas worldCanvas;
+
     public int maxTaggableCharacters = 3;
 
     RaycastHit hit;
@@ -32,13 +32,12 @@ public class CrosshairManager : MonoBehaviour {
     RaycastHit test;
     float dist;
 
+
     // Use this for initialization
     void Start()
     {
         uiGeneralCanvas = GetComponentInParent<Canvas>();
        
-
-
         maxWidth = uiGeneralCanvas.pixelRect.width;
         maxHeight = uiGeneralCanvas.pixelRect.height;
 
@@ -46,13 +45,14 @@ public class CrosshairManager : MonoBehaviour {
         
         // TODO change main camera
         worldCamera = Camera.main;
+        uiGeneralCanvas.worldCamera = worldCamera;
+
     }
 
     void OnRectTransformDimensionsChange()
     {
         maxWidth = GetComponentInParent<Canvas>().pixelRect.width;
-        maxHeight = GetComponentInParent<Canvas>().pixelRect.height;
-        uiGeneralCanvas.worldCamera = worldCamera;
+        maxHeight = GetComponentInParent<Canvas>().pixelRect.height;   
 
     }
 
