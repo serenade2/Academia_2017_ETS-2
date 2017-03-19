@@ -9,6 +9,7 @@ public class CrosshairManager : MonoBehaviour {
     public RawImage crossHair;
     private Camera worldCamera;
     public Canvas worldCanvas;
+    public int maxTaggableCharacters = 3;
 
     RaycastHit hit;
     public LayerMask layer;
@@ -86,7 +87,7 @@ public class CrosshairManager : MonoBehaviour {
                     else
                     {
                         debugLog("tag set");
-                        if (tags.Count <= 2)
+                        if (tags.Count < maxTaggableCharacters)
                         {
                             tags.Add(characterTag);
                             characterTag.Tag(color);
