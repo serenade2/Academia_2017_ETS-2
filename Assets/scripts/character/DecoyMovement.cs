@@ -42,6 +42,8 @@ public class DecoyMovement : NetworkBehaviour
 
     public void TakeApparency(GameObject hackerGameObject)
     {
+        //TODO make it compatible with the new models.
+
         //if (!hasAuthority) return;
         MeshRenderer targetMeshRenderer = hackerGameObject.GetComponent<MeshRenderer>();
         MeshFilter targetMeshFilter = hackerGameObject.GetComponent<MeshFilter>();

@@ -9,6 +9,8 @@ public class CrosshairManager : MonoBehaviour {
     public RawImage crossHair;
     private Camera worldCamera;
     private Canvas uiGeneralCanvas;
+    public Canvas worldCanvas;
+    public int maxTaggableCharacters = 3;
 
     RaycastHit hit;
     public LayerMask layer;
@@ -44,7 +46,12 @@ public class CrosshairManager : MonoBehaviour {
         
         // TODO change main camera
         worldCamera = Camera.main;
+    }
 
+    void OnRectTransformDimensionsChange()
+    {
+        maxWidth = GetComponentInParent<Canvas>().pixelRect.width;
+        maxHeight = GetComponentInParent<Canvas>().pixelRect.height;
         uiGeneralCanvas.worldCamera = worldCamera;
 
     }
@@ -53,6 +60,7 @@ public class CrosshairManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        // restrict crosshair movement to the screen size
         float newX = Mathf.Clamp(crossHair.rectTransform.position.x + (Input.GetAxis(horizontal) * multiplicator), 0f, maxWidth);
         float newY = Mathf.Clamp(crossHair.rectTransform.position.y + (Input.GetAxis(vertical) * multiplicator), 0f, maxHeight);
         Vector2 newPosition = new Vector2(newX, newY);
@@ -105,7 +113,7 @@ public class CrosshairManager : MonoBehaviour {
                     else
                     {
                         debugLog("tag set");
-                        if (tags.Count <= 2)
+                        if (tags.Count < maxTaggableCharacters)
                         {
                             tags.Add(characterTag);
                             characterTag.Tag(color);
@@ -124,13 +132,7 @@ public class CrosshairManager : MonoBehaviour {
     /// </summary>
     private void debugMode() {
         if (debugModeIsActive) {
-            Debug.DrawLine(crossHair.rectTransform.position, new Vector3(0, 0, 0));
-
-            //Debug.Log("tuchWallWest : " + tuchWallWest);
-            //Debug.Log("tuchWallEast : " + tuchWallEast);
-            //Debug.Log("tuchWallSouth : " + tuchWallSouth);
-            //Debug.Log("tuchWallNouth : " + tuchWallNorth);
-           
+            Debug.DrawLine(crossHair.rectTransform.position, new Vector3(0, 0, 0));       
 
             // test raycast
 

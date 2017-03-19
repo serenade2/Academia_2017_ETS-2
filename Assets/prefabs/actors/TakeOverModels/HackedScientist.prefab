@@ -491,6 +491,7 @@ GameObject:
   - component: {fileID: 95278583688059752}
   - component: {fileID: 114790848138375598}
   - component: {fileID: 114502984814371340}
+  - component: {fileID: 114139310106862860}
   m_Layer: 0
   m_Name: HackedScientist
   m_TagString: Untagged
@@ -2694,7 +2695,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 62811fe2f3cff1447bb12080b966945e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2797,6 +2798,25 @@ TrailRenderer:
     textureMode: 1
   m_MinVertexDistance: 1
   m_Autodestruct: 0
+--- !u!114 &114139310106862860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1285316108151198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95278583688059752}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114502984814371340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2831,22 +2851,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
+    i0: 228
+    i1: 81
+    i2: 163
+    i3: 116
+    i4: 55
+    i5: 19
+    i6: 24
+    i7: 180
+    i8: 41
+    i9: 20
+    i10: 42
+    i11: 50
+    i12: 79
+    i13: 185
+    i14: 163
+    i15: 11
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!124 &124619933769392868
