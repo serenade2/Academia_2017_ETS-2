@@ -63,6 +63,7 @@ public class TakeOver : NetworkBehaviour
     public override void OnStartServer()
     {
         InitializeHackerModels();
+        DisableModels();
     }
 	
 	// Update is called once per frame
