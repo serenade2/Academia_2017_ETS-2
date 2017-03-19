@@ -141,8 +141,6 @@ public class CrosshairManager : MonoBehaviour {
             //Debug.Log(worldCamera);
             Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
 
-            
-
             Debug.DrawRay(ray.origin, ray.direction * 50f, Color.red);
         } 
     }

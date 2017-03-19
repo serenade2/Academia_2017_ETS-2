@@ -10,6 +10,7 @@ TagManager:
   - Room
   - Objective
   - ObjectiveCollider
+  - RewindManager
   layers:
   - Default
   - TransparentFX

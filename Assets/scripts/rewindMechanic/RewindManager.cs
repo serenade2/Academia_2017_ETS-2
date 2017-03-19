@@ -2,9 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using CustomUtile;
 
-public class RewindManager : NetworkBehaviour
+public class RewindManager : NetworkBehaviour, Observable
 {
+    private bool trigerableUpdate = false;
+
+    private bool powerIsReady = true;
+    public float cooldownTime;
+    private float currentTime;
+    public float yieldWaitingTime;
+    public float progressCooldown;
+    private ArrayList listObserver = new ArrayList();
+
     public List<Rewindable> rewinds = new List<Rewindable>();
     public GameObject blackGlitch;
 
@@ -21,24 +31,26 @@ public class RewindManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4))
+        if (powerIsReady)
         {
-            foreach (Rewindable rewind in rewinds)
-            {
-                //rewind.StartRewind();
-                if (rewind.isClient)
-                {
-                    rewind.RpcStartRewind();
-                }
-                else
-                {
-                    rewind.StartRewind();
-                }
-            }
-
-
+          InputChecker();  
         }
-        else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
+        
+    }
+
+    public void AddRewindable(Rewindable rewindable)
+    {
+        rewinds.Add(rewindable);
+    }
+
+    public void RemoveBlackGlitch()
+    {
+        blackGlitch.SetActive(false);
+    }
+
+    private void Rewinder(bool release)
+    {
+        if (release)
         {
             foreach (Rewindable rewind in rewinds)
             {
@@ -53,32 +65,125 @@ public class RewindManager : NetworkBehaviour
                 }
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        else
         {
-            blackGlitch.SetActive(true);
-            Invoke("RemoveBlackGlitch",1f);
             foreach (Rewindable rewind in rewinds)
-                rewind.StartPause();
-
+            {
+                //rewind.StartRewind();
+                if (rewind.isClient)
+                {
+                    rewind.RpcStartRewind();
+                }
+                else
+                {
+                    rewind.StartRewind();
+                }
+            }
+            
         }
-        else if (Input.GetKeyUp(KeyCode.Joystick1Button1))
+        
+    }
+
+    private void Pause(bool release)
+    {
+        if (release)
         {
             CancelInvoke();
             RemoveBlackGlitch();
             foreach (Rewindable rewind in rewinds)
                 rewind.StopPause();
         }
+        else
+        {
+            blackGlitch.SetActive(true);
+            Invoke("RemoveBlackGlitch", 1f);
+            foreach (Rewindable rewind in rewinds)
+                rewind.StartPause();
+        }
     }
 
-    public void AddRewindable(Rewindable rewindable)
+    private void InputChecker()
     {
-        rewinds.Add(rewindable);
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4))
+        {
+            Rewinder(false);
+            
+        }
+        else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
+        {
+            Rewinder(true);
+            activeCooldown();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+        {
+            Pause(false);
+
+        }
+        else if (Input.GetKeyUp(KeyCode.Joystick1Button1))
+        {
+            Pause(true);
+            activeCooldown();
+        }
     }
 
-    public void RemoveBlackGlitch()
+    private void activeCooldown()
     {
-        blackGlitch.SetActive(false);
+        powerIsReady = false;
+        currentTime = 0;
+        StartCoroutine(CooldownCoroutine());
+        finishCoolDonw();
+    }
+
+    private void finishCoolDonw()
+    {
+        StopCoroutine(CooldownCoroutine());
+        powerIsReady = true;
+    }
+
+    private IEnumerator CooldownCoroutine()
+    {
+        for (float i = 0; i <= cooldownTime; i+= progressCooldown)
+        {
+            currentTime = i;
+        }
+        setChanged();
+        notify();
+        yield return new WaitForSeconds(yieldWaitingTime);
+    }
+
+    public float CooldownTime
+    {
+        get { return cooldownTime; }
+    }
+
+    public float CurrentTime
+    {
+        get { return currentTime; }
+    }
+
+
+    public void addObserver(Observer o)
+    {
+        listObserver.Add(o);
+    }
+
+    public void setChanged()
+    {
+        trigerableUpdate = true;
+    }
+
+    public void notify()
+    {
+        if (trigerableUpdate)
+        {
+            foreach (Observer o in listObserver)
+            {
+                o.update();
+            }
+            trigerableUpdate = false;
+        }
+        
     }
 }
 
