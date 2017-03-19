@@ -1,47 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using cakeslice;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class TagCharacter : NetworkBehaviour {
-    public GameObject model;
-    private Material material; //The GameObject material
-    private Color startColor;
+
+    [SyncVar]
     private bool isTagged = false;
+    private Outline outline;
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
-
-        material = model.GetComponent<Renderer>().material;
-        startColor = model.GetComponent<Renderer>().material.color;
+        // get a reference to the component before disabling it
+        outline = GetComponentInChildren<Outline>();
+        outline.enabled = isTagged;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Tag()
     {
-
-    }
-
-
-    public void Tag(Color color)
-    {
-        Debug.Log("tag");
-        material.SetColor("_Color", color);
-
-        RpcChangeState(color);
-        Debug.Log("tag");
+        outline.enabled = true;
+        RpcChangeState(true);
         isTagged = true;
-        Debug.Log("tagFin");
     }
 
     public void UnTag()
     {
-        Debug.Log("untag");
-        material.SetColor("_Color", startColor);
-        RpcChangeState(startColor);
+        outline.enabled = false;
+        RpcChangeState(false);
         isTagged = false;
-        Debug.Log("untagFin");
     }
 
     public bool GetIsTagged()
@@ -50,9 +35,8 @@ public class TagCharacter : NetworkBehaviour {
     }
 
     [ClientRpc]
-    public void RpcChangeState(Color color)
+    public void RpcChangeState(bool tagged)
     {
-        Debug.Log(color);
-        material.SetColor("_Color", color);
+        outline.enabled = tagged;
     }
 }

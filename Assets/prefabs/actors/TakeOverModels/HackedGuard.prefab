@@ -111,6 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4597996481677058}
   - component: {fileID: 137809304041089522}
+  - component: {fileID: 114944787905721850}
   m_Layer: 0
   m_Name: Guard_Armor
   m_TagString: Untagged
@@ -2869,6 +2870,21 @@ MonoBehaviour:
     i15: 9
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114944787905721850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1141218531416240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e838e2e89537ef445955a78b3ae67598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
+  originalLayer: 0
+  originalMaterials: []
 --- !u!124 &124905449983481192
 Behaviour:
   m_ObjectHideFlags: 1

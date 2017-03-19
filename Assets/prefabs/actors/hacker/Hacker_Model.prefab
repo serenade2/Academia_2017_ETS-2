@@ -335,6 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4105125342375346}
   - component: {fileID: 137566721520629802}
+  - component: {fileID: 114664496329364688}
   m_Layer: 0
   m_Name: HackerHumanBody
   m_TagString: Untagged
@@ -1822,6 +1823,21 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
+--- !u!114 &114664496329364688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1466545437525352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e838e2e89537ef445955a78b3ae67598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114807762526869268
 MonoBehaviour:
   m_ObjectHideFlags: 1
