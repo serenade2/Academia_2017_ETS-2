@@ -15,7 +15,6 @@ public class CrosshairManager : MonoBehaviour {
     public LayerMask layer;
     TagCharacter characterTag;
     private List<TagCharacter> tags = new List<TagCharacter>();
-    public Color color;
 
 
     float maxWidth;
@@ -90,7 +89,7 @@ public class CrosshairManager : MonoBehaviour {
                         if (tags.Count < maxTaggableCharacters)
                         {
                             tags.Add(characterTag);
-                            characterTag.Tag(color);
+                            characterTag.Tag();
                             Debug.Log("Tagged");
                         }
                     }

@@ -380,6 +380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4067861654960950}
   - component: {fileID: 137297078561469096}
+  - component: {fileID: 114901621906764340}
   m_Layer: 0
   m_Name: Guard_Armor
   m_TagString: Untagged
@@ -2872,6 +2873,21 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
+--- !u!114 &114901621906764340
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393597753771976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e838e2e89537ef445955a78b3ae67598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
+  originalLayer: 0
+  originalMaterials: []
 --- !u!136 &136605674113928440
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3206,8 +3222,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 4711341885702552}
   m_AABB:
-    m_Center: {x: -0.00000003958121, y: 0.97443795, z: -0.85074127}
-    m_Extent: {x: 5.036248, y: 2.5146778, z: 7.9165244}
+    m_Center: {x: -0.00000003958121, y: 0.38977528, z: -0.3402965}
+    m_Extent: {x: 2.0144992, y: 1.0058712, z: 3.16661}
   m_DirtyAABB: 0
 --- !u!137 &137498822386265868
 SkinnedMeshRenderer:

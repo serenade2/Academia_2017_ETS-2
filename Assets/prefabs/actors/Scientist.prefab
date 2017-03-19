@@ -909,6 +909,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4304386342324720}
   - component: {fileID: 137628877655299482}
+  - component: {fileID: 114347253263483948}
   m_Layer: 11
   m_Name: Guard_Armor
   m_TagString: Untagged
@@ -2771,6 +2772,21 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114347253263483948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636490794192042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e838e2e89537ef445955a78b3ae67598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114378790563943170
 MonoBehaviour:
   m_ObjectHideFlags: 1
