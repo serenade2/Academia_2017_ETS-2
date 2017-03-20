@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198678966918585928}
   - component: {fileID: 199865777064918124}
   m_Layer: 0
-  m_Name: Rewind VFX
+  m_Name: Ambient VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
