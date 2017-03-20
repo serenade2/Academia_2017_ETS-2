@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 725308424}
   - component: {fileID: 725308423}
   m_Layer: 0
-  m_Name: test
+  m_Name: Ambient Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,9 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227b6358764df33488edf007bdcc027d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particleSystem: {fileID: 1650753957}
-  inverseGravity: 1
-  rewindSpeedFactor: 0.02
+  isRewinding: 0
 --- !u!4 &725308424
 Transform:
   m_ObjectHideFlags: 0
@@ -128,11 +126,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 725308422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 376.75543, y: -50.723103, z: 119.41661}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1851316019}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &953354384
 GameObject:
@@ -202,19 +201,19 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 725308424}
     m_Modifications:
     - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -376.75543
       objectReference: {fileID: 0}
     - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 50.723103
       objectReference: {fileID: 0}
     - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -119.41661
       objectReference: {fileID: 0}
     - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
       propertyPath: m_LocalRotation.x
@@ -222,11 +221,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
       propertyPath: m_LocalRotation.w
@@ -234,7 +233,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198678966918585928, guid: 5df3a37726a1db3428071ba314fbfe2f,
         type: 2}
@@ -244,7 +243,7 @@ Prefab:
     - target: {fileID: 198678966918585928, guid: 5df3a37726a1db3428071ba314fbfe2f,
         type: 2}
       propertyPath: randomSeed
-      value: 1780566335
+      value: 566116012
       objectReference: {fileID: 0}
     - target: {fileID: 198678966918585928, guid: 5df3a37726a1db3428071ba314fbfe2f,
         type: 2}
@@ -308,6 +307,14 @@ Prefab:
         type: 2}
       propertyPath: ClampVelocityModule.separateAxis
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5df3a37726a1db3428071ba314fbfe2f, type: 2}
@@ -391,11 +398,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &1650753957 stripped
-ParticleSystem:
-  m_PrefabParentObject: {fileID: 198678966918585928, guid: 5df3a37726a1db3428071ba314fbfe2f,
+--- !u!4 &1851316019 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4875912146273328, guid: 5df3a37726a1db3428071ba314fbfe2f,
     type: 2}
   m_PrefabInternal: {fileID: 994986920}
 --- !u!1 &1896421161
