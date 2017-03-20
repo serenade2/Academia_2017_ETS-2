@@ -12,11 +12,13 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
     public float speed = 10f;
     private bool canMove = true;
     private CharacterController ctrl;
+    private NetworkAnimator hackerNetworkAnimator;
 
     // Use this for initialization
     void Start()
     {
         this.ctrl = GetComponent<CharacterController>();
+        hackerNetworkAnimator = GetComponentInChildren<NetworkAnimator>();
 
         if (hasAuthority)
         {
@@ -28,6 +30,12 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
     // Update is called once per frame
     void Update()
     {
+        // check if a new animator has been assigned.
+        if (hackerNetworkAnimator.transform.gameObject.activeSelf == false)
+        {
+            hackerNetworkAnimator = GetComponentInChildren<NetworkAnimator>();
+        }
+
         if (!hasAuthority)
         {
             return;
@@ -36,6 +44,8 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
 	    if (canMove)
 	    {
             Vector3 input = new Vector3(Input.GetAxis("Horizontal1"), 0f, Input.GetAxis("Vertical1"));
+            hackerNetworkAnimator.animator.SetFloat("Speed", input.sqrMagnitude);
+
             ctrl.SimpleMove(input * speed);
         }
     }

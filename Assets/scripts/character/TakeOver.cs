@@ -19,26 +19,29 @@ public class TakeOver : NetworkBehaviour
     public GameObject HackedScientistPrefab;
     public GameObject HackedEngineerPrefab;
     public GameObject HackerDefaultPrefab;
+    public GameObject HackedGuardNewPrefab;
+
     private HackerCursor hackerCursor;
     private GameObject _hackedGuard;
     private GameObject _hackedScientist;
     private GameObject _hackedEngineer;
+    private GameObject _hackedGuardNew;
     private GameObject _hacker;
-    private NetworkAnimator _hackerAnimator;
-    private NetworkAnimator _hackerGuardAnimator;
-    private NetworkAnimator _hackerEngineerAnimator;
-    private NetworkAnimator _hackerScientistAnimator;
+    //private NetworkAnimator _hackerAnimator;
+    //private NetworkAnimator _hackerGuardAnimator;
+    //private NetworkAnimator _hackerEngineerAnimator;
+    //private NetworkAnimator _hackerScientistAnimator;
     private float _animationSpeed;
     // Use this for initialization
     public override void OnStartAuthority()
 	{
         GameObject cursor = GameObject.Instantiate(CursorPrefab);
-        _animationSpeed = GetComponent<HackerCharacterController>().speed;
+        //_animationSpeed = GetComponent<HackerCharacterController>().speed;
 
         if (HackedGuardPrefab != null && HackedScientistPrefab != null && HackedEngineerPrefab != null )
         {
             InitializeHackerModels();
-            InitializeHackerAnimators();
+            //InitializeHackerAnimators();
             DisableModels();
         }
         else
@@ -96,7 +99,7 @@ public class TakeOver : NetworkBehaviour
             }
         }
 
-	    UpdateHackedAnimations();
+	    //UpdateHackedAnimations();
 	}
    
     public void AddAi(GameObject ai)
@@ -302,6 +305,7 @@ public class TakeOver : NetworkBehaviour
         _hackedGuard = GameObject.Instantiate(HackedGuardPrefab, this.transform.position, this.transform.rotation);
         _hackedScientist = GameObject.Instantiate(HackedScientistPrefab, this.transform.position, this.transform.rotation);
         _hackedEngineer = GameObject.Instantiate(HackedEngineerPrefab, this.transform.position, this.transform.rotation);
+        _hackedGuardNew = GameObject.Instantiate(HackedGuardNewPrefab, this.transform.position, this.transform.rotation);
 
         _hacker.transform.parent = this.gameObject.transform;
         //_hacker.transform.localScale = this.gameObject.transform.lossyScale;
@@ -315,16 +319,16 @@ public class TakeOver : NetworkBehaviour
         _hackedEngineer.transform.parent = this.gameObject.transform;
         //_hackedEngineer.transform.localScale = this.gameObject.transform.lossyScale;
 
-     
+        _hackedGuardNew.transform.parent = this.gameObject.transform;
     }
 
-    private void InitializeHackerAnimators()
-    {
-        _hackerAnimator = _hacker.GetComponent<NetworkAnimator>();
-        _hackerGuardAnimator = _hackedGuard.GetComponent<NetworkAnimator>();
-        _hackerScientistAnimator = _hackedScientist.GetComponent<NetworkAnimator>();
-        _hackerEngineerAnimator = _hackedEngineer.GetComponent<NetworkAnimator>();
-    }
+    //private void InitializeHackerAnimators()
+    //{
+    //    _hackerAnimator = _hacker.GetComponent<NetworkAnimator>();
+    //    _hackerGuardAnimator = _hackedGuard.GetComponent<NetworkAnimator>();
+    //    _hackerScientistAnimator = _hackedScientist.GetComponent<NetworkAnimator>();
+    //    _hackerEngineerAnimator = _hackedEngineer.GetComponent<NetworkAnimator>();
+    //}
 
     private void DisableModels()
     {
@@ -332,6 +336,7 @@ public class TakeOver : NetworkBehaviour
         _hackedGuard.SetActive(false);
         _hackedScientist.SetActive(false);
         _hackedEngineer.SetActive(false);
+        _hackedGuardNew.SetActive(false);
     }
 
     public void UpdatedHackedPrefabs(GameObject targetGameObject)
@@ -339,12 +344,21 @@ public class TakeOver : NetworkBehaviour
         //TODO Remove the renderer component on the hacker and create a hacker default mesh and assign it on a gameObject
         //this.GetComponent<MeshRenderer>().enabled = false; 
         //Activate the HackedGuardPrefab instead!
-        if (targetGameObject.name.ToLower().Contains("guard"))
+        if (targetGameObject.name.ToLower().Contains("new"))
+        {
+            _hacker.SetActive(false);
+            _hackedGuard.SetActive(false);
+            _hackedScientist.SetActive(false);
+            _hackedEngineer.SetActive(false);
+            _hackedGuardNew.SetActive(true);
+        }
+        else if (targetGameObject.name.ToLower().Contains("guard"))
         {
             _hacker.SetActive(false);
             _hackedGuard.SetActive(true);
             _hackedScientist.SetActive(false);
             _hackedEngineer.SetActive(false);
+            _hackedGuardNew.SetActive(false);
         }
         else if (targetGameObject.name.ToLower().Contains("scientist"))
         {
@@ -352,6 +366,7 @@ public class TakeOver : NetworkBehaviour
             _hackedGuard.SetActive(false);
             _hackedScientist.SetActive(true);
             _hackedEngineer.SetActive(false);
+            _hackedGuardNew.SetActive(false);
         }
         else if (targetGameObject.name.ToLower().Contains("engineer"))
         {
@@ -359,6 +374,7 @@ public class TakeOver : NetworkBehaviour
             _hackedGuard.SetActive(false);
             _hackedScientist.SetActive(false);
             _hackedEngineer.SetActive(true);
+            _hackedGuardNew.SetActive(false);
         }
         else
         {
@@ -372,30 +388,30 @@ public class TakeOver : NetworkBehaviour
         UpdatedHackedPrefabs(targetGameObject);    
     }
 
-    private void UpdateHackedAnimations()
-    {
-        float h = Input.GetAxis("Horizontal1");              // the direction the model is facing
-        float v = Input.GetAxis("Vertical1");                // the speed at wich the model is moving
+    //private void UpdateHackedAnimations()
+    //{
+    //    float h = Input.GetAxis("Horizontal1");              // the direction the model is facing
+    //    float v = Input.GetAxis("Vertical1");                // the speed at wich the model is moving
        
-        if (_hackedGuard.activeSelf)
-        {
-            _hackerGuardAnimator.animator.SetFloat("Speed", v);
-            _hackerGuardAnimator.animator.SetFloat("Direction", h);
-        }
-        else if (_hackedScientist.activeSelf)
-        {
-            _hackerScientistAnimator.animator.SetFloat("Speed", v);
-            _hackerScientistAnimator.animator.SetFloat("Direction", h);
-        }
-        else if (_hackedEngineer.activeSelf)
-        {
-            _hackerEngineerAnimator.animator.SetFloat("Speed", v);
-            _hackerEngineerAnimator.animator.SetFloat("Direction", h);
-        }
-        else
-        {
-            _hackerAnimator.animator.SetFloat("Speed", v);
-            _hackerAnimator.animator.SetFloat("Direction", h);
-        }
-    } 
+    //    if (_hackedGuard.activeSelf)
+    //    {
+    //        _hackerGuardAnimator.animator.SetFloat("Speed", v);
+    //        _hackerGuardAnimator.animator.SetFloat("Speed", h);
+    //    }
+    //    else if (_hackedScientist.activeSelf)
+    //    {
+    //        _hackerScientistAnimator.animator.SetFloat("Speed", v);
+    //        _hackerScientistAnimator.animator.SetFloat("Speed", h);
+    //    }
+    //    else if (_hackedEngineer.activeSelf)
+    //    {
+    //        _hackerEngineerAnimator.animator.SetFloat("Speed", v);
+    //        _hackerEngineerAnimator.animator.SetFloat("Direction", h);
+    //    }
+    //    else
+    //    {
+    //        _hackerAnimator.animator.SetFloat("Speed", v);
+    //        _hackerAnimator.animator.SetFloat("Direction", h);
+    //    }
+    //} 
 }
