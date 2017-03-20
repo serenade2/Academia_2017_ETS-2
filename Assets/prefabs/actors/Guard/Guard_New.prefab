@@ -365,6 +365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4409977345686830}
   - component: {fileID: 137525904444748904}
+  - component: {fileID: 114530659877223600}
   m_Layer: 0
   m_Name: Merged_PM3D_Sphere3D_1_copy11
   m_TagString: Untagged
@@ -1555,7 +1556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 1453104008037396}
 --- !u!114 &114309834821838188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1599,6 +1599,21 @@ MonoBehaviour:
     i15: 79
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114530659877223600
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1453104008037396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e838e2e89537ef445955a78b3ae67598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114679219401023272
 MonoBehaviour:
   m_ObjectHideFlags: 1
