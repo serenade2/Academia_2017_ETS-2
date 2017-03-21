@@ -17,7 +17,7 @@ public class CrosshairManager : MonoBehaviour {
     public LayerMask layer;
     TagCharacter characterTag;
     private List<TagCharacter> tags = new List<TagCharacter>();
-
+    DestroyCharacter characterDestroy;
 
     float maxWidth;
     float maxHeight;
@@ -63,8 +63,26 @@ public class CrosshairManager : MonoBehaviour {
         }
 
         tagEvent();
+        destroyEvent();
         debugMode();
     }
+
+    private void destroyEvent()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+        {
+            Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, 50f, layer))
+            {
+                if (hit.collider.transform.parent.GetComponent<DestroyCharacter>() != null)
+                {
+                    characterDestroy = hit.collider.transform.parent.GetComponent<DestroyCharacter>();
+                    characterDestroy.RpcDestroy();
+                }
+            }
+        }
+    }
+
 
     private void tagEvent()
     {

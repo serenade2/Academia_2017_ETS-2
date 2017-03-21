@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class RewindParticle : MonoBehaviour
 {
+    public float rewindSpeedMultiplier = 2f;
+
+    [HideInInspector]
+    public bool shouldEmit = false;
 
     private ParticleSystem particleSystem;
+    private ParticleSystem.MainModule main;
+    private ParticleSystem.EmissionModule emission;
 
     private float rewindStartTime;
     private float timeRewinded = 0;
-    [HideInInspector]
-    public bool isRewinding = false;
     private float beginEmissionTime;
+
+    private float initialSimulationSpeed;
     
 
     ParticleSystem.Particle[] particles;
@@ -19,66 +25,75 @@ public class RewindParticle : MonoBehaviour
     void Awake()
     {
         particleSystem = GetComponentInChildren<ParticleSystem>();
+        main = particleSystem.main;  // get the variable its always complaining about...
+        emission = particleSystem.emission;
 
-        particleSystem.Clear();
-        particleSystem.Stop();
-        particleSystem.randomSeed = 1; // or anything else
-        particleSystem.Play();
-        beginEmissionTime = Time.time; // now
+        beginEmissionTime = Time.time; // begin now
+        initialSimulationSpeed = main.simulationSpeed;
     }
 
 	// Update is called once per frame
 	void Update ()
 	{      
-	    if (!isRewinding && !particleSystem.emission.enabled && Time.time >= beginEmissionTime )
+	    if (shouldEmit && !particleSystem.emission.enabled && Time.time >= beginEmissionTime )
 	    {
-            var emission = particleSystem.emission;
             emission.enabled = true;
         }
     }
 
     void InitializeIfNeeded()
     {
-        if (particles == null || particles.Length < particleSystem.main.maxParticles)
-            particles = new ParticleSystem.Particle[particleSystem.main.maxParticles];
+        if (particles == null || particles.Length < main.maxParticles)
+            particles = new ParticleSystem.Particle[main.maxParticles];
     }
 
     public void StartRewind()
     {
         rewindStartTime = Time.time;
 
-        isRewinding = true;
+        shouldEmit = false;
 
         // stop emission since we playback the particles already existing
-        var emission = particleSystem.emission;
         emission.enabled = false;
 
-        ToggleRewindEffect(true);
+        ChangeParticlesVelocity(new Vector3(0f, 0f, -main.startSpeedMultiplier * rewindSpeedMultiplier));
     }
 
     public void StopRewind()
     {
-        float rewindDuration = Time.time - rewindStartTime;
+        timeRewinded = Time.time - rewindStartTime;
+        beginEmissionTime = Time.time + timeRewinded;
 
-        beginEmissionTime = Time.time;
-
-        ToggleRewindEffect(false);
-        isRewinding = false;
+        ChangeParticlesVelocity(new Vector3(0f, 0f, main.startSpeedMultiplier));
+        shouldEmit = true;
     }
 
-    private void ToggleRewindEffect(bool turnOn)
+    public void Pause()
+    {
+        // stop emission since we're paused
+        emission.enabled = false;
+        shouldEmit = false;
+        
+        main.simulationSpeed = 0f; // freeze the simulation
+    }
+
+    public void UnPause()
+    {
+        main.simulationSpeed = initialSimulationSpeed;
+        shouldEmit = true;
+    }
+
+    private void ChangeParticlesVelocity(Vector3 newVelocity)
     {
         InitializeIfNeeded();
-        var main = particleSystem.main;
-        main.gravityModifierMultiplier = -particleSystem.main.gravityModifierMultiplier;
 
         // GetParticles is allocation free because we reuse the particles buffer between updates
         int numParticlesAlive = particleSystem.GetParticles(particles);
-
-        // Change only the particles that are alive
+        
         for (int i = 0; i < numParticlesAlive; i++)
         {
-            particles[i].velocity = -particles[i].velocity;
+            particles[i].velocity = newVelocity;
+            particles[i].remainingLifetime = particles[i].remainingLifetime*2f;
         }
 
         // Apply the particle changes to the particle system
