@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114745411820482370}
   m_Layer: 0
   m_Name: RewindManager
-  m_TagString: Untagged
+  m_TagString: RewindManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,6 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fec913140ff33043b317630aa12b971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownTime: 0
+  yieldWaitingTime: 0
+  progressCooldown: 0
   rewinds: []
   blackGlitch: {fileID: 1947093061813412, guid: d18fa389f98240d4a8ae96b721513c8d,
     type: 2}

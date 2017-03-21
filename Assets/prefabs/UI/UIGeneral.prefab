@@ -174,9 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9563489ac5e2aad40b27437ed23af308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewindManager: {fileID: 0}
-  pauseIcone: {fileID: 114169486731477796}
-  rewindIcone: {fileID: 114850572824695438}
+  pauseImage: {fileID: 114169486731477796}
+  RewindImage: {fileID: 114850572824695438}
 --- !u!114 &114071366172845280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -344,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crossHair: {fileID: 114341197990684174}
+  maxTaggableCharacters: 3
   layer:
     serializedVersion: 2
     m_Bits: 256
@@ -3124,7 +3124,7 @@ Canvas:
   m_GameObject: {fileID: 1013655221375040}
   m_Enabled: 1
   serializedVersion: 2
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

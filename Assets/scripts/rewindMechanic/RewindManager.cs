@@ -13,7 +13,7 @@ public class RewindManager : NetworkBehaviour, Observable
     private float currentTime;
     public float yieldWaitingTime;
     public float progressCooldown;
-    private ArrayList listObserver = new ArrayList();
+    private List<Observer> listObserver = new List<Observer>();
 
     public List<Rewindable> rewinds = new List<Rewindable>();
     public GameObject blackGlitch;
@@ -106,23 +106,23 @@ public class RewindManager : NetworkBehaviour, Observable
     {
         if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
-            Rewinder(false);
+            //Rewinder(false);
             
         }
         else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
         {
-            Rewinder(true);
+            //Rewinder(true);
             activeCooldown();
         }
 
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
-            Pause(false);
+            //Pause(false);
 
         }
         else if (Input.GetKeyUp(KeyCode.Joystick1Button1))
         {
-            Pause(true);
+            //Pause(true);
             activeCooldown();
         }
     }
@@ -143,13 +143,27 @@ public class RewindManager : NetworkBehaviour, Observable
 
     private IEnumerator CooldownCoroutine()
     {
-        for (float i = 0; i <= cooldownTime; i+= progressCooldown)
+
+        while (currentTime < cooldownTime)
         {
-            currentTime = i;
+            currentTime += progressCooldown;
+           // Debug.Log(currentTime);
+            setChanged();
+            notify();
+            // Put  your code in here
+            yield return new WaitForSeconds(yieldWaitingTime);
+            //yield return null;
         }
-        setChanged();
-        notify();
-        yield return new WaitForSeconds(yieldWaitingTime);
+
+        //for (float i = 0; i <= cooldownTime; i+= progressCooldown)
+        //{
+        //    currentTime = i;
+        //    setChanged();
+        //    notify();
+        //    yield return new WaitForSeconds(yieldWaitingTime);
+           
+        //}
+
     }
 
     public float CooldownTime
@@ -179,7 +193,7 @@ public class RewindManager : NetworkBehaviour, Observable
         {
             foreach (Observer o in listObserver)
             {
-                o.update();
+                o.updateObserver();
             }
             trigerableUpdate = false;
         }
