@@ -131,7 +131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: {fileID: 0}
   radius: 15
-  translatSpeed: 10
+  moveSpeed: 10
+  lookAngleIncrement: 180
+  cameraMode: 1
 --- !u!124 &124981062329192710
 Behaviour:
   m_ObjectHideFlags: 1
