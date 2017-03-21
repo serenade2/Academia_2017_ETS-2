@@ -45,7 +45,8 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
 	    {
             Vector3 input = new Vector3(Input.GetAxis("Horizontal1"), 0f, Input.GetAxis("Vertical1"));
             hackerNetworkAnimator.animator.SetFloat("Speed", input.sqrMagnitude);
-
+            //align the model to the same direction the character is moving.
+            //hackerNetworkAnimator.transform.forward = this.transform.forward; 
             ctrl.SimpleMove(input * speed);
         }
     }

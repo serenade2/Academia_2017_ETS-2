@@ -114,6 +114,7 @@ public class TakeOver : NetworkBehaviour
             }
             if (hackerCursor.Target == null)
             {
+                hackerCursor.EnableCursor();
                 hackerCursor.SetTarget(ai);
             }
 
@@ -295,6 +296,7 @@ public class TakeOver : NetworkBehaviour
        
         if (currentAi == null)
             return;
+        
         hackerCursor.SetTarget(currentAi);
         hackerCursor.IsVisible = visibleCondition;
     }
