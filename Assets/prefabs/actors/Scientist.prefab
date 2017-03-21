@@ -2722,7 +2722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95591501453409376}
-  m_ParameterSendBits: 0
+  m_ParameterSendBits: 2
   param0: 
   param1: 
   param2: 
@@ -2856,7 +2856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 1636490794192042}
 --- !u!136 &136584834937589438
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3222,7 +3221,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1837513959338184}
   serializedVersion: 5
   lengthInSec: 1
-  speed: 1
+  simulationSpeed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
