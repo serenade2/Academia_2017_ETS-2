@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewindSpeedMultiplier: 5
-  isRewinding: 0
+  shouldEmit: 0
 --- !u!198 &198289028143483388
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -96,7 +96,7 @@ ParticleSystem:
   looping: 1
   prewarm: 1
   playOnAwake: 1
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   startDelay:
     scalar: 0
     maxCurve:
@@ -139,7 +139,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 897736292
+  randomSeed: 1337
   InitialModule:
     serializedVersion: 3
     enabled: 1

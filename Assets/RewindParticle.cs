@@ -21,10 +21,6 @@ public class RewindParticle : MonoBehaviour
     {
         particleSystem = GetComponentInChildren<ParticleSystem>();
 
-        particleSystem.Clear();
-        particleSystem.Stop();
-        particleSystem.randomSeed = 1; // or anything else
-        particleSystem.Play();
         beginEmissionTime = Time.time; // now
     }
 
