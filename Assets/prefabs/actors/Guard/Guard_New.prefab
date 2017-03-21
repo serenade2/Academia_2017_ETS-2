@@ -1545,6 +1545,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memento: 1
+  recordFrequency: 0.1
+  recordMaxTime: 10
 --- !u!114 &114188813691093154
 MonoBehaviour:
   m_ObjectHideFlags: 1
