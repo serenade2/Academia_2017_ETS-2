@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198423451720972350}
   - component: {fileID: 199371970485953080}
   m_Layer: 0
-  m_Name: Disintegration VFX
+  m_Name: DisintegrationVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
