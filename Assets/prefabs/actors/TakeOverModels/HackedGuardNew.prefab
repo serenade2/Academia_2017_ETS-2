@@ -1569,7 +1569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95377235546294152}
-  m_ParameterSendBits: 0
+  m_ParameterSendBits: 3
   param0: 
   param1: 
   param2: 
@@ -1618,7 +1618,7 @@ MonoBehaviour:
     i14: 49
     i15: 125
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
+  m_LocalPlayerAuthority: 1
 --- !u!137 &137141634173494154
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

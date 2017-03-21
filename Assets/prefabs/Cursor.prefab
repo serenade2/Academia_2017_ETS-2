@@ -36,7 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4850307482296146}
   - component: {fileID: 33022605462665834}
-  - component: {fileID: 65240962600430748}
   - component: {fileID: 23025515391157602}
   m_Layer: 0
   m_Name: CursorArrow
@@ -110,18 +109,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1991485016530900}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65240962600430748
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1991485016530900}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114116321607591732
 MonoBehaviour:
   m_ObjectHideFlags: 1
