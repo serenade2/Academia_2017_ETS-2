@@ -51,9 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317e5ce24833a5d4ba8f005cd9c44ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WinningAudio: {fileID: 0}
-  StageAudio: {fileID: 82590120569958018, guid: 0ee22c617ad7e004ebd8382c711d49fc,
-    type: 2}
-  RevertedAudio: {fileID: 82215591103326628, guid: 05df81faec36d3c48872bb0c7c26688c,
-    type: 2}
-  LosingAudio: {fileID: 0}
+  WinningSound: {fileID: 0}
+  PlaySound: {fileID: 0}
+  RewindSound: {fileID: 0}
+  LosingSound: {fileID: 0}

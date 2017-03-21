@@ -1,88 +1,105 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource WinningAudio;
-    public AudioSource StageAudio;
-    public AudioSource RevertedAudio;
-    public AudioSource LosingAudio;
+    public AudioSource WinningSound;
+    public AudioSource PlaySound;
+    public AudioSource RewindSound;
+    public AudioSource LosingSound;
 
 
     // Use this for initialization
-    void Start ()
+    public void Start()
     {
         //InitializeComponents();
         PlayStageClip(true);
         PlayRevertStageClip(true);
         MuteRevertStageClip();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
-	}
+	    if (Input.GetKeyDown(KeyCode.A))
+	    {
+	        ToggleReverse();
+	    }
+    }
 
     public void PlayWinningClip(bool looping)
     {
-        WinningAudio.Play();
+        WinningSound.Play();
     }
 
     public void PlayLosingClip(bool looping)
     {
-        LosingAudio.Play();
+        LosingSound.Play();
     }
 
     public void PlayStageClip(bool looping)
     {
-        StageAudio.Play();
-        StageAudio.loop = looping;
+        PlaySound.Play();
+        PlaySound.loop = looping;
     }
 
     public void PlayRevertStageClip(bool looping)
     {
-        RevertedAudio.Play();
-        RevertedAudio.loop = looping;
+        RewindSound.Play();
+        RewindSound.loop = looping;
     }
 
     public void StopWinningClip()
     {
-        WinningAudio.Stop();
+        WinningSound.Stop();
     }
 
     public void StopStageClip()
     {
-        StageAudio.Stop();
+        PlaySound.Stop();
     }
 
     public void StopRevertStageClip()
     {
-        RevertedAudio.Stop();
+        RewindSound.Stop();
     }
     public void StopLosingClip()
     {
-        LosingAudio.Stop();
+        LosingSound.Stop();
     }
 
     public void MuteStageClip()
     {
-        StageAudio.mute = true;
+        PlaySound.mute = true;
     }
 
     public void MuteRevertStageClip()
     {
-        RevertedAudio.mute = true;
+        RewindSound.mute = true;
     }
 
     public void UnMuteStageClip()
     {
-        StageAudio.mute = false;
+        PlaySound.mute = false;
     }
 
     public void UnMuteRevertStageClip()
     {
-        RevertedAudio.mute = false;
+        RewindSound.mute = false;
+    }
+
+    public void ToggleReverse()
+    {
+        if (PlaySound.pitch < 0)
+        {
+            PlaySound.pitch = 1;
+        }
+        else
+        {
+
+            PlaySound.pitch = -1.6f;
+        }
     }
 }
