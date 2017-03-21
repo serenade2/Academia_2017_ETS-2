@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class RewindParticle : MonoBehaviour
 {
+    public float rewindSpeedMultiplier = 2f;
 
-    private ParticleSystem particleSystem;
-
-    private float rewindStartTime;
-    private float timeRewinded = 0;
     [HideInInspector]
     public bool isRewinding = false;
+
+    private ParticleSystem particleSystem;
+    private float rewindStartTime;
+    private float timeRewinded = 0;
     private float beginEmissionTime;
     
 
@@ -53,7 +54,7 @@ public class RewindParticle : MonoBehaviour
         var emission = particleSystem.emission;
         emission.enabled = false;
 
-        ToggleRewindEffect(true);
+        ChangeParticlesVelocity(new Vector3(0f, 0f, -particleSystem.main.startSpeedMultiplier * rewindSpeedMultiplier));
     }
 
     public void StopRewind()
@@ -62,15 +63,13 @@ public class RewindParticle : MonoBehaviour
 
         beginEmissionTime = Time.time;
 
-        ToggleRewindEffect(false);
+        ChangeParticlesVelocity(new Vector3(0f, 0f, particleSystem.main.startSpeedMultiplier));
         isRewinding = false;
     }
 
-    private void ToggleRewindEffect(bool turnOn)
+    private void ChangeParticlesVelocity(Vector3 newVelocity)
     {
         InitializeIfNeeded();
-        var main = particleSystem.main;
-        main.gravityModifierMultiplier = -particleSystem.main.gravityModifierMultiplier;
 
         // GetParticles is allocation free because we reuse the particles buffer between updates
         int numParticlesAlive = particleSystem.GetParticles(particles);
@@ -78,7 +77,7 @@ public class RewindParticle : MonoBehaviour
         // Change only the particles that are alive
         for (int i = 0; i < numParticlesAlive; i++)
         {
-            particles[i].velocity = -particles[i].velocity;
+            particles[i].velocity = newVelocity;
         }
 
         // Apply the particle changes to the particle system

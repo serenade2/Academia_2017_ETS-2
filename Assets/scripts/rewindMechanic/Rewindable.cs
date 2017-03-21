@@ -12,8 +12,11 @@ public class Rewindable : NetworkBehaviour
     private RewindMementoFactory rewindMementoFactory = new RewindMementoFactory();
     public RewindMementoFactory.Type memento = 0; //The memento to use with the memento factory;
 
-    private float recordDelay = 0.1f; //Recording frequency -> higher value = faster replay
-    private float recordMaxTime = 10f;
+    // These should be set by the RewindManager so it's uniform
+    [HideInInspector]
+    public float recordFrequency = 0.1f; //Recording frequency -> higher value = faster replay
+    [HideInInspector]
+    public float recordMaxTime = 10f;
 
     //Coroutines
     private Coroutine record;
@@ -152,14 +155,14 @@ public class Rewindable : NetworkBehaviour
     {
         while (true)
         {
-            if (stateHistory.Count < recordMaxTime / recordDelay)
+            if (stateHistory.Count < recordMaxTime / recordFrequency)
                 stateHistory.AddLast(rewindMementoFactory.MakeRewindMemento(memento, gameObject));
             else
             {
                 stateHistory.RemoveFirst();
                 stateHistory.AddLast(rewindMementoFactory.MakeRewindMemento(memento, gameObject));
             }
-            yield return new WaitForSeconds(recordDelay);
+            yield return new WaitForSeconds(recordFrequency);
         }
     }
 
@@ -177,7 +180,7 @@ public class Rewindable : NetworkBehaviour
                 StopRewind();
             }
 
-            yield return new WaitForSeconds(0.01f);
+            yield return null;
         }
     }
 }

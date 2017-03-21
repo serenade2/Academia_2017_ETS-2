@@ -23,7 +23,7 @@ GameObject:
   m_Layer: 0
   m_Name: AmbientEffect
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -51,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1011670124902624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.2, y: 0, z: -14}
+  m_LocalPosition: {x: 11.2, y: -30, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4337945234117128}
@@ -82,6 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 227b6358764df33488edf007bdcc027d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewindSpeedMultiplier: 5
   isRewinding: 0
 --- !u!198 &198289028143483388
 ParticleSystem:
@@ -138,12 +139,12 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -1319234284
+  randomSeed: 897736292
   InitialModule:
     serializedVersion: 3
     enabled: 1
     startLifetime:
-      scalar: 5
+      scalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -552,7 +553,7 @@ ParticleSystem:
     size3D: 0
     rotation3D: 0
     gravityModifier:
-      scalar: -20
+      scalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -597,8 +598,8 @@ ParticleSystem:
     radius: 1
     angle: 25
     length: 5
-    boxX: 120
-    boxY: 120
+    boxX: 160
+    boxY: 160
     boxZ: 50
     arc: 360
     placementMode: 0
@@ -617,7 +618,7 @@ ParticleSystem:
     enabled: 1
     serializedVersion: 3
     rateOverTime:
-      scalar: 100
+      scalar: 200
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1418,7 +1419,7 @@ ParticleSystem:
     enabled: 0
     multiplier: 1
   ClampVelocityModule:
-    enabled: 1
+    enabled: 0
     x:
       scalar: 1
       maxCurve:
