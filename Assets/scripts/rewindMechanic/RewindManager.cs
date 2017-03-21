@@ -58,6 +58,7 @@ public class RewindManager : NetworkBehaviour
             foreach (Rewindable rewind in rewinds)
                 rewind.StartPause();
 
+            ambientParticle.Pause();
         }
 
         // pause button up
@@ -67,6 +68,8 @@ public class RewindManager : NetworkBehaviour
             RemoveBlackGlitch();
             foreach (Rewindable rewind in rewinds)
                 rewind.StopPause();
+
+            ambientParticle.UnPause();
         }
     }
 
