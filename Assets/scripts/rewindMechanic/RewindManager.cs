@@ -38,15 +38,19 @@ public class RewindManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        // rewind button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
             StartRewind();
         }
+
+        // rewind button up
         else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
         {
             StopRewind();
         }
 
+        // pause button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
             blackGlitch.SetActive(true);
@@ -55,6 +59,8 @@ public class RewindManager : NetworkBehaviour
                 rewind.StartPause();
 
         }
+
+        // pause button up
         else if (Input.GetKeyUp(KeyCode.Joystick1Button1))
         {
             CancelInvoke();
