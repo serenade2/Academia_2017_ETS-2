@@ -175,7 +175,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4297692990232116, guid: b47e33f0764be8946900c10d78fa81f3, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 198289028143483388, guid: b47e33f0764be8946900c10d78fa81f3,
         type: 2}
@@ -369,6 +369,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114505455362542068, guid: 6cf8137d702473b47b02b33378743686,
+        type: 2}
+      propertyPath: StepAudioClips.Array.size
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4020160016649126, guid: 6cf8137d702473b47b02b33378743686, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -403,20 +408,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4767776336403784, guid: 6cf8137d702473b47b02b33378743686, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.61110026
+      value: 0.6111003
       objectReference: {fileID: 0}
     - target: {fileID: 4767776336403784, guid: 6cf8137d702473b47b02b33378743686, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.32521254
+      value: -0.32521257
       objectReference: {fileID: 0}
     - target: {fileID: 4767776336403784, guid: 6cf8137d702473b47b02b33378743686, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0.6543836
+      value: 0.65438366
       objectReference: {fileID: 0}
     - target: {fileID: 4767776336403784, guid: 6cf8137d702473b47b02b33378743686, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.304262
+      value: 0.30426204
       objectReference: {fileID: 0}
+    - target: {fileID: 114505455362542068, guid: 6cf8137d702473b47b02b33378743686,
+        type: 2}
+      propertyPath: StepAudioClips.Array.data[6]
+      value: 
+      objectReference: {fileID: 8300000, guid: 26033889273619e46b48df3d26dcd669, type: 3}
+    - target: {fileID: 114505455362542068, guid: 6cf8137d702473b47b02b33378743686,
+        type: 2}
+      propertyPath: StepAudioClips.Array.data[7]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2087a370351885e4597a0c3b1bfb9317, type: 3}
+    - target: {fileID: 114505455362542068, guid: 6cf8137d702473b47b02b33378743686,
+        type: 2}
+      propertyPath: StepAudioClips.Array.data[8]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c4bbcae2cfbc354cb5e9d7ff0515764, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6cf8137d702473b47b02b33378743686, type: 2}
   m_IsPrefabParent: 0

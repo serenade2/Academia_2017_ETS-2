@@ -17,7 +17,7 @@ public class RewindManager : NetworkBehaviour
     public float recordMaxTime = 10f;
 
     private float rewindRealLifeTime;
-
+    private SoundManager soundManager; 
     // Use this for initialization
     public override void OnStartServer()
     {
@@ -33,6 +33,7 @@ public class RewindManager : NetworkBehaviour
         }
 
         ambientParticle = FindObjectOfType<RewindParticle>();
+        soundManager = GameObject.FindObjectOfType<SoundManager>();
     }
 
     // Update is called once per frame
@@ -42,12 +43,18 @@ public class RewindManager : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
             StartRewind();
+
+            soundManager.MuteStageClip();
+            soundManager.UnMuteRevertStageClip();
         }
 
         // rewind button up
         else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
         {
             StopRewind();
+
+            soundManager.MuteRevertStageClip();
+            soundManager.UnMuteStageClip();
         }
 
         // pause button down

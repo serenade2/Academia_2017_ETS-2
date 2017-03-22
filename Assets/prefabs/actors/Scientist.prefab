@@ -2618,13 +2618,13 @@ AudioSource:
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2821,14 +2821,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StepAudioClips:
-  - {fileID: 8300000, guid: 66c785213002f6045881cb0513dc413d, type: 3}
-  - {fileID: 8300000, guid: f8e920d033e13f841bafa4c379c1bc4d, type: 3}
-  - {fileID: 8300000, guid: f932e100ddd3c4d4ba95ac05810dfd33, type: 3}
-  - {fileID: 8300000, guid: 6fc582507e1154742becad98a1e9607d, type: 3}
-  - {fileID: 8300000, guid: 5e6cb52209604894c9c9b0bee695ee72, type: 3}
-  - {fileID: 8300000, guid: ac4a5d22272e0f348b9cbb0c594db096, type: 3}
+  - {fileID: 8300000, guid: b0d989c41ed92c14e81041b751ea9955, type: 3}
+  - {fileID: 8300000, guid: fe3ce9b450b36cb46926081cfc1530d0, type: 3}
+  - {fileID: 8300000, guid: 483596e909c027d49bffc5b1bf13b5a6, type: 3}
+  - {fileID: 8300000, guid: 09c75f61beecd1b498bde130ea26038f, type: 3}
+  - {fileID: 8300000, guid: 72a2e96f3382fe5419a70163cf6c1ea6, type: 3}
+  - {fileID: 8300000, guid: 438f2d100ba2341419fb0a7de9dbf0eb, type: 3}
+  - {fileID: 8300000, guid: 26033889273619e46b48df3d26dcd669, type: 3}
+  - {fileID: 8300000, guid: 2087a370351885e4597a0c3b1bfb9317, type: 3}
+  - {fileID: 8300000, guid: 2c4bbcae2cfbc354cb5e9d7ff0515764, type: 3}
   InteractionAudioClip: {fileID: 0}
-  DesintegrateAudioClip: {fileID: 0}
+  DesintegrateAudioClip: {fileID: 8300000, guid: 32877d3b863de9b4e8c1572c3bad942a,
+    type: 3}
 --- !u!114 &114287939743062552
 MonoBehaviour:
   m_ObjectHideFlags: 1

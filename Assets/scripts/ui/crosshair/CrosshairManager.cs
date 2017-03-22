@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-public class CrosshairManager : MonoBehaviour {
+public class CrosshairManager : NetworkBehaviour {
 
     public enum CameraMode { Rotation, Fps };
     public CameraMode cameraMode = CameraMode.Fps;
@@ -31,7 +31,8 @@ public class CrosshairManager : MonoBehaviour {
 
     RaycastHit test;
     float dist;
-
+    private SoundManager soundManager;
+    private ActorSoundManager actorSoundManager;
     // Use this for initialization
     void Start()
     {
@@ -41,6 +42,7 @@ public class CrosshairManager : MonoBehaviour {
         crossHair.rectTransform.position = new Vector3(maxWidth / 2f, maxHeight / 2f, 0);
 
         worldCamera = Camera.main;
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     void OnRectTransformDimensionsChange()
@@ -81,17 +83,19 @@ public class CrosshairManager : MonoBehaviour {
                     {
                         // trigger victory for Watcher
                         Debug.Log("=================     Watcher WINS   ===================");
+                        // play the winning sound
+                        soundManager.PlayWinningClip(false);
                     }
                     else
                     {
                         characterDestroy = hit.collider.transform.parent.GetComponent<DestroyCharacter>();
+                        // play 
                         characterDestroy.Destroy();
                     }
                 }
             }
         }
     }
-
 
     private void tagEvent()
     {
