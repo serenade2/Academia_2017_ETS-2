@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 
 public class CrosshairManager : MonoBehaviour {
 
+    public enum CameraMode { Rotation, Fps };
+    public CameraMode cameraMode = CameraMode.Fps;
     public RawImage crossHair;
     private Camera worldCamera;
     public Canvas worldCanvas;
@@ -15,7 +17,7 @@ public class CrosshairManager : MonoBehaviour {
     public LayerMask layer;
     TagCharacter characterTag;
     private List<TagCharacter> tags = new List<TagCharacter>();
-
+    DestroyCharacter characterDestroy;
 
     float maxWidth;
     float maxHeight;
@@ -52,15 +54,44 @@ public class CrosshairManager : MonoBehaviour {
     void Update()
     {
         // restrict crosshair movement to the screen size
-        float newX = Mathf.Clamp(crossHair.rectTransform.position.x + (Input.GetAxis(horizontal) * multiplicator), 0f, maxWidth);
-        float newY = Mathf.Clamp(crossHair.rectTransform.position.y + (Input.GetAxis(vertical) * multiplicator), 0f, maxHeight);
-        Vector2 newPosition = new Vector2(newX, newY);
-
-        crossHair.rectTransform.position = newPosition;
+        if (cameraMode == CameraMode.Rotation)
+        {
+            float newX = Mathf.Clamp(crossHair.rectTransform.position.x + (Input.GetAxis(horizontal) * multiplicator), 0f, maxWidth);
+            float newY = Mathf.Clamp(crossHair.rectTransform.position.y + (Input.GetAxis(vertical) * multiplicator), 0f, maxHeight);
+            Vector2 newPosition = new Vector2(newX, newY);
+            crossHair.rectTransform.position = newPosition;
+        }
 
         tagEvent();
+        destroyEvent();
         debugMode();
     }
+
+    private void destroyEvent()
+    {
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+        {
+            Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, 50f, layer))
+            {
+                if (hit.collider.transform.parent.GetComponent<DestroyCharacter>() != null)
+                {
+
+                    if (hit.collider.tag == "Hacker")
+                    {
+                        // trigger victory for Watcher
+                        Debug.Log("=================     Watcher WINS   ===================");
+                    }
+                    else
+                    {
+                        characterDestroy = hit.collider.transform.parent.GetComponent<DestroyCharacter>();
+                        characterDestroy.Destroy();
+                    }
+                }
+            }
+        }
+    }
+
 
     private void tagEvent()
     {

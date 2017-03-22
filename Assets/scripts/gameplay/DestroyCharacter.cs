@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class DestroyCharacter : NetworkBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+public class DestroyCharacter : NetworkBehaviour
+{
 	// Update is called once per frame
 	void Update () {
 		
@@ -18,6 +13,19 @@ public class DestroyCharacter : NetworkBehaviour {
     [ClientRpc]
     public void RpcDestroy()
     {
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
+
+    public void Destroy()
+    {
+        RewindManager rewindManager = GameObject.Find("RewindManager(Clone)").GetComponent<RewindManager>();
+        
+        Rewindable self = GetComponent<Rewindable>();
+        
+        rewindManager.RemoveRewindable(self);
+
+        RpcDestroy();
+    }
+
+
 }
