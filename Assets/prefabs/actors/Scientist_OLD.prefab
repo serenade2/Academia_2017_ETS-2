@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 114125725105515226}
   - component: {fileID: 82390343778183844}
   m_Layer: 11
-  m_Name: Scientist
+  m_Name: Scientist_OLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1497,7 +1497,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1714357601546212}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.68, y: 0.61, z: -14.8}
+  m_LocalPosition: {x: 9.604931, y: 0.5363445, z: -19.18952}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
   - {fileID: 4222289573980280}

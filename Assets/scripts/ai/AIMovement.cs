@@ -11,15 +11,18 @@ public class AIMovement : NetworkBehaviour, IRewindable
     public AIType aiType = AIType.GUARD;
     public int objectivePerAI;
     [SerializeField]
-    private GameObject[] objectives;
+    public GameObject[] objectives;
 	private LinkedList<int> objectiveHistory = new LinkedList<int>();
     private UnityEngine.AI.NavMeshAgent agent;
     private float agentVelocity;
     private bool hasChangedPath = false; //Verify if path has changed for a new one
 	private int currentObjectiveIndex;
     private bool isRewinding;
+    private bool isWorking = false;
     private int nbObjectives = 0;
     private NetworkAnimator networkAnimator;
+    private IEnumerator workingCoroutine;
+
     // Use this for initialization
     public void Start()
     {
@@ -28,14 +31,13 @@ public class AIMovement : NetworkBehaviour, IRewindable
         InitializeAi();
     }
 
-    [Command]
+    /*[Command]
     void CmdInitializeAi()
     {
         InitializeAi();
-    }
+    }*/
     void InitializeAi()
     {
-
         objectives = new GameObject[objectivePerAI];
 
         //Get this AI objectives to patrol
@@ -48,9 +50,9 @@ public class AIMovement : NetworkBehaviour, IRewindable
                 Objective objectiveScript = objective.GetComponent<Objective>();
                 if (aiType == AIType.GUARD)
                 {
-                    if (objectiveScript.GetRestrictions()[0] == 1)
+                    if (objectiveScript.GetGuardAccess())
                     {
-                        if (objectiveScript.AddUser())
+                        if (objectiveScript.AddUser(gameObject))
                         {
                             objectives[nbObjectives] = objective;
                             nbObjectives++;
@@ -59,9 +61,9 @@ public class AIMovement : NetworkBehaviour, IRewindable
                 }
                 else if (aiType == AIType.SCIENTIST)
                 {
-                    if (objectiveScript.GetRestrictions()[1] == 1)
+                    if (objectiveScript.GetScientistAccess())
                     {
-                        if (objectiveScript.AddUser())
+                        if (objectiveScript.AddUser(gameObject))
                         {
                             objectives[nbObjectives] = objective;
                             nbObjectives++;
@@ -70,9 +72,9 @@ public class AIMovement : NetworkBehaviour, IRewindable
                 }
                 else
                 {
-                    if (objectiveScript.GetRestrictions()[2] == 1)
+                    if (objectiveScript.GetEngineerAccess())
                     {
-                        if (objectiveScript.AddUser())
+                        if (objectiveScript.AddUser(gameObject))
                         {
                             objectives[nbObjectives] = objective;
                             nbObjectives++;
@@ -102,7 +104,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
         UpdateAnimation(agentVelocity);
         //print("DesiredVelocity SqrMagnitude:" + agent.desiredVelocity.sqrMagnitude);
         //When destination is reached
-        if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending && !isRewinding)
+        /*if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending && !isRewinding)
         {
             hasChangedPath = true;
 
@@ -118,7 +120,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
             {
                 ChangeDestination();
             }
-        }
+        }*/
             
     }
 
@@ -127,6 +129,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
         hasChangedPath = false;
         currentObjectiveIndex = Random.Range(0, nbObjectives);
         agent.SetDestination(objectives[currentObjectiveIndex].GetComponent<Objective>().GetUsingPos().position);
+        if (objectives[currentObjectiveIndex].GetComponent<Objective>().GetIsUsed())
+            ChangeDestination();
     }
 
     public void ChangeDestination(int objectiveIndex)
@@ -156,11 +160,23 @@ public class AIMovement : NetworkBehaviour, IRewindable
         if (isPaused)
         {
             agent.Stop();
+
+            if (isWorking)
+            {
+                StopCoroutine(workingCoroutine);
+            }
+
             networkAnimator.animator.speed = 0f;
         }
         else
         {
             agent.Resume();
+
+            if (isWorking)
+            {
+                StartCoroutine(workingCoroutine);
+            }
+
             networkAnimator.animator.speed = 1f;
         }
     }
@@ -199,4 +215,48 @@ public class AIMovement : NetworkBehaviour, IRewindable
     {
         networkAnimator.animator.SetFloat("Speed", velocity);
     }
+
+    public void ObjectiveTaken(GameObject objective)
+    {
+        if(objective == objectives[currentObjectiveIndex] && !isWorking)
+        {
+            ChangeDestination();
+        }
+    }
+
+    public void StartWorking(int delay)
+    {
+        isWorking = true;
+        workingCoroutine = Working(delay);
+        StartCoroutine(workingCoroutine);
+    }
+
+    public void StopWorking()
+    {
+        isWorking = false;
+        StopCoroutine(workingCoroutine);
+    }
+
+    IEnumerator Working(int delay)
+    {
+        for(int i = 0; i <= delay; i++)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+        isWorking = false;
+        /* if (objectiveHistory.Count > 0)
+         {
+             objectiveHistory.RemoveFirst();
+             if (objectiveHistory.Count > 0)
+                 ChangeDestination(objectiveHistory.First.Value);
+             else
+                 ChangeDestination();
+         }
+         else
+         {
+             ChangeDestination();
+         }*/
+        ChangeDestination();
+    }
+
 }
