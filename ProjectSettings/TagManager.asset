@@ -10,6 +10,7 @@ TagManager:
   - Room
   - Objective
   - ObjectiveCollider
+  - NPC
   layers:
   - Default
   - TransparentFX

@@ -18,8 +18,11 @@ public class AIMovement : NetworkBehaviour, IRewindable
     private bool hasChangedPath = false; //Verify if path has changed for a new one
 	private int currentObjectiveIndex;
     private bool isRewinding;
+    private bool isWorking = false;
     private int nbObjectives = 0;
     private NetworkAnimator networkAnimator;
+    private Coroutine workingCoroutine;
+
     // Use this for initialization
     public void Start()
     {
@@ -48,9 +51,9 @@ public class AIMovement : NetworkBehaviour, IRewindable
                 Objective objectiveScript = objective.GetComponent<Objective>();
                 if (aiType == AIType.GUARD)
                 {
-                    if (objectiveScript.GetRestrictions()[0] == 1)
+                    if (objectiveScript.GetGuardAccess())
                     {
-                        if (objectiveScript.AddUser())
+                        if (objectiveScript.AddUser(gameObject))
                         {
                             objectives[nbObjectives] = objective;
                             nbObjectives++;
@@ -59,9 +62,9 @@ public class AIMovement : NetworkBehaviour, IRewindable
                 }
                 else if (aiType == AIType.SCIENTIST)
                 {
-                    if (objectiveScript.GetRestrictions()[1] == 1)
+                    if (objectiveScript.GetScientistAccess())
                     {
-                        if (objectiveScript.AddUser())
+                        if (objectiveScript.AddUser(gameObject))
                         {
                             objectives[nbObjectives] = objective;
                             nbObjectives++;
@@ -70,9 +73,9 @@ public class AIMovement : NetworkBehaviour, IRewindable
                 }
                 else
                 {
-                    if (objectiveScript.GetRestrictions()[2] == 1)
+                    if (objectiveScript.GetEngineerAccess())
                     {
-                        if (objectiveScript.AddUser())
+                        if (objectiveScript.AddUser(gameObject))
                         {
                             objectives[nbObjectives] = objective;
                             nbObjectives++;
@@ -95,11 +98,12 @@ public class AIMovement : NetworkBehaviour, IRewindable
     {
         if (!hasAuthority)
             return;
+
         agentVelocity = agent.desiredVelocity.magnitude;
         UpdateAnimation(agentVelocity);
         //print("DesiredVelocity SqrMagnitude:" + agent.desiredVelocity.sqrMagnitude);
         //When destination is reached
-        if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending && !isRewinding)
+        /*if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending && !isRewinding)
         {
             hasChangedPath = true;
 
@@ -115,7 +119,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
             {
                 ChangeDestination();
             }
-        }
+        }*/
             
     }
 
@@ -124,6 +128,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
         hasChangedPath = false;
         currentObjectiveIndex = Random.Range(0, nbObjectives);
         agent.SetDestination(objectives[currentObjectiveIndex].GetComponent<Objective>().GetUsingPos().position);
+        if (objectives[currentObjectiveIndex].GetComponent<Objective>().GetIsUsed())
+            ChangeDestination();
     }
 
     public void ChangeDestination(int objectiveIndex)
@@ -194,4 +200,36 @@ public class AIMovement : NetworkBehaviour, IRewindable
     {
         networkAnimator.animator.SetFloat("Speed", velocity);
     }
+
+    public void ObjectiveTaken(GameObject objective)
+    {
+        if(objective == objectives[currentObjectiveIndex] && !isWorking)
+        {
+            ChangeDestination();
+        }
+    }
+
+    public void StartWorking(int delay)
+    {
+        isWorking = true;
+        workingCoroutine = StartCoroutine(Working(delay));
+    }
+
+    public void StopWorking()
+    {
+        isWorking = false;
+        StopCoroutine(workingCoroutine);
+    }
+
+    IEnumerator Working(int delay)
+    {
+        for(int i = 0; i <= delay; i++)
+        {
+           // print(i);
+            yield return new WaitForSeconds(1f);
+        }
+        isWorking = false;
+        ChangeDestination();
+    }
+
 }
