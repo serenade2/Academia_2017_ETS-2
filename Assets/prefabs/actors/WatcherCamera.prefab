@@ -133,7 +133,7 @@ MonoBehaviour:
   radius: 15
   moveSpeed: 10
   lookAngleIncrement: 180
-  cameraMode: 1
+  cameraMode: 2
 --- !u!124 &124981062329192710
 Behaviour:
   m_ObjectHideFlags: 1

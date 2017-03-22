@@ -17,7 +17,7 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
     void Start()
     {
         this.ctrl = GetComponent<CharacterController>();
-        hackerNetworkAnimator = GetComponentInChildren<NetworkAnimator>();
+        hackerNetworkAnimator = GetComponent<NetworkAnimator>();
 
         if (hasAuthority)
         {
@@ -29,11 +29,6 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
     // Update is called once per frame
     void Update()
     {
-        // check if a new animator has been assigned.
-        if (hackerNetworkAnimator.transform.gameObject.activeSelf == false)
-        {
-            hackerNetworkAnimator = GetComponentInChildren<NetworkAnimator>();
-        }
 
         if (!hasAuthority)
         {
@@ -45,7 +40,7 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
 	    {
             Vector3 input = new Vector3(Input.GetAxis("Horizontal1"), 0f, Input.GetAxis("Vertical1"));
             UpdateAnimation(input, speed);
-            CmdUpdateAnimation(input, speed);
+            //CmdUpdateAnimation(input, speed);
             //TODO resume FROM HERE hackerNetworkAnimator.set
             //align the model to the same direction the character is moving.
             //hackerNetworkAnimator.transform.forward = this.transform.forward; 
