@@ -1045,7 +1045,7 @@ GameObject:
   - component: {fileID: 114125725105515226}
   - component: {fileID: 82390343778183844}
   m_Layer: 11
-  m_Name: Scientist
+  m_Name: Scientist_OLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3309,7 +3309,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1837513959338184}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
