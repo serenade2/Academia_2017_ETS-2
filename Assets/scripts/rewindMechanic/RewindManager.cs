@@ -18,6 +18,11 @@ public class RewindManager : NetworkBehaviour
 
     private float rewindRealLifeTime;
 
+    private int recordCount = 0;
+    private Coroutine record;
+    private Coroutine rewind;
+    private bool isRecording = false;
+
     // Use this for initialization
     public override void OnStartServer()
     {
@@ -33,6 +38,8 @@ public class RewindManager : NetworkBehaviour
         }
 
         ambientParticle = FindObjectOfType<RewindParticle>();
+
+        record = StartCoroutine(Record());
     }
 
     // Update is called once per frame
@@ -88,14 +95,44 @@ public class RewindManager : NetworkBehaviour
         blackGlitch.SetActive(false);
     }
 
-    IEnumerator StopRewindAfterMaxTime()
+    /*IEnumerator StopRewindAfterMaxTime()
     {
         yield return new WaitForSeconds(rewindRealLifeTime);
         StopRewind();
+    }*/
+
+    IEnumerator Record()
+    {
+        while (true)
+        {
+            if (recordCount < recordMaxTime / recordFrequency)
+                recordCount++;
+            yield return new WaitForSeconds(recordFrequency);
+        }
+    }
+
+    IEnumerator Rewind()
+    {
+        while (true)
+        {
+            if (recordCount > 0)
+            {
+                recordCount--;
+            }
+            else
+            {
+                StopRewind();
+            }
+
+            yield return null;
+        }
     }
 
     public void StartRewind()
     {
+        StopCoroutine(record);
+        isRecording = false;
+        rewind = StartCoroutine(Rewind());
         foreach (Rewindable rewind in rewinds)
         {
             if (rewind.gameObject.CompareTag("Hacker"))
@@ -110,13 +147,16 @@ public class RewindManager : NetworkBehaviour
 
         ambientParticle.StartRewind();
 
-        // make sure the rewinding stops after the allowed time
-        StartCoroutine(StopRewindAfterMaxTime());
     }
 
     public void StopRewind()
     {
-        StopCoroutine(StopRewindAfterMaxTime());
+        StopCoroutine(rewind);
+        if (!isRecording)
+        {
+            record = StartCoroutine(Record());
+            isRecording = true;
+        }
 
         foreach (Rewindable rewind in rewinds)
         {

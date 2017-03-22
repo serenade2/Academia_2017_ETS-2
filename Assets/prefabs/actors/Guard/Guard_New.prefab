@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 114994132526060026}
   - component: {fileID: 114920258667569154}
   - component: {fileID: 114482000280694764}
+  - component: {fileID: 54149546412366612}
   m_Layer: 11
   m_Name: Guard_New
   m_TagString: NPC
@@ -1392,7 +1393,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &54149546412366612
 Rigidbody:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1302190702032762}

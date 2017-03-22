@@ -114,8 +114,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214317050102488}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.474, y: 31.624, z: -5.6}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000035762784}
+  m_LocalPosition: {x: 26.473995, y: 31.624, z: 2.3105583}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4627185657405210}
@@ -124,7 +124,7 @@ Transform:
   - {fileID: 4165936205959230}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -179.99998, z: 0}
 --- !u!4 &4627185657405210
 Transform:
   m_ObjectHideFlags: 1
@@ -322,8 +322,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1cf2c60f71992a49a4b66c63e4871a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isUsed: 0
   maxUser: 3
   guardAccess: 1
   scientistAccess: 0
-  engineerAccess: 0
+  engineerAccess: 1
   usingPos: {fileID: 4914616420486256}
+  users: []
+  workingTime: 3

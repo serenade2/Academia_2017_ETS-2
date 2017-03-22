@@ -234,6 +234,18 @@ public class AIMovement : NetworkBehaviour, IRewindable
             yield return new WaitForSeconds(1f);
         }
         isWorking = false;
+        /* if (objectiveHistory.Count > 0)
+         {
+             objectiveHistory.RemoveFirst();
+             if (objectiveHistory.Count > 0)
+                 ChangeDestination(objectiveHistory.First.Value);
+             else
+                 ChangeDestination();
+         }
+         else
+         {
+             ChangeDestination();
+         }*/
         ChangeDestination();
     }
 
