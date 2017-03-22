@@ -14,10 +14,6 @@ public class SoundManager : MonoBehaviour
     // Use this for initialization
     public void Start()
     {
-        //InitializeComponents();
-        PlayStageClip(true);
-        PlayRevertStageClip(true);
-        MuteRevertStageClip();
     }
 	
 	// Update is called once per frame
@@ -27,6 +23,13 @@ public class SoundManager : MonoBehaviour
 	    {
 	        ToggleReverse();
 	    }
+    }
+
+    public void GameStartPlay()
+    {
+        PlayStageClip(true);
+        PlayRevertStageClip(true);
+        MuteRevertStageClip();
     }
 
     public void PlayWinningClip(bool looping)
@@ -42,6 +45,7 @@ public class SoundManager : MonoBehaviour
     public void PlayStageClip(bool looping)
     {
         PlaySound.Play();
+        PlaySound.volume = 0.05f; // 5 % of the volume
         PlaySound.loop = looping;
     }
 

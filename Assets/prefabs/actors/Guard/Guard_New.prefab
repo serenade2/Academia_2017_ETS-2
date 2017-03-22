@@ -246,7 +246,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4588210104935026}
   - component: {fileID: 95199871209452282}
-  - component: {fileID: 54149546412366612}
   - component: {fileID: 195004184709584212}
   - component: {fileID: 136280770727075384}
   - component: {fileID: 114309834821838188}
@@ -257,6 +256,8 @@ GameObject:
   - component: {fileID: 114994132526060026}
   - component: {fileID: 114920258667569154}
   - component: {fileID: 114482000280694764}
+  - component: {fileID: 114833810838670310}
+  - component: {fileID: 82532398093378214}
   m_Layer: 11
   m_Name: Guard_New
   m_TagString: Untagged
@@ -1391,21 +1392,6 @@ Transform:
   m_Father: {fileID: 4400584149255032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &54149546412366612
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1302190702032762}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &65794623622181404
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1418,6 +1404,86 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &82532398093378214
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1302190702032762}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95199871209452282
 Animator:
   serializedVersion: 3
@@ -1630,6 +1696,26 @@ MonoBehaviour:
   aiType: 0
   objectivePerAI: 3
   objectives: []
+--- !u!114 &114833810838670310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1302190702032762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6b8ff622df9d746821220bd52d65a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StepAudioClips:
+  - {fileID: 8300000, guid: 66c785213002f6045881cb0513dc413d, type: 3}
+  - {fileID: 8300000, guid: f8e920d033e13f841bafa4c379c1bc4d, type: 3}
+  - {fileID: 8300000, guid: f932e100ddd3c4d4ba95ac05810dfd33, type: 3}
+  - {fileID: 8300000, guid: 6fc582507e1154742becad98a1e9607d, type: 3}
+  - {fileID: 8300000, guid: 5e6cb52209604894c9c9b0bee695ee72, type: 3}
+  - {fileID: 8300000, guid: ac4a5d22272e0f348b9cbb0c594db096, type: 3}
+  InteractionAudioClip: {fileID: 0}
+  DesintegrateAudioClip: {fileID: 0}
 --- !u!114 &114899759121990778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1931,7 +2017,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1302190702032762}
   m_Enabled: 1
   m_Radius: 0.86
-  m_Speed: 3
+  m_Speed: 2
   m_Acceleration: 1000
   avoidancePriority: 50
   m_AngularSpeed: 1200
