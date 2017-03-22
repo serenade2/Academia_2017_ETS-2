@@ -9,10 +9,13 @@ public class RewindManager : NetworkBehaviour, Observable
     private bool trigerableUpdate = false;
 
     private bool powerIsReady = true;
-    public float cooldownTime;
+    public float cooldownTime =15f;
     private float currentTime;
-    public float yieldWaitingTime;
-    public float progressCooldown;
+
+    [Header("Temp entre les tics")]
+    public float yieldWaitingTime = 0.1f;
+    public float progressCooldown = 0.1f;
+    [Header("Temp entre les tics")]
     private ArrayList listObserver = new ArrayList();
 
     public List<Rewindable> rewinds = new List<Rewindable>();
@@ -230,7 +233,7 @@ public class RewindManager : NetworkBehaviour, Observable
         {
             foreach (Observer o in listObserver)
             {
-                o.update();
+                o.updateObserver();
             }
             trigerableUpdate = false;
         }
