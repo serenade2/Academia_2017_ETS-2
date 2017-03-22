@@ -78,6 +78,11 @@ public class RewindManager : NetworkBehaviour
         rewinds.Add(rewindable);
     }
 
+    public void RemoveRewindable(Rewindable rewindable)
+    {
+        rewinds.Remove(rewindable);
+    }
+
     public void RemoveBlackGlitch()
     {
         blackGlitch.SetActive(false);

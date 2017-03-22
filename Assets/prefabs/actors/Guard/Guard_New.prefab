@@ -246,7 +246,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4588210104935026}
   - component: {fileID: 95199871209452282}
-  - component: {fileID: 54149546412366612}
   - component: {fileID: 195004184709584212}
   - component: {fileID: 136280770727075384}
   - component: {fileID: 114309834821838188}
