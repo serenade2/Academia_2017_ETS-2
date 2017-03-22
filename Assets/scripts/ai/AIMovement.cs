@@ -87,6 +87,9 @@ public class AIMovement : NetworkBehaviour, IRewindable
         agent.updateRotation = true;
 
         networkAnimator = GetComponent<NetworkAnimator>();
+
+        networkAnimator.animator.StartRecording(0); // start animation recording!
+
         ChangeDestination();
     }
 
@@ -153,10 +156,12 @@ public class AIMovement : NetworkBehaviour, IRewindable
         if (isPaused)
         {
             agent.Stop();
+            networkAnimator.animator.speed = 0f;
         }
         else
         {
             agent.Resume();
+            networkAnimator.animator.speed = 1f;
         }
     }
 
