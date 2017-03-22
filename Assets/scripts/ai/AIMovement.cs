@@ -21,7 +21,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
     private bool isWorking = false;
     private int nbObjectives = 0;
     private NetworkAnimator networkAnimator;
-    private Coroutine workingCoroutine;
+    private IEnumerator workingCoroutine;
 
     // Use this for initialization
     public void Start()
@@ -159,10 +159,12 @@ public class AIMovement : NetworkBehaviour, IRewindable
         if (isPaused)
         {
             agent.Stop();
+            StopCoroutine(workingCoroutine);
         }
         else
         {
             agent.Resume();
+            StartCoroutine(workingCoroutine);
         }
     }
 
@@ -212,7 +214,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
     public void StartWorking(int delay)
     {
         isWorking = true;
-        workingCoroutine = StartCoroutine(Working(delay));
+        workingCoroutine = Working(delay);
+        StartCoroutine(workingCoroutine);
     }
 
     public void StopWorking()
@@ -225,7 +228,6 @@ public class AIMovement : NetworkBehaviour, IRewindable
     {
         for(int i = 0; i <= delay; i++)
         {
-           // print(i);
             yield return new WaitForSeconds(1f);
         }
         isWorking = false;

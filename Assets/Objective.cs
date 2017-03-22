@@ -47,7 +47,7 @@ public class Objective : NetworkBehaviour {
     {
         this.isUsed = isUsed;
     }
-
+     
     public bool AddUser(GameObject user)
     {
         if (userCount < maxUser)
