@@ -78,9 +78,7 @@ public class Objective : NetworkBehaviour {
             if(!other.CompareTag("Hacker"))  currentUser.GetComponent<AIMovement>().StartWorking(workingTime);
             foreach (AIMovement user in users)
             {
-                if (user == null)
-                    users.Remove(user);
-                else
+                if (user != null)
                     user.ObjectiveTaken(gameObject);
             }
         }

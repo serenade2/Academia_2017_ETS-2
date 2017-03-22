@@ -160,13 +160,23 @@ public class AIMovement : NetworkBehaviour, IRewindable
         if (isPaused)
         {
             agent.Stop();
-            StopCoroutine(workingCoroutine);
+
+            if (isWorking)
+            {
+                StopCoroutine(workingCoroutine);
+            }
+
             networkAnimator.animator.speed = 0f;
         }
         else
         {
             agent.Resume();
-            StartCoroutine(workingCoroutine);
+
+            if (isWorking)
+            {
+                StartCoroutine(workingCoroutine);
+            }
+
             networkAnimator.animator.speed = 1f;
         }
     }
