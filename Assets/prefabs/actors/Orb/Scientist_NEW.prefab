@@ -1989,14 +1989,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StepAudioClips:
-  - {fileID: 8300000, guid: 66c785213002f6045881cb0513dc413d, type: 3}
-  - {fileID: 8300000, guid: f8e920d033e13f841bafa4c379c1bc4d, type: 3}
-  - {fileID: 8300000, guid: f932e100ddd3c4d4ba95ac05810dfd33, type: 3}
-  - {fileID: 8300000, guid: 6fc582507e1154742becad98a1e9607d, type: 3}
-  - {fileID: 8300000, guid: 5e6cb52209604894c9c9b0bee695ee72, type: 3}
-  - {fileID: 8300000, guid: ac4a5d22272e0f348b9cbb0c594db096, type: 3}
+  - {fileID: 8300000, guid: b0d989c41ed92c14e81041b751ea9955, type: 3}
+  - {fileID: 8300000, guid: fe3ce9b450b36cb46926081cfc1530d0, type: 3}
+  - {fileID: 8300000, guid: 483596e909c027d49bffc5b1bf13b5a6, type: 3}
+  - {fileID: 8300000, guid: 09c75f61beecd1b498bde130ea26038f, type: 3}
+  - {fileID: 8300000, guid: 72a2e96f3382fe5419a70163cf6c1ea6, type: 3}
+  - {fileID: 8300000, guid: 438f2d100ba2341419fb0a7de9dbf0eb, type: 3}
+  - {fileID: 8300000, guid: 26033889273619e46b48df3d26dcd669, type: 3}
+  - {fileID: 8300000, guid: 2087a370351885e4597a0c3b1bfb9317, type: 3}
+  - {fileID: 8300000, guid: 2c4bbcae2cfbc354cb5e9d7ff0515764, type: 3}
   InteractionAudioClip: {fileID: 0}
-  DesintegrateAudioClip: {fileID: 0}
+  DesintegrateAudioClip: {fileID: 8300000, guid: 32877d3b863de9b4e8c1572c3bad942a,
+    type: 3}
 --- !u!114 &114366661743597754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2060,22 +2064,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
+    i0: 49
+    i1: 26
+    i2: 5
+    i3: 231
+    i4: 45
+    i5: 135
+    i6: 149
+    i7: 132
+    i8: 27
+    i9: 78
+    i10: 162
+    i11: 137
+    i12: 194
+    i13: 71
+    i14: 86
+    i15: 149
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114602888412465314

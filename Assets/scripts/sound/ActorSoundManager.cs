@@ -28,7 +28,7 @@ public class ActorSoundManager : MonoBehaviour
 		
 	}
 
-    void PlayStepSound()
+    public void PlayStepSound()
     {
         if (audioPlayer.isPlaying)
         {
@@ -42,6 +42,12 @@ public class ActorSoundManager : MonoBehaviour
         audioPlayer.clip = currentStep;
         audioPlayer.Play();
         nextClip++;
+    }
+
+    public void PlayDesintegrateSound()
+    {
+        audioPlayer.clip = DesintegrateAudioClip;
+        audioPlayer.Play();
     }
 
 
