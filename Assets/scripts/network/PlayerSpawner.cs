@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerSpawner : NetworkBehaviour {
-    public GameObject hackerPrefab;
+
+    public GameObject hackerScientist;
+    public GameObject hackerEngineer;
+    public GameObject hackerGuard;
+
     public GameObject watcherPrefab;
     public GameObject objectiveManagerPrefab;
 
@@ -36,7 +40,9 @@ public class PlayerSpawner : NetworkBehaviour {
         {
             Vector3 player1spawn = GameObject.Find("player1Spawn").transform.position;
 
-            player = GameObject.Instantiate(hackerPrefab, player1spawn, hackerPrefab.transform.rotation);
+            GameObject character = RandomSelectCharacter();
+
+            player = GameObject.Instantiate(character, player1spawn, character.transform.rotation);
             NetworkServer.SpawnWithClientAuthority(player, gameObject);
 			GameObject.Find("RewindManager(Clone)").GetComponent<RewindManager>().AddRewindable(player.GetComponent<Rewindable>());
 
@@ -51,9 +57,13 @@ public class PlayerSpawner : NetworkBehaviour {
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject RandomSelectCharacter()
     {
+
+        List<GameObject> choices = new List<GameObject> {hackerEngineer, hackerGuard, hackerScientist};
+
+        return choices[Random.Range(0, choices.Count)];
+
 
     }
 }

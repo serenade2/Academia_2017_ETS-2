@@ -2767,6 +2767,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memento: 1
+  recordFrequency: 0.1
+  recordMaxTime: 10
 --- !u!114 &114595140441004356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4170,7 +4172,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1933284936167264}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1

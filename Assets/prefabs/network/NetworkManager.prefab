@@ -66,14 +66,15 @@ MonoBehaviour:
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: 
-  m_OnlineScene: 
+  m_OnlineScene: SceneIntegration
   m_SpawnPrefabs:
-  - {fileID: 1445516490173184, guid: d182a31a7bf9c8442b0f4e766da6482c, type: 2}
   - {fileID: 1328234100468404, guid: ff6994edf7430424ebecfab216582297, type: 2}
   - {fileID: 1457918936068302, guid: 48f3368eeb57dd140a67e907c152027e, type: 2}
-  - {fileID: 1369334446370686, guid: a439ad5b7327d5e4488318333d9f6faa, type: 2}
   - {fileID: 1302907032153588, guid: d54a3705c34be3642a5f48558c30655e, type: 2}
   - {fileID: 1525966589198876, guid: 24cf7d7fdd5cd854bb55bd31d46ba15f, type: 2}
+  - {fileID: 1458704947068104, guid: 1ebd02ef1bdc79a4f91b35f8403d01b2, type: 2}
+  - {fileID: 1980061166334184, guid: 281dbc95b2cb28b4aa1341d9485ad21b, type: 2}
+  - {fileID: 1785591465865406, guid: fcb0327a9e508474cb29c23ff467832f, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
