@@ -2,11 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using CustomUtile;
 
-public class RewindManager : NetworkBehaviour
+public class RewindManager : NetworkBehaviour, Observable
 {
+    private bool trigerableUpdate = false;
+
+    private bool powerIsReady = true;
+    public float cooldownTime;
+    private float currentTime;
+    public float yieldWaitingTime;
+    public float progressCooldown;
+    private ArrayList listObserver = new ArrayList();
+
     public List<Rewindable> rewinds = new List<Rewindable>();
     public GameObject blackGlitch;
+
+    private float rewindRealLifeTime;
 
     public RewindParticle ambientParticle;
 
@@ -16,19 +28,16 @@ public class RewindManager : NetworkBehaviour
     [Tooltip("Max time in seconds the game objects should record themselves")]
     public float recordMaxTime = 10f;
 
-    private float rewindRealLifeTime;
 
     // Use this for initialization
     public override void OnStartServer()
     {
         // not sure if this is good or not... it's actually smelly, right ?
-        rewindRealLifeTime = recordMaxTime*recordFrequency;
+        rewindRealLifeTime = recordMaxTime * recordFrequency;
 
         Rewindable[] rewindComponents = FindObjectsOfType(typeof(Rewindable)) as Rewindable[];
         foreach (Rewindable rewind in rewindComponents)
         {
-            rewind.recordFrequency = recordFrequency;
-            rewind.recordMaxTime = recordMaxTime;
             rewinds.Add(rewind);
         }
 
@@ -38,6 +47,60 @@ public class RewindManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (powerIsReady)
+        {
+            InputChecker();
+        }
+    }
+
+    public void AddRewindable(Rewindable rewindable)
+    {
+        rewinds.Add(rewindable);
+    }
+
+    public void RemoveBlackGlitch()
+    {
+        blackGlitch.SetActive(false);
+    }
+
+    private void Rewinder(bool release)
+    {
+        if (release)
+        {
+            foreach (Rewindable rewind in rewinds)
+            {
+                //rewind.StartRewind();
+                if (rewind.isClient)
+                {
+                    rewind.RpcStopRewind();
+                }
+                else
+                {
+                    rewind.StopRewind();
+                }
+            }
+        }
+        else
+        {
+            foreach (Rewindable rewind in rewinds)
+            {
+                //rewind.StartRewind();
+                if (rewind.isClient)
+                {
+                    rewind.RpcStartRewind();
+                }
+                else
+                {
+                    rewind.StartRewind();
+                }
+            }
+        }
+    }
+
+
+    private void InputChecker()
+    {
+
         // rewind button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
@@ -48,13 +111,14 @@ public class RewindManager : NetworkBehaviour
         else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
         {
             StopRewind();
+            activeCooldown();
         }
 
         // pause button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
             blackGlitch.SetActive(true);
-            Invoke("RemoveBlackGlitch",1f);
+            Invoke("RemoveBlackGlitch", 1f);
             foreach (Rewindable rewind in rewinds)
                 rewind.StartPause();
 
@@ -70,23 +134,8 @@ public class RewindManager : NetworkBehaviour
                 rewind.StopPause();
 
             ambientParticle.UnPause();
+            activeCooldown();
         }
-    }
-
-    public void AddRewindable(Rewindable rewindable)
-    {
-        rewinds.Add(rewindable);
-    }
-
-    public void RemoveBlackGlitch()
-    {
-        blackGlitch.SetActive(false);
-    }
-
-    IEnumerator StopRewindAfterMaxTime()
-    {
-        yield return new WaitForSeconds(rewindRealLifeTime);
-        StopRewind();
     }
 
     public void StartRewind()
@@ -128,5 +177,71 @@ public class RewindManager : NetworkBehaviour
         ambientParticle.StopRewind();
     }
 
+
+    private void activeCooldown()
+    {
+        powerIsReady = false;
+        currentTime = 0;
+        StartCoroutine(CooldownCoroutine());
+        finishCoolDonw();
+    }
+
+    private void finishCoolDonw()
+    {
+        StopCoroutine(CooldownCoroutine());
+        powerIsReady = true;
+    }
+
+    private IEnumerator CooldownCoroutine()
+    {
+        for (float i = 0; i <= cooldownTime; i += progressCooldown)
+        {
+            currentTime = i;
+        }
+        setChanged();
+        notify();
+        yield return new WaitForSeconds(yieldWaitingTime);
+    }
+
+    public float CooldownTime
+    {
+        get { return cooldownTime; }
+    }
+
+    public float CurrentTime
+    {
+        get { return currentTime; }
+    }
+
+
+    public void addObserver(Observer o)
+    {
+        listObserver.Add(o);
+    }
+
+    public void setChanged()
+    {
+        trigerableUpdate = true;
+    }
+
+    public void notify()
+    {
+        if (trigerableUpdate)
+        {
+            foreach (Observer o in listObserver)
+            {
+                o.update();
+            }
+            trigerableUpdate = false;
+        }
+
+    }
+
+    IEnumerator StopRewindAfterMaxTime()
+    {
+        yield return new WaitForSeconds(rewindRealLifeTime);
+        StopRewind();
+        activeCooldown();
+    }
 }
 
