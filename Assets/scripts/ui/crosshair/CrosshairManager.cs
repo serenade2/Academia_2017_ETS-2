@@ -76,8 +76,17 @@ public class CrosshairManager : MonoBehaviour {
             {
                 if (hit.collider.transform.parent.GetComponent<DestroyCharacter>() != null)
                 {
-                    characterDestroy = hit.collider.transform.parent.GetComponent<DestroyCharacter>();
-                    characterDestroy.RpcDestroy();
+
+                    if (hit.collider.tag == "Hacker")
+                    {
+                        // trigger victory for Watcher
+                        Debug.Log("=================     Watcher WINS   ===================");
+                    }
+                    else
+                    {
+                        characterDestroy = hit.collider.transform.parent.GetComponent<DestroyCharacter>();
+                        characterDestroy.Destroy();
+                    }
                 }
             }
         }
