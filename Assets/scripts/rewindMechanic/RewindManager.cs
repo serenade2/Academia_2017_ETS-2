@@ -93,7 +93,7 @@ public class RewindManager : NetworkBehaviour
     {
         foreach (Rewindable rewind in rewinds)
         {
-            if (rewind.isClient)
+            if (rewind.gameObject.CompareTag("Hacker"))
             {
                 rewind.RpcStartRewind();
             }
@@ -115,7 +115,7 @@ public class RewindManager : NetworkBehaviour
 
         foreach (Rewindable rewind in rewinds)
         {
-            if (rewind.isClient)
+            if (rewind.gameObject.CompareTag("Hacker"))
             {
                 rewind.RpcStopRewind();
             }

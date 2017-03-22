@@ -62,6 +62,7 @@ public class Objective : NetworkBehaviour {
         }
     }
 
+
     public Transform GetUsingPos()
     {
         return usingPos;
@@ -69,23 +70,28 @@ public class Objective : NetworkBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!hasAuthority) return;
         if ((other.CompareTag("NPC") || other.CompareTag("Hacker")) && !isUsed)
         {
             isUsed = true;
             currentUser = other.gameObject;
-            currentUser.GetComponent<AIMovement>().StartWorking(workingTime);
+            if(!other.CompareTag("Hacker"))  currentUser.GetComponent<AIMovement>().StartWorking(workingTime);
             foreach (AIMovement user in users)
             {
-                user.ObjectiveTaken(gameObject);
+                if (user == null)
+                    users.Remove(user);
+                else
+                    user.ObjectiveTaken(gameObject);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (!hasAuthority) return;
         if (currentUser == other.gameObject)
         {
-            currentUser.GetComponent<AIMovement>().StopWorking();
+            if (!currentUser.CompareTag("Hacker")) currentUser.GetComponent<AIMovement>().StopWorking();
             currentUser = null;
             isUsed = false;
         }

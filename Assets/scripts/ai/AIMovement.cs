@@ -11,7 +11,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
     public AIType aiType = AIType.GUARD;
     public int objectivePerAI;
     [SerializeField]
-    private GameObject[] objectives;
+    public GameObject[] objectives;
 	private LinkedList<int> objectiveHistory = new LinkedList<int>();
     private UnityEngine.AI.NavMeshAgent agent;
     private float agentVelocity;
@@ -31,14 +31,13 @@ public class AIMovement : NetworkBehaviour, IRewindable
         InitializeAi();
     }
 
-    [Command]
+    /*[Command]
     void CmdInitializeAi()
     {
         InitializeAi();
-    }
+    }*/
     void InitializeAi()
     {
-
         objectives = new GameObject[objectivePerAI];
 
         //Get this AI objectives to patrol
@@ -98,7 +97,6 @@ public class AIMovement : NetworkBehaviour, IRewindable
     {
         if (!hasAuthority)
             return;
-
         agentVelocity = agent.desiredVelocity.magnitude;
         UpdateAnimation(agentVelocity);
         //print("DesiredVelocity SqrMagnitude:" + agent.desiredVelocity.sqrMagnitude);
