@@ -507,6 +507,7 @@ GameObject:
   - component: {fileID: 114608904911704568}
   - component: {fileID: 114030646702620566}
   - component: {fileID: 114807762526869268}
+  - component: {fileID: 114381061628328584}
   m_Layer: 0
   m_Name: Hacker_Model
   m_TagString: Untagged
@@ -1804,6 +1805,26 @@ MonoBehaviour:
     i15: 135
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114381061628328584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1709916967882484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6b8ff622df9d746821220bd52d65a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StepAudioClips:
+  - {fileID: 8300000, guid: 66c785213002f6045881cb0513dc413d, type: 3}
+  - {fileID: 8300000, guid: f8e920d033e13f841bafa4c379c1bc4d, type: 3}
+  - {fileID: 8300000, guid: f932e100ddd3c4d4ba95ac05810dfd33, type: 3}
+  - {fileID: 8300000, guid: 6fc582507e1154742becad98a1e9607d, type: 3}
+  - {fileID: 8300000, guid: 5e6cb52209604894c9c9b0bee695ee72, type: 3}
+  - {fileID: 8300000, guid: ac4a5d22272e0f348b9cbb0c594db096, type: 3}
+  InteractionAudioClip: {fileID: 0}
+  DesintegrateAudioClip: {fileID: 0}
 --- !u!114 &114608904911704568
 MonoBehaviour:
   m_ObjectHideFlags: 1
