@@ -325,7 +325,7 @@ MonoBehaviour:
   isUsed: 0
   maxUser: 3
   guardAccess: 1
-  scientistAccess: 0
+  scientistAccess: 1
   engineerAccess: 1
   usingPos: {fileID: 4914616420486256}
   users: []

@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 114482000280694764}
   - component: {fileID: 114833810838670310}
   - component: {fileID: 82532398093378214}
+  - component: {fileID: 54149546412366612}
   m_Layer: 11
   m_Name: Guard_New
   m_TagString: NPC
@@ -1662,7 +1663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
-    m_Value: 15
+    m_Value: 0
   m_AssetId:
     i0: 70
     i1: 200

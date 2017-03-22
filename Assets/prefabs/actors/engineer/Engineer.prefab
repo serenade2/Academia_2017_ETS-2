@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 114735424769522268}
   - component: {fileID: 114505455362542068}
   - component: {fileID: 82815308228135372}
+  - component: {fileID: 54436844149614456}
   m_Layer: 11
   m_Name: Engineer
   m_TagString: NPC
@@ -992,7 +993,7 @@ MeshRenderer:
   m_SortingOrder: 0
 --- !u!54 &54436844149614456
 Rigidbody:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515956930890112}
@@ -1244,24 +1245,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
-    m_Value: 3
+    m_Value: 0
   m_AssetId:
-    i0: 108
-    i1: 248
-    i2: 19
-    i3: 125
-    i4: 112
-    i5: 36
-    i6: 115
-    i7: 180
-    i8: 123
-    i9: 2
-    i10: 179
-    i11: 51
-    i12: 120
-    i13: 116
-    i14: 54
-    i15: 134
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114197658406883676
