@@ -105,7 +105,7 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
         //Update the direction https://docs.unity3d.com/ScriptReference/Vector3.RotateTowards.html
         if(direction != Vector3.zero)
         {
-            float step = speed * Time.deltaTime;
+            float step = speed * Time.deltaTime * 3.5f;
             Vector3 rotationDirection = Vector3.RotateTowards(hackerNetworkAnimator.transform.forward, direction, step, 0.0f);
             //Debug.DrawRay(hackerNetworkAnimator.transform.position, rotationDirection, Color.cyan);
             hackerNetworkAnimator.transform.rotation = Quaternion.LookRotation(rotationDirection);
