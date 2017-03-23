@@ -2079,22 +2079,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
+    i0: 49
+    i1: 26
+    i2: 5
+    i3: 231
+    i4: 45
+    i5: 135
+    i6: 149
+    i7: 132
+    i8: 27
+    i9: 78
+    i10: 162
+    i11: 137
+    i12: 194
+    i13: 71
+    i14: 86
+    i15: 149
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114602888412465314
@@ -2497,7 +2497,7 @@ NavMeshAgent:
   m_Speed: 2
   m_Acceleration: 1000
   avoidancePriority: 50
-  m_AngularSpeed: 360
+  m_AngularSpeed: 999
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

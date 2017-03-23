@@ -2108,7 +2108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hackerCameraPrefab: {fileID: 1184326867210834, guid: 6970c6da3b18a71479df0ab2fd2e0e41,
     type: 2}
-  speed: 3
+  speed: 2
 --- !u!114 &114821434899608536
 MonoBehaviour:
   m_ObjectHideFlags: 1
