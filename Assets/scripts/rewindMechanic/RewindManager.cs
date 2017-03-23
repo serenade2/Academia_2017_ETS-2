@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
+using CustomUtile;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class RewindManager : NetworkBehaviour
+public class RewindManager : NetworkBehaviour, Observable
 {
     public List<Rewindable> rewinds = new List<Rewindable>();
     public GameObject blackGlitch;
@@ -22,6 +24,16 @@ public class RewindManager : NetworkBehaviour
     private Coroutine record;
     private Coroutine rewind;
     private bool isRecording = false;
+    private ArrayList listObserver = new ArrayList();
+    private bool triggerableUpdate = false;
+
+    private bool powerIsReady = true;
+    private float currentTime;
+    public float cooldownTime = 15f;
+    public float yieldWaitingTime = 0.1f;
+    public float progressCooldown = 0.1f;
+
+
     // Use this for initialization
     public override void OnStartServer()
     {
@@ -45,6 +57,9 @@ public class RewindManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!powerIsReady)
+            return;
+
         // rewind button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
@@ -61,6 +76,7 @@ public class RewindManager : NetworkBehaviour
 
             soundManager.MuteRevertStageClip();
             soundManager.UnMuteStageClip();
+            activeCooldown();
         }
 
         // pause button down
@@ -83,6 +99,7 @@ public class RewindManager : NetworkBehaviour
                 rewind.StopPause();
 
             ambientParticle.UnPause();
+            activeCooldown();
         }
     }
 
@@ -179,5 +196,59 @@ public class RewindManager : NetworkBehaviour
         ambientParticle.StopRewind();
     }
 
+
+    private void activeCooldown()
+    {
+        powerIsReady = false;
+        currentTime = 0;
+        StartCoroutine(CooldownCoroutine());
+    }
+
+
+    private IEnumerator CooldownCoroutine()
+    {
+        for (float i = 0; i <= cooldownTime; i += progressCooldown)
+        {
+            currentTime = i;
+            setChanged();
+            notify();
+            yield return new WaitForSeconds(yieldWaitingTime);
+        }
+
+        powerIsReady = true;
+    }
+
+    public float CooldownTime
+    {
+        get { return cooldownTime; }
+    }
+
+    public float CurrentTime
+    {
+        get { return currentTime; }
+    }
+
+
+    public void addObserver(Observer o)
+    {
+        listObserver.Add(o);
+    }
+
+    public void setChanged()
+    {
+        triggerableUpdate = true;
+    }
+
+    public void notify()
+    {
+        if (triggerableUpdate)
+        {
+            foreach (Observer o in listObserver)
+            {
+                o.updateObserver();
+            }
+            triggerableUpdate = false;
+        }
+    }
 }
 
