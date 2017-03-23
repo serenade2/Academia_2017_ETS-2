@@ -84,5 +84,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f6767228a5b4e439b1c5a89fd2b5dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doors:
-  - {fileID: 0}
+  numberOfObjectivesToWin: 3
+  activatableObjectivePrefab: {fileID: 114342427439528614, guid: 85446cb69e90fdb43beee87bf6d62d2e,
+    type: 2}

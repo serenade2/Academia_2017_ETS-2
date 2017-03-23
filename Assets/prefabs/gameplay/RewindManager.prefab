@@ -55,6 +55,13 @@ MonoBehaviour:
   rewinds: []
   blackGlitch: {fileID: 1947093061813412, guid: d18fa389f98240d4a8ae96b721513c8d,
     type: 2}
+  ambientParticle: {fileID: 0}
+  recordFrequency: 0.1
+  recordMaxTime: 10
+  cooldownTime: 3
+  yieldWaitingTime: 0.1
+  progressCooldown: 0.1
+  blurrScreenTime: 0.6
 --- !u!114 &114745411820482370
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : NetworkBehaviour
 {
     public AudioSource WinningSound;
     public AudioSource PlaySound;
@@ -30,6 +30,7 @@ public class SoundManager : MonoBehaviour
         PlayStageClip(true);
         PlayRevertStageClip(true);
         MuteRevertStageClip();
+        print("GameStartPlay called...");
     }
 
     public void PlayWinningClip(bool looping)
@@ -82,9 +83,21 @@ public class SoundManager : MonoBehaviour
         PlaySound.mute = true;
     }
 
+    [ClientRpc]
+    public void RpcMuteStageClip()
+    {
+        MuteRevertStageClip();
+    }
+
     public void MuteRevertStageClip()
     {
         RewindSound.mute = true;
+    }
+
+    [ClientRpc]
+    public void RpcMuteRevertStageClip()
+    {
+        MuteRevertStageClip();
     }
 
     public void UnMuteStageClip()
@@ -92,9 +105,21 @@ public class SoundManager : MonoBehaviour
         PlaySound.mute = false;
     }
 
+    [ClientRpc]
+    public void RpcUnMuteStageClip()
+    {
+        UnMuteStageClip();
+    }
+
     public void UnMuteRevertStageClip()
     {
         RewindSound.mute = false;
+    }
+
+    [ClientRpc]
+    public void RpcUnMuteRevertStageClip()
+    {
+        UnMuteRevertStageClip();
     }
 
     public void ToggleReverse()

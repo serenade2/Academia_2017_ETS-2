@@ -20,8 +20,8 @@ public class InteractionManager : MonoBehaviour {
     public Image ProgressBar;
     [Header("Interaction things")]
     [Tooltip("Rate at which the progress bar progresses each tick")]
-    public float fillingRate;
-    public ActivatableDoor activatableDoor;
+    public float fillingRate = 1f;
+    public ActivatableObjective activatable;
 
     private float currentProgress = 0;
     private float MAX_PROGRESS = 100;
@@ -63,6 +63,6 @@ public class InteractionManager : MonoBehaviour {
 
     private void CompletedAction()
     {
-        ObjectiveManager.Instance.CmdCompleteObjective(activatableDoor.gameObject);
+        ObjectiveManager.Instance.CmdCompleteObjective(activatable.gameObject);
     }
 }

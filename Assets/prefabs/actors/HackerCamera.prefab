@@ -18,13 +18,17 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4953304621804522}
+  - component: {fileID: 4402508608924746}
   - component: {fileID: 20085180353286334}
   - component: {fileID: 124488773479889692}
   - component: {fileID: 92269156369125364}
   - component: {fileID: 81479251775591966}
   - component: {fileID: 114412270012477252}
   - component: {fileID: 114836041525599522}
+  - component: {fileID: 114070441921284088}
+  - component: {fileID: 114254477173462630}
+  - component: {fileID: 114415264817157538}
+  - component: {fileID: 114094860159485718}
   m_Layer: 0
   m_Name: HackerCamera
   m_TagString: MainCamera
@@ -32,14 +36,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4953304621804522
+--- !u!4 &4402508608924746
 Transform:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184326867210834}
   m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.72, z: -2.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,8 +57,8 @@ Camera:
   m_GameObject: {fileID: 1184326867210834}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -93,6 +97,54 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184326867210834}
   m_Enabled: 1
+--- !u!114 &114070441921284088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184326867210834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a8e76d0adf843459d6197d132f9b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraEffect: {fileID: 114254477173462630}
+  minFlickerRate: 0.5
+  maxFlickerRate: 4
+  minEffectValue: -1.5
+  maxEffectValue: 1.5
+  minTimeOn: 0.1
+  maxTimeOn: 0.25
+  lerpStep: 0.1
+--- !u!114 &114094860159485718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184326867210834}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 870b9a8f0f82f4f56800cc427bcd1025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scanLineJitter: 0.24
+  _verticalJump: 0
+  _horizontalShake: 0.072
+  _colorDrift: 0.275
+  _shader: {fileID: 4800000, guid: da33272284ea24f208f36998880990be, type: 3}
+--- !u!114 &114254477173462630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184326867210834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081069ad656cda141ae75b6982e107ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curShader: {fileID: 4800000, guid: 1c91786e8809d1e4796f6e1d60d20fda, type: 3}
+  ChromaticAbberation: 0
 --- !u!114 &114412270012477252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -106,6 +158,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTag: Hacker
   cameraOffset: {x: 0, y: 3.5, z: -3.5}
+--- !u!114 &114415264817157538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184326867210834}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3a070408aa941ab83ae10be1708848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _intensity: 0.35
+  _shader: {fileID: 4800000, guid: ba40dc630e1d9417cb9ea22586ece1e1, type: 3}
 --- !u!114 &114836041525599522
 MonoBehaviour:
   m_ObjectHideFlags: 1

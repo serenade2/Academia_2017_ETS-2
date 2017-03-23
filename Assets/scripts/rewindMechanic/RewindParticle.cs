@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class RewindParticle : MonoBehaviour
+public class RewindParticle : NetworkBehaviour
 {
     public float rewindSpeedMultiplier = 2f;
 
@@ -59,6 +60,12 @@ public class RewindParticle : MonoBehaviour
         ChangeParticlesVelocity(new Vector3(0f, 0f, -main.startSpeedMultiplier * rewindSpeedMultiplier));
     }
 
+    [ClientRpc]
+    public void RpcStartRewind()
+    {
+        StartRewind();
+    }
+
     public void StopRewind()
     {
         timeRewinded = Time.time - rewindStartTime;
@@ -66,6 +73,12 @@ public class RewindParticle : MonoBehaviour
 
         ChangeParticlesVelocity(new Vector3(0f, 0f, main.startSpeedMultiplier));
         shouldEmit = true;
+    }
+
+    [ClientRpc]
+    public void RpcStopRewind()
+    {
+        StopRewind();
     }
 
     public void Pause()
@@ -77,10 +90,22 @@ public class RewindParticle : MonoBehaviour
         main.simulationSpeed = 0f; // freeze the simulation
     }
 
+    [ClientRpc]
+    public void RpcPause()
+    {
+        Pause();
+    }
+
     public void UnPause()
     {
         main.simulationSpeed = initialSimulationSpeed;
         shouldEmit = true;
+    }
+
+    [ClientRpc]
+    public void RpcUnPause()
+    {
+        UnPause();
     }
 
     private void ChangeParticlesVelocity(Vector3 newVelocity)
