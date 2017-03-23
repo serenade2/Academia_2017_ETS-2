@@ -23,6 +23,9 @@ public class RewindManager : NetworkBehaviour, Observable
 	private int recordCount = 0;
     private Coroutine record;
     private Coroutine rewind;
+    private Coroutine gCD;//Global CoolDown
+    private Coroutine rewindCD;
+    private Coroutine pauseCD;
     private bool isRecording = false;
     private ArrayList listObserver = new ArrayList();
     private bool triggerableUpdate = false;
@@ -66,7 +69,7 @@ public class RewindManager : NetworkBehaviour, Observable
     // Update is called once per frame
     void Update()
     {
-        if (!powerIsReady)
+        if(!cooldownSplit && !powerIsReady)
             return;
 
         // rewind button down
@@ -216,34 +219,57 @@ public class RewindManager : NetworkBehaviour, Observable
     {
         powerIsReady = false;
         currentTime = 0;
-        StartCoroutine(CooldownCoroutine());
+        rewindCooldownTime = 0;
+        pauseCooldownTime = 0;
+
+        if (!cooldownSplit)
+        {
+            gCD = StartCoroutine(CooldownCoroutine(0));
+        }
+        else
+        {
+            if (pauseCooldown)
+               rewindCD = StartCoroutine(CooldownCoroutine(2));
+            if (rewindCooldown)
+               pauseCD = StartCoroutine(CooldownCoroutine(1));
+        }
     }
 
 
-    private IEnumerator CooldownCoroutine()
+    private IEnumerator CooldownCoroutine(int j)
     {
         for (float i = 0; i <= cooldownTime; i += progressCooldown)
         {
-            if (!cooldownSplit)
+            switch (j)
             {
-                currentTime = i;
-            }    
-            else
-            {
-                if (pauseCooldown)
+                case 1:
                     pauseCooldownTime = i;
-                if (rewindCooldown)
+                    break;
+                case 2:
                     rewindCooldownTime = i;
-            }
+                    break;
+                default:
+                    currentTime = i;
+                    break;
+            }   
             setChanged();
             notify();
             yield return new WaitForSeconds(yieldWaitingTime);
         }
-        if (!cooldownSplit)
+
+        switch (j)
         {
-            pauseCooldown = false;
-            rewindCooldown = false;
+            case 1:
+                pauseCooldown = false;
+                break;
+            case 2:
+                rewindCooldown = false;
+                break;
+            default:
+                powerIsReady = true;
+                break;
         }
+
         powerIsReady = true;
     }
 
