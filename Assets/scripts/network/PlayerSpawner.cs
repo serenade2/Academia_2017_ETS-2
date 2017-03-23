@@ -38,11 +38,11 @@ public class PlayerSpawner : NetworkBehaviour {
     {
         if (!isPlayer2)
         {
-            Vector3 player1spawn = GameObject.Find("player1Spawn").transform.position;
+            GameObject[] player1spawns = GameObject.FindGameObjectsWithTag("Player1Spawn");
 
             GameObject character = RandomSelectCharacter();
 
-            player = GameObject.Instantiate(character, player1spawn, character.transform.rotation);
+            player = GameObject.Instantiate(character, player1spawns[Random.Range(0,player1spawns.Length)].transform.position, character.transform.rotation);
             NetworkServer.SpawnWithClientAuthority(player, gameObject);
 			GameObject.Find("RewindManager(Clone)").GetComponent<RewindManager>().AddRewindable(player.GetComponent<Rewindable>());
 
