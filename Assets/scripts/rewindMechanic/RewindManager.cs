@@ -33,6 +33,15 @@ public class RewindManager : NetworkBehaviour, Observable
     public float yieldWaitingTime = 0.1f;
     public float progressCooldown = 0.1f;
 
+    [Header("Cooldown elements")]
+    [Tooltip("Cooldown separer")]
+    public bool cooldownSplit = false;
+
+    private bool pauseCooldown = false;
+    private bool rewindCooldown = false;
+
+    private float pauseCooldownTime;
+    private float rewindCooldownTime;
 
     // Use this for initialization
     public override void OnStartServer()
@@ -63,6 +72,9 @@ public class RewindManager : NetworkBehaviour, Observable
         // rewind button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
+            if (cooldownSplit)
+                rewindCooldown = true;
+
             StartRewind();
 
             soundManager.MuteStageClip();
@@ -82,6 +94,9 @@ public class RewindManager : NetworkBehaviour, Observable
         // pause button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
+            if (cooldownSplit)
+                pauseCooldown = true;
+
             blackGlitch.SetActive(true);
             Invoke("RemoveBlackGlitch",1f);
             foreach (Rewindable rewind in rewinds)
@@ -209,13 +224,52 @@ public class RewindManager : NetworkBehaviour, Observable
     {
         for (float i = 0; i <= cooldownTime; i += progressCooldown)
         {
-            currentTime = i;
+            if (!cooldownSplit)
+            {
+                currentTime = i;
+            }    
+            else
+            {
+                if (pauseCooldown)
+                    pauseCooldownTime = i;
+                if (rewindCooldown)
+                    rewindCooldownTime = i;
+            }
             setChanged();
             notify();
             yield return new WaitForSeconds(yieldWaitingTime);
         }
-
+        if (!cooldownSplit)
+        {
+            pauseCooldown = false;
+            rewindCooldown = false;
+        }
         powerIsReady = true;
+    }
+
+    public bool CooldownSplit
+    {
+        get { return cooldownSplit; }
+    }
+
+    public bool PauseCooldown
+    {
+        get { return pauseCooldown; }
+    }
+
+    public bool RewindCooldown
+    {
+        get { return rewindCooldown; }
+    }
+
+    public float PauseCooldownTime
+    {
+        get { return pauseCooldownTime; }
+    }
+
+    public float RewindCooldownTime
+    {
+        get { return rewindCooldownTime; }
     }
 
     public float CooldownTime

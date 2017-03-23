@@ -22,11 +22,30 @@ public class InteractionManageur : MonoBehaviour, Observer
 
     public void updateObserver()
     {
-        float ratio = rM.CurrentTime /rM.CooldownTime;
+        if (!rM.CooldownSplit)
+        {
+            pauseImage.fillAmount = RatioCalculateur(rM.CurrentTime, rM.CooldownTime);
+            RewindImage.fillAmount = RatioCalculateur(rM.CurrentTime, rM.CooldownTime); ;
+        }
+        else
+        {
+            if (rM.PauseCooldown)
+            {
+                pauseImage.fillAmount = RatioCalculateur(rM.PauseCooldownTime, rM.CooldownTime);
+            }
+            else if (rM.RewindCooldown)
+            {
+                RewindImage.fillAmount = RatioCalculateur(rM.RewindCooldownTime, rM.CooldownTime);
+            }
+
+        }
+    }
+
+    public float RatioCalculateur(float f1, float f2)
+    {
+        float ratio = f1 / f2;
         if (ratio > 0.985f)
             ratio = 1f;
-        pauseImage.fillAmount = ratio;
-        RewindImage.fillAmount = ratio;
-
+        return ratio;
     }
 }
