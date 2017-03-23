@@ -1804,7 +1804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiType: 0
-  objectivePerAI: 3
+  objectivePerAI: 30
   objectives:
   - {fileID: 0}
   - {fileID: 0}
