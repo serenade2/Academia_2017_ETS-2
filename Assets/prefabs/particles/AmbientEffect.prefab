@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4297692990232116}
   - component: {fileID: 114129215784868236}
+  - component: {fileID: 114121056730297154}
   m_Layer: 0
   m_Name: AmbientEffect
   m_TagString: Untagged
@@ -71,6 +72,38 @@ Transform:
   m_Father: {fileID: 4297692990232116}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114121056730297154
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1011670124902624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 180
+    i1: 126
+    i2: 51
+    i3: 240
+    i4: 118
+    i5: 75
+    i6: 232
+    i7: 148
+    i8: 105
+    i9: 0
+    i10: 193
+    i11: 13
+    i12: 120
+    i13: 250
+    i14: 129
+    i15: 243
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114129215784868236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,7 +125,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1231894846734472}
   serializedVersion: 5
   lengthInSec: 3
-  speed: 0.25
+  simulationSpeed: 0.25
   looping: 1
   prewarm: 1
   playOnAwake: 1
