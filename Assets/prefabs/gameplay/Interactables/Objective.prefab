@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUsed: 0
-  maxUser: 3
+  maxUser: 8
   guardAccess: 1
   scientistAccess: 1
   engineerAccess: 1
