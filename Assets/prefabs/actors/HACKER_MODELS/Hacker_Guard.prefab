@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 114230768855997180}
   - component: {fileID: 82745489925433086}
   - component: {fileID: 114157577957198874}
+  - component: {fileID: 114409356399498684}
   m_Layer: 10
   m_Name: Hacker_Guard
   m_TagString: Hacker
@@ -1019,7 +1020,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1390819673046310}
-  m_LocalRotation: {x: 0.5964278, y: -0.35751668, z: 0.653539, w: 0.29890245}
+  m_LocalRotation: {x: 0.59642774, y: -0.35751665, z: 0.65353894, w: 0.29890242}
   m_LocalPosition: {x: -0.064812265, y: 0.1448568, z: -0.014041476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1724,6 +1725,18 @@ MonoBehaviour:
   eraseRenderer: 0
   originalLayer: 0
   originalMaterials: []
+--- !u!114 &114409356399498684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1980061166334184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b941d58f670a3149b4e7ed68ae0b7b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blurrTimeOnPause: 0.2
 --- !u!114 &114445389192549278
 MonoBehaviour:
   m_ObjectHideFlags: 1

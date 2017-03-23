@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Kino;
 using UnityEngine;
 
-public class CameraGlitchRewind : MonoBehaviour, IRewindable
+public class HackerCameraGlitchRewind : MonoBehaviour, IRewindable
 {
     public float blurrTimeOnPause = 0.2f;
 

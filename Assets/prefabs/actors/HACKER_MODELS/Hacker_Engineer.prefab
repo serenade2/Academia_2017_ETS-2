@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 114012300576425664}
   - component: {fileID: 82284086043482894}
   - component: {fileID: 114302968735849868}
+  - component: {fileID: 114046606932761716}
   m_Layer: 10
   m_Name: Hacker_Engineer
   m_TagString: Hacker
@@ -978,7 +979,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1627627676611992}
-  m_LocalRotation: {x: 0.6111003, y: -0.32521257, z: 0.65438366, w: 0.30426204}
+  m_LocalRotation: {x: 0.61110026, y: -0.32521254, z: 0.6543836, w: 0.304262}
   m_LocalPosition: {x: -0.05878442, y: 0.13533472, z: -0.0041038347}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1217,6 +1218,18 @@ MonoBehaviour:
   InteractionAudioClip: {fileID: 0}
   DesintegrateAudioClip: {fileID: 8300000, guid: 32877d3b863de9b4e8c1572c3bad942a,
     type: 3}
+--- !u!114 &114046606932761716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458704947068104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b941d58f670a3149b4e7ed68ae0b7b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blurrTimeOnPause: 0.2
 --- !u!114 &114086013606264216
 MonoBehaviour:
   m_ObjectHideFlags: 1
