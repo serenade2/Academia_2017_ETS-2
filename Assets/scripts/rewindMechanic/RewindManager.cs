@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using CustomUtile;
+using Kino;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -32,6 +33,8 @@ public class RewindManager : NetworkBehaviour, Observable
     public float cooldownTime = 15f;
     public float yieldWaitingTime = 0.1f;
     public float progressCooldown = 0.1f;
+
+    public float blurrScreenTime = 0.2f;
 
 
     // Use this for initialization
@@ -76,8 +79,8 @@ public class RewindManager : NetworkBehaviour, Observable
         // pause button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
-            blackGlitch.SetActive(true);
-            Invoke("RemoveBlackGlitch",1f);
+            StartCoroutine(BlurrScreen());
+            
             foreach (Rewindable rewind in rewinds)
                 rewind.StartPause();
 
@@ -165,11 +168,16 @@ public class RewindManager : NetworkBehaviour, Observable
         ambientParticle.RpcStartRewind();
         soundManager.RpcMuteStageClip();
         soundManager.RpcUnMuteRevertStageClip();
+
+        Camera.main.GetComponent<DigitalGlitch>().enabled = true;
+        Camera.main.GetComponent<AnalogGlitch>().enabled = true;
     }
 
     public void StopRewind()
     {
-        StopCoroutine(rewind);
+        if(rewind != null)
+            StopCoroutine(rewind);
+
         if (!isRecording)
         {
             record = StartCoroutine(Record());
@@ -191,6 +199,9 @@ public class RewindManager : NetworkBehaviour, Observable
         ambientParticle.RpcStopRewind();
         soundManager.RpcMuteRevertStageClip();
         soundManager.RpcUnMuteStageClip();
+
+        Camera.main.GetComponent<DigitalGlitch>().enabled = false;
+        Camera.main.GetComponent<AnalogGlitch>().enabled = false;
 
     }
 
@@ -247,6 +258,19 @@ public class RewindManager : NetworkBehaviour, Observable
             }
             triggerableUpdate = false;
         }
+    }
+
+    private IEnumerator BlurrScreen()
+    {
+        var glitch = Camera.main.GetComponent<AnalogGlitch>();
+        glitch.enabled = true;
+        glitch.colorDrift = 0.7f;
+        glitch.scanLineJitter = 0.7f;
+        glitch.horizontalShake = 0.7f;
+        yield return new WaitForSeconds(blurrScreenTime);
+        glitch.enabled = false;
+        glitch.colorDrift = 0.275f;
+        glitch.scanLineJitter = 0.24f;
     }
 }
 
