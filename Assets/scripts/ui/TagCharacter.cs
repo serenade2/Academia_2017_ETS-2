@@ -1,12 +1,15 @@
 ﻿using cakeslice;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class TagCharacter : NetworkBehaviour {
-
+    public GameObject trailPrefab;
+    public Transform spawnPosition;
     [SyncVar]
     private bool isTagged = false;
     private Outline outline;
+    private Coroutine trailSpawn;
 
     void Awake()
     {
@@ -20,6 +23,7 @@ public class TagCharacter : NetworkBehaviour {
         outline.enabled = true;
         RpcChangeState(true);
         isTagged = true;
+        trailSpawn = StartCoroutine(TrailSpawn());
     }
 
     public void UnTag()
@@ -27,6 +31,7 @@ public class TagCharacter : NetworkBehaviour {
         outline.enabled = false;
         RpcChangeState(false);
         isTagged = false;
+        StopCoroutine(trailSpawn);
     }
 
     public bool GetIsTagged()
@@ -38,5 +43,14 @@ public class TagCharacter : NetworkBehaviour {
     public void RpcChangeState(bool tagged)
     {
         outline.enabled = tagged;
+    }
+
+    public IEnumerator TrailSpawn()
+    {
+        while (true)
+        {
+            Instantiate(trailPrefab, spawnPosition.position + new Vector3(Random.Range(-0.5f,0.5f), 0, Random.Range(-0.5f, 0.5f)), trailPrefab.transform.rotation);
+            yield return new WaitForSeconds(Random.Range(0.2f,0.5f));
+        }
     }
 }
