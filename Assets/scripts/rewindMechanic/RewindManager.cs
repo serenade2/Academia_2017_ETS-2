@@ -64,18 +64,12 @@ public class RewindManager : NetworkBehaviour, Observable
         if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
             StartRewind();
-
-            soundManager.MuteStageClip();
-            soundManager.UnMuteRevertStageClip();
         }
 
         // rewind button up
         else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
         {
             StopRewind();
-
-            soundManager.MuteRevertStageClip();
-            soundManager.UnMuteStageClip();
             activeCooldown();
         }
 
@@ -168,8 +162,9 @@ public class RewindManager : NetworkBehaviour, Observable
             }
         }
 
-        ambientParticle.StartRewind();
-
+        ambientParticle.RpcStartRewind();
+        soundManager.RpcMuteStageClip();
+        soundManager.RpcUnMuteRevertStageClip();
     }
 
     public void StopRewind()
@@ -193,7 +188,10 @@ public class RewindManager : NetworkBehaviour, Observable
             }
         }
 
-        ambientParticle.StopRewind();
+        ambientParticle.RpcStopRewind();
+        soundManager.RpcMuteRevertStageClip();
+        soundManager.RpcUnMuteStageClip();
+
     }
 
 
