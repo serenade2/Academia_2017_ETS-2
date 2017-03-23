@@ -19,12 +19,11 @@ public class RewindManager : NetworkBehaviour, Observable
     public float recordMaxTime = 10f;
 
     private float rewindRealLifeTime;
-
-    private int recordCount = 0;
+    private SoundManager soundManager;
+	private int recordCount = 0;
     private Coroutine record;
     private Coroutine rewind;
     private bool isRecording = false;
-
     private ArrayList listObserver = new ArrayList();
     private bool triggerableUpdate = false;
 
@@ -50,6 +49,7 @@ public class RewindManager : NetworkBehaviour, Observable
         }
 
         ambientParticle = FindObjectOfType<RewindParticle>();
+        soundManager = GameObject.FindObjectOfType<SoundManager>();
 
         record = StartCoroutine(Record());
     }
@@ -64,12 +64,18 @@ public class RewindManager : NetworkBehaviour, Observable
         if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
             StartRewind();
+
+            soundManager.MuteStageClip();
+            soundManager.UnMuteRevertStageClip();
         }
 
         // rewind button up
         else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
         {
             StopRewind();
+
+            soundManager.MuteRevertStageClip();
+            soundManager.UnMuteStageClip();
             activeCooldown();
         }
 

@@ -35,17 +35,20 @@ public class SoundManager : MonoBehaviour
     public void PlayWinningClip(bool looping)
     {
         WinningSound.Play();
+        StopStageClip();
+        StopRevertStageClip();
     }
 
     public void PlayLosingClip(bool looping)
     {
         LosingSound.Play();
+        StopStageClip();
+        StopRevertStageClip();
     }
 
     public void PlayStageClip(bool looping)
     {
         PlaySound.Play();
-        PlaySound.volume = 0.05f; // 5 % of the volume
         PlaySound.loop = looping;
     }
 
