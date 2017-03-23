@@ -28,7 +28,7 @@ public class WatcherCameraController : MonoBehaviour
         }
 
         transform.position = level.transform.position + new Vector3(0, radius, 0);
-        transform.LookAt(level.transform.position);
+        //transform.LookAt(level.transform.position);
         soundManager = GameObject.FindObjectOfType<SoundManager>();
         soundManager.GameStartPlay();
     }
