@@ -36,15 +36,7 @@ public class RewindManager : NetworkBehaviour, Observable
     public float yieldWaitingTime = 0.1f;
     public float progressCooldown = 0.1f;
 
-    [Header("Cooldown elements")]
-    [Tooltip("Cooldown separer")]
-    public bool cooldownSplit = false;
-
-    private bool pauseCooldown = false;
-    private bool rewindCooldown = false;
-
-    private float pauseCooldownTime;
-    private float rewindCooldownTime;
+   
 
     // Use this for initialization
     public override void OnStartServer()
@@ -69,14 +61,13 @@ public class RewindManager : NetworkBehaviour, Observable
     // Update is called once per frame
     void Update()
     {
-        if(!cooldownSplit && !powerIsReady)
+        if(!powerIsReady)
             return;
 
         // rewind button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
-            if (cooldownSplit)
-                rewindCooldown = true;
+           
 
             StartRewind();
 
@@ -97,8 +88,7 @@ public class RewindManager : NetworkBehaviour, Observable
         // pause button down
         if (Input.GetKeyDown(KeyCode.Joystick1Button1))
         {
-            if (cooldownSplit)
-                pauseCooldown = true;
+            
 
             blackGlitch.SetActive(true);
             Invoke("RemoveBlackGlitch",1f);
@@ -218,84 +208,23 @@ public class RewindManager : NetworkBehaviour, Observable
     private void activeCooldown()
     {
         powerIsReady = false;
-        currentTime = 0;
-        rewindCooldownTime = 0;
-        pauseCooldownTime = 0;
-
-        if (!cooldownSplit)
-        {
-            gCD = StartCoroutine(CooldownCoroutine(0));
-        }
-        else
-        {
-            if (pauseCooldown)
-               rewindCD = StartCoroutine(CooldownCoroutine(2));
-            if (rewindCooldown)
-               pauseCD = StartCoroutine(CooldownCoroutine(1));
-        }
+        currentTime = 0f;
+        StartCoroutine(CooldownCoroutine());
+        
     }
 
 
-    private IEnumerator CooldownCoroutine(int j)
+    private IEnumerator CooldownCoroutine()
     {
         for (float i = 0; i <= cooldownTime; i += progressCooldown)
         {
-            switch (j)
-            {
-                case 1:
-                    pauseCooldownTime = i;
-                    break;
-                case 2:
-                    rewindCooldownTime = i;
-                    break;
-                default:
-                    currentTime = i;
-                    break;
-            }   
+            currentTime = i;   
             setChanged();
             notify();
             yield return new WaitForSeconds(yieldWaitingTime);
         }
 
-        switch (j)
-        {
-            case 1:
-                pauseCooldown = false;
-                break;
-            case 2:
-                rewindCooldown = false;
-                break;
-            default:
-                powerIsReady = true;
-                break;
-        }
-
         powerIsReady = true;
-    }
-
-    public bool CooldownSplit
-    {
-        get { return cooldownSplit; }
-    }
-
-    public bool PauseCooldown
-    {
-        get { return pauseCooldown; }
-    }
-
-    public bool RewindCooldown
-    {
-        get { return rewindCooldown; }
-    }
-
-    public float PauseCooldownTime
-    {
-        get { return pauseCooldownTime; }
-    }
-
-    public float RewindCooldownTime
-    {
-        get { return rewindCooldownTime; }
     }
 
     public float CooldownTime

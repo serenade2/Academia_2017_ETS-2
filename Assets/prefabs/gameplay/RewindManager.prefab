@@ -61,7 +61,7 @@ MonoBehaviour:
   cooldownTime: 3
   yieldWaitingTime: 0.1
   progressCooldown: 0.1
-  cooldownSplit: 0
+  cooldownSplit: 1
 --- !u!114 &114745411820482370
 MonoBehaviour:
   m_ObjectHideFlags: 1
