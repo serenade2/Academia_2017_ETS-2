@@ -84,7 +84,7 @@ public class RewindManager : NetworkBehaviour, Observable
             foreach (Rewindable rewind in rewinds)
                 rewind.StartPause();
 
-            ambientParticle.Pause();
+            ambientParticle.RpcPause();
         }
 
         // pause button up
@@ -95,7 +95,7 @@ public class RewindManager : NetworkBehaviour, Observable
             foreach (Rewindable rewind in rewinds)
                 rewind.StopPause();
 
-            ambientParticle.UnPause();
+            ambientParticle.RpcUnPause();
             activeCooldown();
         }
     }
