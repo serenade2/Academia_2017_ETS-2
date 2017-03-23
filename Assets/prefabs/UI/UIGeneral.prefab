@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5a3e4cd5a7c2a746978ae01bb590c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraMode: 1
   crossHair: {fileID: 114417475858827404}
   worldCanvas: {fileID: 223634832692525490}
   maxTaggableCharacters: 3
@@ -335,7 +336,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   multiplicator: 10
-  debugModeIsActive: 1
+  debugModeIsActive: 0
 --- !u!114 &114575973229793210
 MonoBehaviour:
   m_ObjectHideFlags: 1
