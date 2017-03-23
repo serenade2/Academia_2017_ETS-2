@@ -2110,7 +2110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
-    m_Value: 1
+    m_Value: 0
   m_AssetId:
     i0: 49
     i1: 26
@@ -2153,6 +2153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trailPrefab: {fileID: 0}
+  spawnPosition: {fileID: 0}
 --- !u!114 &114794018805729022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2546,7 +2548,7 @@ ParticleSystem:
   serializedVersion: 5
   lengthInSec: 3
   speed: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   autoRandomSeed: 1
@@ -2592,7 +2594,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1283325152
+  randomSeed: -221707845
   InitialModule:
     serializedVersion: 3
     enabled: 1

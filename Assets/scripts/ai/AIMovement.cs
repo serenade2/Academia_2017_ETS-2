@@ -26,6 +26,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
     // Use this for initialization
     public void Start()
     {
+        networkAnimator = GetComponent<NetworkAnimator>();
         if (!hasAuthority)
             return;
         InitializeAi();
@@ -88,8 +89,6 @@ public class AIMovement : NetworkBehaviour, IRewindable
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         agent.updateRotation = true;
 
-        networkAnimator = GetComponent<NetworkAnimator>();
-
         networkAnimator.animator.StartRecording(0); // start animation recording!
 
         ChangeDestination();
@@ -101,7 +100,8 @@ public class AIMovement : NetworkBehaviour, IRewindable
         if (!hasAuthority)
             return;
         agentVelocity = agent.desiredVelocity.magnitude;
-        UpdateAnimation(agentVelocity);
+        if (!isRewinding)
+            UpdateAnimation(agentVelocity);
         //print("DesiredVelocity SqrMagnitude:" + agent.desiredVelocity.sqrMagnitude);
         //When destination is reached
         /*if (agent.remainingDistance <= 0 && hasChangedPath == false && !agent.pathPending && !isRewinding)
@@ -147,11 +147,13 @@ public class AIMovement : NetworkBehaviour, IRewindable
             isRewinding = true;
             agent.Stop();
             hasChangedPath = false;
+            networkAnimator.animator.speed = 1f;
         }
         else
         {
             isRewinding = false;
             agent.Resume();
+            networkAnimator.animator.speed = 1f;
         }
     }
 
@@ -167,6 +169,7 @@ public class AIMovement : NetworkBehaviour, IRewindable
             }
 
             networkAnimator.animator.speed = 0f;
+            RpcPause(isPaused);
         }
         else
         {
@@ -177,6 +180,20 @@ public class AIMovement : NetworkBehaviour, IRewindable
                 StartCoroutine(workingCoroutine);
             }
 
+            networkAnimator.animator.speed = 1f;
+            RpcPause(isPaused);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcPause(bool isPaused)
+    {
+        if (isPaused)
+        {
+            networkAnimator.animator.speed = 0f;
+        }
+        else
+        {
             networkAnimator.animator.speed = 1f;
         }
     }
@@ -214,6 +231,11 @@ public class AIMovement : NetworkBehaviour, IRewindable
     public void UpdateAnimation(float velocity)
     {
         networkAnimator.animator.SetFloat("Speed", velocity);
+    }
+
+    public float GetAgentSpeed()
+    {
+        return agentVelocity;
     }
 
     public void ObjectiveTaken(GameObject objective)

@@ -13,6 +13,8 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
     private bool canMove = true;
     private CharacterController ctrl;
     private NetworkAnimator hackerNetworkAnimator;
+    private float velocity;
+
     // Use this for initialization
     void Start()
     {
@@ -40,6 +42,8 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
 	    {
             Vector3 input = new Vector3(Input.GetAxis("Horizontal1"), 0f, Input.GetAxis("Vertical1"));
             UpdateAnimation(input, speed);
+            velocity = input.magnitude * speed;
+            CmdSetVelocity(velocity);
             //CmdUpdateAnimation(input, speed);
             //TODO resume FROM HERE hackerNetworkAnimator.set
             //align the model to the same direction the character is moving.
@@ -53,16 +57,40 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
         if (isRewinding)
         {
             canMove = false;
+            hackerNetworkAnimator.animator.speed = -1;
         }
         else
         {
             canMove = true;
+            hackerNetworkAnimator.animator.speed = 1;
         }
     }
 
     public void Pause(bool isPaused)
     {
+        if(isPaused == true)
+        {
+            hackerNetworkAnimator.animator.speed = 0;
+            RpcPause(isPaused);
+        }
+        else
+        {
+            hackerNetworkAnimator.animator.speed = 1;
+            RpcPause(isPaused);
+        }
+    }
 
+    [ClientRpc]
+    public void RpcPause(bool isPaused)
+    {
+        if (isPaused == true)
+        {
+            hackerNetworkAnimator.animator.speed = 0;
+        }
+        else
+        {
+            hackerNetworkAnimator.animator.speed = 1;
+        }
     }
 
     public void FastForward(bool fastForward)
@@ -88,5 +116,21 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
     public void CmdUpdateAnimation(Vector3 direction, float speed)
     {
         UpdateAnimation(direction, speed);
+    }
+
+    public float GetVelocity()
+    {
+        return velocity;
+    }
+
+    [Command]
+    public void CmdSetVelocity(float velocity)
+    {
+        this.velocity = velocity;
+    } 
+
+    public void UpdateAnimation(float speed)
+    {
+        hackerNetworkAnimator.animator.SetFloat("Speed", speed);
     }
 }

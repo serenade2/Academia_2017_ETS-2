@@ -15,7 +15,6 @@ public class InteractionColider : MonoBehaviour {
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "Hacker") {
-            Debug.Log("stay");
             if (Input.GetButton("Submit"))
             {
                 interactionManager.InProgress();
@@ -29,7 +28,8 @@ public class InteractionColider : MonoBehaviour {
 
     private void OnTriggerExit(Collider other)
     {
-        interactionManager.AbandonedProgress(); // arrete le remplisage
+        if (other.tag == "Hacker")
+            interactionManager.AbandonedProgress(); // arrete le remplisage
     }
 
 }
