@@ -6,6 +6,8 @@ using UnityEngine;
 public class RewindMementoAI : IRewindMemento
 {
     private Vector3 position;
+    private Quaternion rotation;
+    private float speed;
     private int currentObjectiveIndex;
     private AIMovement aiMovement;
 
@@ -14,11 +16,15 @@ public class RewindMementoAI : IRewindMemento
         aiMovement = rewindable.GetComponent<AIMovement>();
         position = rewindable.transform.position;
         currentObjectiveIndex = aiMovement.GetCurrentObjectiveIndex();
+        rotation = rewindable.transform.rotation;
+        speed = aiMovement.GetAgentSpeed();
     }
 
     public void RestoreFromMemento(GameObject rewindable)
     {
         rewindable.transform.position = position;
+        rewindable.transform.rotation = rotation;
+        aiMovement.UpdateAnimation(speed);
         rewindable.GetComponent<AIMovement>().ChangeDestination(currentObjectiveIndex);
 
         //Add objectives made after rewind

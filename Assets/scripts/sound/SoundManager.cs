@@ -107,7 +107,7 @@ public class SoundManager : NetworkBehaviour
     [ClientRpc]
     public void RpcUnMuteStageClip()
     {
-        RpcUnMuteStageClip();
+        UnMuteStageClip();
     }
 
     public void UnMuteRevertStageClip()
