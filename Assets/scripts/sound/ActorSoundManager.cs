@@ -10,15 +10,12 @@ public class ActorSoundManager : MonoBehaviour
     public AudioClip InteractionAudioClip;
     public AudioClip DesintegrateAudioClip;
     private AudioSource audioPlayer;
-    private NetworkAnimator networkAnimator;
-    private int maxClip;
     private int nextClip;
-	// Use this for initialization
+	
+    // Use this for initialization
 	void Start ()
     {
-        networkAnimator = GetComponent<NetworkAnimator>();
 	    audioPlayer = GetComponent<AudioSource>();
-	    maxClip = StepAudioClips.Count;
 	    nextClip = 0;
     }
 	
@@ -30,14 +27,11 @@ public class ActorSoundManager : MonoBehaviour
 
     public void PlayStepSound()
     {
-        if (audioPlayer.isPlaying)
-        {
-            
-        }
         if (nextClip == StepAudioClips.Count)
         {
             nextClip = 0;
         }
+
         AudioClip currentStep = StepAudioClips[nextClip];
         audioPlayer.clip = currentStep;
         audioPlayer.Play();
@@ -49,6 +43,4 @@ public class ActorSoundManager : MonoBehaviour
         audioPlayer.clip = DesintegrateAudioClip;
         audioPlayer.Play();
     }
-
-
 }

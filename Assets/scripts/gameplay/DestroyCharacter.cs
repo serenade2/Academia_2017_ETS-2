@@ -5,6 +5,15 @@ using UnityEngine.Networking;
 
 public class DestroyCharacter : NetworkBehaviour
 {
+    public GameObject VfxGameObject;
+    public float VfxLifeTime = 5;
+    private ActorSoundManager actorSoundManager;
+    void Start()
+    {
+        actorSoundManager = GetComponent<ActorSoundManager>();
+            // hide the 
+        VfxGameObject.SetActive(false);
+    }
 	// Update is called once per frame
 	void Update () {
 		
@@ -13,6 +22,7 @@ public class DestroyCharacter : NetworkBehaviour
     [ClientRpc]
     public void RpcDestroy()
     {
+        DisplayDestroyVfx();
         Destroy(this.gameObject);
     }
 
@@ -27,5 +37,13 @@ public class DestroyCharacter : NetworkBehaviour
         RpcDestroy();
     }
 
+    public void DisplayDestroyVfx()
+    {
 
+        actorSoundManager.PlayDesintegrateSound();
+        VfxGameObject.SetActive(true);
+        
+        VfxGameObject.transform.parent = null;
+        Destroy(VfxGameObject,VfxLifeTime);
+    }
 }

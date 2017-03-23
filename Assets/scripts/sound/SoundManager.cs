@@ -30,6 +30,7 @@ public class SoundManager : NetworkBehaviour
         PlayStageClip(true);
         PlayRevertStageClip(true);
         MuteRevertStageClip();
+        print("GameStartPlay called...");
     }
 
     public void PlayWinningClip(bool looping)
