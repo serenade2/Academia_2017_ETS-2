@@ -922,7 +922,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1732881900477522}
-  m_LocalRotation: {x: 0.61110026, y: -0.32521254, z: 0.6543836, w: 0.304262}
+  m_LocalRotation: {x: 0.6111003, y: -0.32521257, z: 0.65438366, w: 0.30426204}
   m_LocalPosition: {x: -0.05878442, y: 0.13533472, z: -0.0041038347}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1299,24 +1299,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
-    m_Value: 2
+    m_Value: 0
   m_AssetId:
-    i0: 108
-    i1: 248
-    i2: 19
-    i3: 125
-    i4: 112
-    i5: 36
-    i6: 115
-    i7: 180
-    i8: 123
-    i9: 2
-    i10: 179
-    i11: 51
-    i12: 120
-    i13: 116
-    i14: 54
-    i15: 134
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114197658406883676
