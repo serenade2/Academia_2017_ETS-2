@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
+
 using UnityEngine.EventSystems;
 using System;
 
@@ -10,9 +11,15 @@ public class NavigationScript : MonoBehaviour {
 
 
     public GameObject main;
-    public GameObject option;
+    //public GameObject option;
     public GameObject play;
     public NetworkManager network;
+
+    [Header("Gestion des boutton first Select")]
+ 
+
+    public Button pageJeuxFristSelect;
+    public Button pageMainFristSelect;
 
     //public void Awake()
     //{
@@ -21,15 +28,18 @@ public class NavigationScript : MonoBehaviour {
 
     public void toSelectPlay() {
         play.gameObject.SetActive(true);
-        option.gameObject.SetActive(false);
+        //option.gameObject.SetActive(false);
         main.gameObject.SetActive(false);
+
+        pageJeuxFristSelect.Select();
+        
     }
 
-    public void toOption() {
-        play.gameObject.SetActive(false);
-        option.gameObject.SetActive(true);
-        main.gameObject.SetActive(false);
-    }
+    //public void toOption() {
+    //    play.gameObject.SetActive(false);
+    //    //option.gameObject.SetActive(true);
+    //    main.gameObject.SetActive(false);
+    //}
 
     public void quiter() {
         Application.Quit();
@@ -38,8 +48,9 @@ public class NavigationScript : MonoBehaviour {
     public void back()
     {
         play.gameObject.SetActive(false);
-        option.gameObject.SetActive(false);
+        //option.gameObject.SetActive(false);
         main.gameObject.SetActive(true);
+        pageMainFristSelect.Select();
     }
 
     public void prepareGame(Toggle t)
