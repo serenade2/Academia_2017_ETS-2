@@ -79,7 +79,7 @@ public class CrosshairManager : NetworkBehaviour {
                 if (hit.collider.transform.parent.GetComponent<DestroyCharacter>() != null)
                 {
 
-                    if (hit.collider.tag == "Hacker")
+                    if (hit.collider.transform.gameObject.tag == "Hacker")
                     {
                         // trigger victory for Watcher
                         Debug.Log("=================     Watcher WINS   ===================");
