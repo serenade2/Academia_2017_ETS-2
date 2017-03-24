@@ -4007,7 +4007,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1464985569787088}
-  m_LocalRotation: {x: 0.6111003, y: -0.32521257, z: 0.65438366, w: 0.30426204}
+  m_LocalRotation: {x: 0.61110026, y: -0.32521254, z: 0.6543836, w: 0.304262}
   m_LocalPosition: {x: -0.05878442, y: 0.13533472, z: -0.0041038347}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7207,6 +7207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trailPrefab: {fileID: 0}
+  spawnPosition: {fileID: 0}
 --- !u!114 &114046209100033480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7272,6 +7274,9 @@ MonoBehaviour:
   hackerCameraPrefab: {fileID: 1184326867210834, guid: 6970c6da3b18a71479df0ab2fd2e0e41,
     type: 2}
   speed: 3
+  LoseDisplay: {fileID: 1532574595332650, guid: be95f7f2a563e934f8e5da6382cc4f17,
+    type: 2}
+  WinDisplay: {fileID: 1736587172811782, guid: 7b314ce70abce1f4f9af11f51ba7ec88, type: 2}
 --- !u!114 &114138764608007944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7335,6 +7340,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   memento: 0
+  recordFrequency: 0.1
+  recordMaxTime: 10
 --- !u!114 &114260655604365340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7412,6 +7419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3774bcafa21ab4a449db80882b5d7507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VfxGameObject: {fileID: 0}
+  VfxLifeTime: 5
 --- !u!114 &114462912395320762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7571,6 +7580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trailPrefab: {fileID: 0}
+  spawnPosition: {fileID: 0}
 --- !u!114 &114862458932353596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7645,6 +7656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a80517cdca0c47a4289c1e6c171eddb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trailPrefab: {fileID: 0}
+  spawnPosition: {fileID: 0}
 --- !u!124 &124092023360791556
 Behaviour:
   m_ObjectHideFlags: 1

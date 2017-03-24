@@ -71,6 +71,8 @@ public class NavigationScript : MonoBehaviour {
             String ipHost = i.text;
 
             String[] ip = ipHost.Split(':');
+            
+
             network.SetMatchHost(ip[0],int.Parse(ip[1]),false);
             network.StartClient();
             

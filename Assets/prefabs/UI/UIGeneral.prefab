@@ -332,6 +332,8 @@ MonoBehaviour:
   crossHair: {fileID: 114417475858827404}
   worldCanvas: {fileID: 223634832692525490}
   maxTaggableCharacters: 3
+  WinnningDisplay: {fileID: 1736587172811782, guid: 7b314ce70abce1f4f9af11f51ba7ec88,
+    type: 2}
   layer:
     serializedVersion: 2
     m_Bits: 256
