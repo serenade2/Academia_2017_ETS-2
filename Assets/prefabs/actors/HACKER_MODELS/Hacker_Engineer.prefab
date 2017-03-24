@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 82284086043482894}
   - component: {fileID: 114302968735849868}
   - component: {fileID: 114046606932761716}
+  - component: {fileID: 114647764070255528}
   m_Layer: 10
   m_Name: Hacker_Engineer
   m_TagString: Hacker
@@ -1038,7 +1039,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1627627676611992}
-  m_LocalRotation: {x: 0.6111003, y: -0.32521257, z: 0.65438366, w: 0.30426204}
+  m_LocalRotation: {x: 0.61110026, y: -0.32521254, z: 0.6543836, w: 0.304262}
   m_LocalPosition: {x: -0.05878442, y: 0.13533472, z: -0.0041038347}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1265,15 +1266,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StepAudioClips:
-  - {fileID: 8300000, guid: b0d989c41ed92c14e81041b751ea9955, type: 3}
-  - {fileID: 8300000, guid: fe3ce9b450b36cb46926081cfc1530d0, type: 3}
-  - {fileID: 8300000, guid: 483596e909c027d49bffc5b1bf13b5a6, type: 3}
-  - {fileID: 8300000, guid: 09c75f61beecd1b498bde130ea26038f, type: 3}
-  - {fileID: 8300000, guid: 72a2e96f3382fe5419a70163cf6c1ea6, type: 3}
-  - {fileID: 8300000, guid: 438f2d100ba2341419fb0a7de9dbf0eb, type: 3}
-  - {fileID: 8300000, guid: 26033889273619e46b48df3d26dcd669, type: 3}
-  - {fileID: 8300000, guid: 2087a370351885e4597a0c3b1bfb9317, type: 3}
-  - {fileID: 8300000, guid: 2c4bbcae2cfbc354cb5e9d7ff0515764, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   InteractionAudioClip: {fileID: 0}
   DesintegrateAudioClip: {fileID: 8300000, guid: 32877d3b863de9b4e8c1572c3bad942a,
     type: 3}
@@ -1416,6 +1417,18 @@ MonoBehaviour:
     i15: 178
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114647764070255528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1458704947068104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e70fd63f712434ab12607ed716086d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1324289921573526, guid: 6368dd3ed0440c94fb5f16e77396d860, type: 2}
 --- !u!114 &114719896650754532
 MonoBehaviour:
   m_ObjectHideFlags: 1

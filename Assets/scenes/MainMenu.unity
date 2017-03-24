@@ -254,7 +254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &81208009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,7 +1143,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 756397960}
   m_TextComponent: {fileID: 283706933}
   m_Placeholder: {fileID: 391254795}
@@ -1677,7 +1677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1376033049
 RectTransform:
   m_ObjectHideFlags: 0

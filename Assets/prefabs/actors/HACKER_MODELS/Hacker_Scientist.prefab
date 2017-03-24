@@ -653,6 +653,7 @@ GameObject:
   - component: {fileID: 82271603603900026}
   - component: {fileID: 114316146743882006}
   - component: {fileID: 114622945276510710}
+  - component: {fileID: 114773369180728382}
   m_Layer: 10
   m_Name: Hacker_Scientist
   m_TagString: Hacker
@@ -1991,15 +1992,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StepAudioClips:
-  - {fileID: 8300000, guid: b0d989c41ed92c14e81041b751ea9955, type: 3}
-  - {fileID: 8300000, guid: fe3ce9b450b36cb46926081cfc1530d0, type: 3}
-  - {fileID: 8300000, guid: 483596e909c027d49bffc5b1bf13b5a6, type: 3}
-  - {fileID: 8300000, guid: 09c75f61beecd1b498bde130ea26038f, type: 3}
-  - {fileID: 8300000, guid: 72a2e96f3382fe5419a70163cf6c1ea6, type: 3}
-  - {fileID: 8300000, guid: 438f2d100ba2341419fb0a7de9dbf0eb, type: 3}
-  - {fileID: 8300000, guid: 26033889273619e46b48df3d26dcd669, type: 3}
-  - {fileID: 8300000, guid: 2087a370351885e4597a0c3b1bfb9317, type: 3}
-  - {fileID: 8300000, guid: 2c4bbcae2cfbc354cb5e9d7ff0515764, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   InteractionAudioClip: {fileID: 0}
   DesintegrateAudioClip: {fileID: 8300000, guid: 32877d3b863de9b4e8c1572c3bad942a,
     type: 3}
@@ -2128,6 +2129,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurrTimeOnPause: 0.2
+--- !u!114 &114773369180728382
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1785591465865406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e70fd63f712434ab12607ed716086d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1324289921573526, guid: 6368dd3ed0440c94fb5f16e77396d860, type: 2}
 --- !u!114 &114794159887496616
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4749454331959500}
   - component: {fileID: 114066182380965124}
   - component: {fileID: 114268371767431144}
+  - component: {fileID: 114249898786104202}
   m_Layer: 0
   m_Name: Watcher
   m_TagString: Untagged
@@ -58,6 +59,18 @@ MonoBehaviour:
     type: 2}
   watcherCameraPrefab: {fileID: 1721591948023436, guid: 2e819e8b2adf0774a9e29b7d3efe95bc,
     type: 2}
+--- !u!114 &114249898786104202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1457918936068302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e70fd63f712434ab12607ed716086d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1845910219460664, guid: fa3e2930fbf750041b435025128ddf51, type: 2}
 --- !u!114 &114268371767431144
 MonoBehaviour:
   m_ObjectHideFlags: 1
