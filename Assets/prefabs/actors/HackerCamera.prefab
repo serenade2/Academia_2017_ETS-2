@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074c7208e9fca8c4da1037d582a933f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DispersionAmount: 0.24
+  DispersionAmount: 0.1
   Colors: 0
 --- !u!114 &114254477173462630
 MonoBehaviour:
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Hacker
-  cameraOffset: {x: 0, y: 3.5, z: -3.5}
+  cameraOffset: {x: 0, y: 3.55, z: -5}
 --- !u!114 &114415264817157538
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646b5bc27a658f447b1d929fd5ffbd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 3
+  mode: 1
   showGeneratedNormals: 0
   offsetScale: 0.2
   blurRadius: 18
@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074c7208e9fca8c4da1037d582a933f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DispersionAmount: 0.25
+  DispersionAmount: 0.1
   Colors: 0
 --- !u!114 &114951416686053396
 MonoBehaviour:
