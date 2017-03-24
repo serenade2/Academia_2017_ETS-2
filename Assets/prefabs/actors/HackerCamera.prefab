@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074c7208e9fca8c4da1037d582a933f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DispersionAmount: 0.25
+  DispersionAmount: 0.24
   Colors: 0
 --- !u!114 &114254477173462630
 MonoBehaviour:
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184326867210834}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd70d448b18cfbc46af26466f752332c, type: 3}
   m_Name: 
@@ -265,7 +265,7 @@ MonoBehaviour:
   visualizeFocus: 0
   focalLength: 3.64
   focalSize: 0.789
-  aperture: 0.661
+  aperture: 0.244
   focalTransform: {fileID: 0}
   maxBlurSize: 2
   highResolution: 0
