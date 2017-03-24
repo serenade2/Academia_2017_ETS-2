@@ -66,14 +66,11 @@ public class NavigationScript : MonoBehaviour {
         else
         {
             // set network Client
-            
             InputField i = play.GetComponentInChildren<InputField>();
             String ipHost = i.text;
-
             String[] ip = ipHost.Split(':');
-            
-
-            network.SetMatchHost(ip[0],int.Parse(ip[1]),false);
+            network.networkAddress = ip[0];
+            network.networkPort = int.Parse(ip[1]);
             network.StartClient();
             
         }
