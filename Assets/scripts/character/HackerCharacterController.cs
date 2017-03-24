@@ -14,7 +14,11 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
     private CharacterController ctrl;
     private NetworkAnimator hackerNetworkAnimator;
     private float velocity;
-
+    public GameObject LoseDisplay;
+    public GameObject WinDisplay;
+    private SoundManager soundManager;
+    private GameObject _loseDisplay;
+    private GameObject _winDisplay;
     // Use this for initialization
     void Start()
     {
@@ -25,6 +29,13 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
         {
             GameObject.Instantiate(hackerCameraPrefab);
         }
+
+        soundManager = GameObject.FindObjectOfType<SoundManager>();
+        soundManager.GameStartPlay();
+        _loseDisplay = GameObject.Instantiate(LoseDisplay, this.transform.position, this.transform.rotation);
+        _loseDisplay.SetActive(false);
+        _winDisplay = GameObject.Instantiate(WinDisplay, this.transform.position, this.transform.rotation);
+        _winDisplay.SetActive(false);
 
     }
 
@@ -132,5 +143,37 @@ public class HackerCharacterController : NetworkBehaviour, IRewindable
     public void UpdateAnimation(float speed)
     {
         hackerNetworkAnimator.animator.SetFloat("Speed", speed);
+    }
+
+    public void ShowWinDisplay()
+    {
+        _winDisplay.SetActive(true);
+    }
+
+    public void PlayLoseSound()
+    {
+        soundManager.PlayLosingClip(false);
+    }
+
+    public void DisplayLoseScreen()
+    {
+        _loseDisplay.SetActive(true);
+    }
+
+    [ClientRpc]
+    public void RpcDisplayLoseScreen()
+    {
+        if (hasAuthority)
+        {
+            DisplayLoseScreen();
+        }
+    }
+    [ClientRpc]
+    public void RpcPlayLoseSound()
+    {
+        if (hasAuthority)
+        {
+            PlayLoseSound();
+        }
     }
 }

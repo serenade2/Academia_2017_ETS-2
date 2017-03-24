@@ -1065,7 +1065,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1390819673046310}
-  m_LocalRotation: {x: 0.59642774, y: -0.35751665, z: 0.65353894, w: 0.29890242}
+  m_LocalRotation: {x: 0.5964278, y: -0.35751668, z: 0.653539, w: 0.29890245}
   m_LocalPosition: {x: -0.064812265, y: 0.1448568, z: -0.014041476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1772,6 +1772,9 @@ MonoBehaviour:
   hackerCameraPrefab: {fileID: 1184326867210834, guid: 6970c6da3b18a71479df0ab2fd2e0e41,
     type: 2}
   speed: 2
+  LoseDisplay: {fileID: 1532574595332650, guid: be95f7f2a563e934f8e5da6382cc4f17,
+    type: 2}
+  WinDisplay: {fileID: 1736587172811782, guid: 7b314ce70abce1f4f9af11f51ba7ec88, type: 2}
 --- !u!114 &114296306539459054
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -84,12 +84,20 @@ public class CrosshairManager : NetworkBehaviour {
 
                     if (hit.collider.transform.gameObject.tag == "Hacker")
                     {
-
+                        // temp hard code 
+                        HackerCharacterController hackerController = hit.collider.transform.parent.GetComponent<HackerCharacterController>();
+                        
                         // trigger victory for Watcher
                         Debug.Log("=================     Watcher WINS   ===================");
                         // play the winning sound
                         soundManager.PlayWinningClip(false);
                         DisplayWinningUIForWatcher();
+
+                        hackerController.RpcDisplayLoseScreen();
+                        hackerController.RpcPlayLoseSound();
+
+                       
+                        
                     }
                     else
                     {
@@ -142,9 +150,6 @@ public class CrosshairManager : NetworkBehaviour {
     {
         _winDisplay.SetActive(true);
     }
-
-
-
 
 
     /// <summary>
