@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: f629841549474e8429cec782a953e285
-timeCreated: 1490345381
+guid: d8d08f5a753ce464c9e46585d65f38f4
+timeCreated: 1490345400
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
   materialInstances:
   - serializedVersion: 16
-    name: TriangleTiles
-    prototypeName: TriangleTiles
+    name: HexagonSteel
+    prototypeName: HexagonSteel
     shaderName: 
     shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-    shaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
+    shaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP
     renderQueue: -1
     lightmapFlags: 1
     inputs:
@@ -28,17 +28,10 @@ SubstanceImporter:
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
-    - name: Tile_Amount
-      value:
-        scalar[0]: 2
-        scalar[1]: 0
-        scalar[2]: 0
-        scalar[3]: 0
-        texture: {instanceID: 0}
     materialInformation:
       serializedVersion: 5
       offset: {x: 0, y: 0}
-      scale: {x: 0.5, y: 0.5}
+      scale: {x: 0.4, y: 0.4}
       generateMipmaps: 1
       generateAllOutputs: 0
       animationUpdateRate: 42
@@ -49,7 +42,7 @@ SubstanceImporter:
           name: _BumpMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.5, y: 0.5}
+          scale: {x: 0.4, y: 0.4}
           offset: {x: 0, y: 0}
       - first:
           name: _DetailAlbedoMap
@@ -73,31 +66,31 @@ SubstanceImporter:
           name: _EmissionMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.5, y: 0.5}
+          scale: {x: 0.4, y: 0.4}
           offset: {x: 0, y: 0}
       - first:
           name: _MainTex
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.5, y: 0.5}
+          scale: {x: 0.4, y: 0.4}
           offset: {x: 0, y: 0}
       - first:
           name: _MetallicGlossMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.5, y: 0.5}
+          scale: {x: 0.4, y: 0.4}
           offset: {x: 0, y: 0}
       - first:
           name: _OcclusionMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.5, y: 0.5}
+          scale: {x: 0.4, y: 0.4}
           offset: {x: 0, y: 0}
       - first:
           name: _ParallaxMap
         second:
           texture: {instanceID: 0}
-          scale: {x: 0.5, y: 0.5}
+          scale: {x: 1, y: 1}
           offset: {x: 0, y: 0}
       floats:
       - first:
@@ -114,7 +107,7 @@ SubstanceImporter:
         second: 0
       - first:
           name: _GlossMapScale
-        second: 0.811
+        second: 0.606
       - first:
           name: _Glossiness
         second: 0.5
@@ -151,32 +144,27 @@ SubstanceImporter:
       colors:
       - first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 0.7647059, g: 0.90263695, b: 1, a: 1}
       - first:
           name: _EmissionColor
         second: {r: 0, g: 0, b: 0, a: 1}
     textureParameters:
-    - name: TriangleTiles_basecolor
+    - name: HexagonSteel_basecolor
       alphaSource: 6
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: TriangleTiles_normal
+    - name: HexagonSteel_normal
       alphaSource: 0
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: TriangleTiles_metallic
+    - name: HexagonSteel_metallic
       alphaSource: 7
       filterMode: 1
       aniso: 1
       wrapMode: 0
-    - name: TriangleTiles_AO
-      alphaSource: 0
-      filterMode: 1
-      aniso: 1
-      wrapMode: 0
-    - name: TriangleTiles_Height
+    - name: HexagonSteel_ao
       alphaSource: 0
       filterMode: 1
       aniso: 1
@@ -185,23 +173,19 @@ SubstanceImporter:
     - shaderProp:
         name: _BumpMap
       material: {instanceID: 0}
-      baseUID: 3024263939
+      baseUID: 3852187081
     - shaderProp:
         name: _MainTex
       material: {instanceID: 0}
-      baseUID: 3024263937
+      baseUID: 3852187083
     - shaderProp:
         name: _MetallicGlossMap
       material: {instanceID: 0}
-      baseUID: 3024263943
+      baseUID: 3852187085
     - shaderProp:
         name: _OcclusionMap
       material: {instanceID: 0}
-      baseUID: 3066006270
-    - shaderProp:
-        name: _ParallaxMap
-      material: {instanceID: 0}
-      baseUID: 3066006247
+      baseUID: 3891876166
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 
