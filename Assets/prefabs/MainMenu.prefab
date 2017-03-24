@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 114874638715993744}
   - component: {fileID: 114220418571639362}
   - component: {fileID: 114334387202103470}
-  - component: {fileID: 114941012505271266}
+  - component: {fileID: 114068239483665846}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -420,6 +420,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114068239483665846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1460681245241514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &114129992645990404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -512,7 +525,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'IP Adresse : 10.192.220.20'
+  m_Text: 'IP Adresse : 169.254.80.80'
 --- !u!114 &114153828470849074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -532,9 +545,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
-    m_HighlightedColor: {r: 0.5147059, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0, g: 0.6764706, b: 0.6764706, a: 1}
+    m_NormalColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.7647059, b: 0.7647059, a: 1}
+    m_PressedColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -617,9 +630,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
-    m_HighlightedColor: {r: 0, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
+    m_NormalColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.7647059, b: 0.7647059, a: 1}
+    m_PressedColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -680,7 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.5441177, g: 0.5441177, b: 0.5441177, a: 0.429}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -719,6 +732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IpText: {fileID: 114138310733504618}
   clientField: {fileID: 114416631906648512}
+  labelPort: {fileID: 114628414437055668}
 --- !u!114 &114416631906648512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -738,9 +752,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
-    m_HighlightedColor: {r: 0, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
+    m_NormalColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.7647059, b: 0.7647059, a: 1}
+    m_PressedColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -753,7 +767,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 114129992645990404}
   m_TextComponent: {fileID: 114815008428372458}
   m_Placeholder: {fileID: 114691441168431318}
@@ -907,7 +921,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'LAN Client :'
+  m_Text: 'Port : '
 --- !u!114 &114644206132854064
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -974,7 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.5441177, g: 0.5441177, b: 0.5441177, a: 0.429}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1008,9 +1022,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
-    m_HighlightedColor: {r: 0, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0, g: 0.6764706, b: 0.6764706, a: 1}
+    m_NormalColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.7647059, b: 0.7647059, a: 1}
+    m_PressedColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1087,9 +1101,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
-    m_HighlightedColor: {r: 0, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
+    m_NormalColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.7647059, b: 0.7647059, a: 1}
+    m_PressedColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1152,7 +1166,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: 
 --- !u!114 &114781177895694822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1215,9 +1229,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
-    m_HighlightedColor: {r: 0, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0, g: 0.6691177, b: 0.6691177, a: 1}
+    m_NormalColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.7647059, b: 0.7647059, a: 1}
+    m_PressedColor: {r: 0, g: 0.43382353, b: 0.43382353, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1315,19 +1329,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114941012505271266
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1460681245241514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates: []
-  delegates: []
 --- !u!114 &114964253420330596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1591,7 +1592,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 298, y: -185}
+  m_AnchoredPosition: {x: 298, y: -173}
   m_SizeDelta: {x: 308, y: 44.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224219751428352024
@@ -1839,7 +1840,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143, y: -112}
+  m_AnchoredPosition: {x: 143, y: -92}
   m_SizeDelta: {x: 210.6, y: 34.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224951448227697080

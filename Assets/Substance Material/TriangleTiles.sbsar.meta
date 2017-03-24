@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: f629841549474e8429cec782a953e285
-timeCreated: 1490323052
+timeCreated: 1490343595
 licenseType: Free
 SubstanceImporter:
   serializedVersion: 5
@@ -114,7 +114,7 @@ SubstanceImporter:
         second: 0
       - first:
           name: _GlossMapScale
-        second: 1
+        second: 0.702
       - first:
           name: _Glossiness
         second: 0.5
