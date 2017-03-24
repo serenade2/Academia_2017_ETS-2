@@ -14,6 +14,7 @@ public class WatcherCameraController : MonoBehaviour
     public enum CameraMode {Rotation, Fps, Drone};
     public CameraMode cameraMode = CameraMode.Fps;
     private SoundManager soundManager;
+    private Rigidbody rb;
     // Use this for initialization
     void Start()
     {
@@ -31,6 +32,7 @@ public class WatcherCameraController : MonoBehaviour
         //transform.LookAt(level.transform.position);
         soundManager = GameObject.FindObjectOfType<SoundManager>();
         soundManager.GameStartPlay();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
