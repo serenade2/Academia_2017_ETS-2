@@ -49,7 +49,6 @@ GameObject:
   - component: {fileID: 114801248780616308}
   - component: {fileID: 114689582276039998}
   - component: {fileID: 114877243732926776}
-  - component: {fileID: 114194243695320266}
   - component: {fileID: 114664694590904496}
   m_Layer: 0
   m_Name: WatcherCamera
@@ -167,38 +166,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1721591948023436}
   m_Enabled: 1
---- !u!114 &114194243695320266
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1721591948023436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 46
-    i1: 129
-    i2: 158
-    i3: 139
-    i4: 42
-    i5: 223
-    i6: 7
-    i7: 116
-    i8: 169
-    i9: 226
-    i10: 155
-    i11: 125
-    i12: 62
-    i13: 254
-    i14: 149
-    i15: 188
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114209202170058374
 MonoBehaviour:
   m_ObjectHideFlags: 1

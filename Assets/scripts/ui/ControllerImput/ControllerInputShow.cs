@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class ControllerInputShow : NetworkBehaviour
+public class ControllerInputShow : MonoBehaviour
 {
     public GameObject prefab;
     private GameObject test;
