@@ -45,6 +45,8 @@ GameObject:
   - component: {fileID: 114951416686053396}
   - component: {fileID: 114872677448106450}
   - component: {fileID: 114209202170058374}
+  - component: {fileID: 114998359883366062}
+  - component: {fileID: 114410531528094908}
   m_Layer: 0
   m_Name: WatcherCamera
   m_TagString: MainCamera
@@ -177,6 +179,18 @@ MonoBehaviour:
   _horizontalShake: 0.072
   _colorDrift: 0.275
   _shader: {fileID: 4800000, guid: da33272284ea24f208f36998880990be, type: 3}
+--- !u!114 &114410531528094908
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1721591948023436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80e70fd63f712434ab12607ed716086d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1845910219460664, guid: fa3e2930fbf750041b435025128ddf51, type: 2}
 --- !u!114 &114506260283031664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,6 +277,38 @@ MonoBehaviour:
   minTimeOn: 0.1
   maxTimeOn: 0.25
   lerpStep: 0.1
+--- !u!114 &114998359883366062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1721591948023436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 46
+    i1: 129
+    i2: 158
+    i3: 139
+    i4: 42
+    i5: 223
+    i6: 7
+    i7: 116
+    i8: 169
+    i9: 226
+    i10: 155
+    i11: 125
+    i12: 62
+    i13: 254
+    i14: 149
+    i15: 188
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!124 &124981062329192710
 Behaviour:
   m_ObjectHideFlags: 1

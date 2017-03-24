@@ -653,7 +653,6 @@ GameObject:
   - component: {fileID: 82271603603900026}
   - component: {fileID: 114316146743882006}
   - component: {fileID: 114622945276510710}
-  - component: {fileID: 114773369180728382}
   m_Layer: 10
   m_Name: Hacker_Scientist
   m_TagString: Hacker
@@ -2129,18 +2128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurrTimeOnPause: 0.2
---- !u!114 &114773369180728382
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1785591465865406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80e70fd63f712434ab12607ed716086d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 1324289921573526, guid: 6368dd3ed0440c94fb5f16e77396d860, type: 2}
 --- !u!114 &114794159887496616
 MonoBehaviour:
   m_ObjectHideFlags: 1

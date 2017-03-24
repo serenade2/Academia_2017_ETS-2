@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class ControllerInputShow : MonoBehaviour
+public class ControllerInputShow : NetworkBehaviour
 {
     public GameObject prefab;
     private GameObject test;
@@ -16,6 +17,7 @@ public class ControllerInputShow : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+
 		if (Input.GetKeyDown(KeyCode.Joystick1Button7))
 		{
             test.SetActive(true);
