@@ -10,4 +10,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scenes/MainMenu.unity
   - enabled: 1
-    path: Assets/scenes/SceneIntegration.unity
+    path: Assets/scenes/FinalMap_NoPB.unity
