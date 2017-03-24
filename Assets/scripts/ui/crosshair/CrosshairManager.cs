@@ -12,7 +12,8 @@ public class CrosshairManager : NetworkBehaviour {
     private Camera worldCamera;
     public Canvas worldCanvas;
     public int maxTaggableCharacters = 3;
-
+    public GameObject WinnningDisplay;
+    private GameObject _winDisplay;
     RaycastHit hit;
     public LayerMask layer;
     TagCharacter characterTag;
@@ -43,6 +44,8 @@ public class CrosshairManager : NetworkBehaviour {
 
         worldCamera = Camera.main;
         soundManager = FindObjectOfType<SoundManager>();
+        _winDisplay = GameObject.Instantiate(WinnningDisplay, worldCamera.transform.position, worldCamera.transform.rotation);
+        _winDisplay.SetActive(false);
     }
 
     void OnRectTransformDimensionsChange()
@@ -81,10 +84,12 @@ public class CrosshairManager : NetworkBehaviour {
 
                     if (hit.collider.transform.gameObject.tag == "Hacker")
                     {
+
                         // trigger victory for Watcher
                         Debug.Log("=================     Watcher WINS   ===================");
                         // play the winning sound
                         soundManager.PlayWinningClip(false);
+                        DisplayWinningUIForWatcher();
                     }
                     else
                     {
@@ -132,6 +137,13 @@ public class CrosshairManager : NetworkBehaviour {
             }
         }
     }
+
+    private void DisplayWinningUIForWatcher()
+    {
+        _winDisplay.SetActive(true);
+    }
+
+
 
 
 
