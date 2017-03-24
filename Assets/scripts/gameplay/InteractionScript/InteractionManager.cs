@@ -63,6 +63,7 @@ public class InteractionManager : MonoBehaviour {
 
     private void CompletedAction()
     {
-        ObjectiveManager.Instance.CmdCompleteObjective(activatable.gameObject);
+        activatable.gameObject.SetActive(false);
+        //ObjectiveManager.Instance.CmdCompleteObjective(activatable.gameObject);
     }
 }

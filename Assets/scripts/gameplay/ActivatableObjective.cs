@@ -9,36 +9,11 @@ public class ActivatableObjective : NetworkBehaviour {
     private GameObject objective;
     
 
-    public void Start()
-    {
-
-    }
-
-
-    [Command]
-    public void CmdActivate()
-    {
-        RpcActivate();
-    }
-
     [ClientRpc]
     public void RpcActivate()
     {
-        StartCoroutine(Fade());
+        this.gameObject.SetActive(false);
     }
-
-    IEnumerator Fade()
-    {
-        for (float t = 0f; t < fadeTime; t += Time.deltaTime)
-        {
-            float fadeProgress = t / fadeTime;
-            
-            // TODO: Fade in the UI feedback to indicate an objective has been taken
-
-            yield return null; // continue the loop on the next frame
-        }
-
-    }
-
+    
 }
 

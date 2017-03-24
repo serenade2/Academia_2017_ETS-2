@@ -76,7 +76,7 @@ public class ObjectiveManager : NetworkBehaviour
     [Command]
     public void CmdCompleteObjective(GameObject door)
     {
-        door.GetComponent<ActivatableObjective>().CmdActivate();
+        door.GetComponent<ActivatableObjective>().RpcActivate();
     }
 
 }
