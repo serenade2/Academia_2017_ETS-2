@@ -18,12 +18,12 @@ public class ControllerInputShow : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown(KeyCode.Joystick1Button7))
+		if (Input.GetKeyDown(KeyCode.Joystick1Button6) || Input.GetKeyDown(KeyCode.Joystick1Button7))
 		{
             test.SetActive(true);
 
 		}
-        else if (Input.GetKeyUp(KeyCode.Joystick1Button7))
+        else if (Input.GetKeyUp(KeyCode.Joystick1Button6) || Input.GetKeyUp(KeyCode.Joystick1Button7))
 		{
             test.SetActive(false);
         }
