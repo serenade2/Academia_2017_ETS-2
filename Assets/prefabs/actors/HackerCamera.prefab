@@ -33,6 +33,7 @@ GameObject:
   - component: {fileID: 114084135132173302}
   - component: {fileID: 114626703297519320}
   - component: {fileID: 114208795075582816}
+  - component: {fileID: 114017255352856402}
   m_Layer: 0
   m_Name: HackerCamera
   m_TagString: MainCamera
@@ -101,6 +102,38 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184326867210834}
   m_Enabled: 1
+--- !u!114 &114017255352856402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1184326867210834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 105
+    i1: 112
+    i2: 198
+    i3: 218
+    i4: 59
+    i5: 24
+    i6: 167
+    i7: 20
+    i8: 121
+    i9: 223
+    i10: 10
+    i11: 178
+    i12: 253
+    i13: 46
+    i14: 14
+    i15: 65
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114070441921284088
 MonoBehaviour:
   m_ObjectHideFlags: 1
