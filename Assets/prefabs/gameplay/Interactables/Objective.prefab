@@ -177,7 +177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1691892392389384
 GameObject:
   m_ObjectHideFlags: 1
@@ -275,7 +275,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1214317050102488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.16, y: 33.633656, z: 8.89}
+  m_LocalPosition: {x: 38.85507, y: 37.543655, z: 13.559521}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4627185657405210}
@@ -381,9 +381,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327879984912682}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalRotation: {x: 0, y: 0.9208317, z: 0, w: 0.38996038}
+  m_LocalPosition: {x: 0, y: -0.46, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4376178214842370}
   - {fileID: 4883583444313594}
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneId:
-    m_Value: 0
+    m_Value: 7
   m_AssetId:
     i0: 172
     i1: 254
@@ -503,7 +503,12 @@ MonoBehaviour:
   scientistAccess: 1
   engineerAccess: 1
   usingPos: {fileID: 4914616420486256}
-  users: []
+  users:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   workingTime: 3
 --- !u!198 &198018272614318010
 ParticleSystem:
@@ -513,7 +518,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1963209152660856}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -560,7 +565,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1233467690
+  randomSeed: 113672365
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -3138,7 +3143,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1855789384862672}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -3185,7 +3190,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1133752661
+  randomSeed: -2125968672
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5763,7 +5768,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1280403470841406}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -5810,7 +5815,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1790508595
+  randomSeed: -566221186
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -8388,7 +8393,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1395182573265080}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -8435,7 +8440,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1041211446
+  randomSeed: -1765423052
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -11013,7 +11018,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1430167635724040}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -11060,7 +11065,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 2024452722
+  randomSeed: 617996531
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -13638,7 +13643,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1691892392389384}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -13685,7 +13690,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1299223932
+  randomSeed: 496791655
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -16263,7 +16268,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1140139020815384}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -16310,7 +16315,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 10634964
+  randomSeed: -389084262
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -18888,7 +18893,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1160342820372670}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -18935,7 +18940,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -2043333718
+  randomSeed: -323938573
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -21513,7 +21518,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1574142870393886}
   serializedVersion: 5
   lengthInSec: 1
-  simulationSpeed: 1
+  speed: 1
   looping: 1
   prewarm: 0
   playOnAwake: 1
@@ -21560,7 +21565,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 495626791
+  randomSeed: 1418585913
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -24162,7 +24167,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
+  - {fileID: 2100000, guid: 1d86b69c0ee23024fa775fac74c14518, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -24212,7 +24217,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
+  - {fileID: 2100000, guid: 1d86b69c0ee23024fa775fac74c14518, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -24262,7 +24267,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
+  - {fileID: 2100000, guid: 1d86b69c0ee23024fa775fac74c14518, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -24312,7 +24317,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
+  - {fileID: 2100000, guid: 1d86b69c0ee23024fa775fac74c14518, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -24362,7 +24367,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
+  - {fileID: 2100000, guid: 1d86b69c0ee23024fa775fac74c14518, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -24412,7 +24417,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
+  - {fileID: 2100000, guid: 1d86b69c0ee23024fa775fac74c14518, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -24462,7 +24467,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
+  - {fileID: 2100000, guid: 1d86b69c0ee23024fa775fac74c14518, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -24512,7 +24517,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
+  - {fileID: 2100000, guid: 1d86b69c0ee23024fa775fac74c14518, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -24562,7 +24567,7 @@ ParticleSystemRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 0
   m_Materials:
-  - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
+  - {fileID: 2100000, guid: 1d86b69c0ee23024fa775fac74c14518, type: 2}
   - {fileID: -1688037865, guid: cedfdec61605c754788e28b8df68457f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
