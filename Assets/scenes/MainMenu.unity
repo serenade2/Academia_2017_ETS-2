@@ -1062,7 +1062,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'IP Adresse : 10.192.220.20'
+  m_Text: 'IP Adresse : 169.254.80.80'
 --- !u!222 &718809968
 CanvasRenderer:
   m_ObjectHideFlags: 0

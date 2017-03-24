@@ -1443,6 +1443,9 @@ MonoBehaviour:
   hackerCameraPrefab: {fileID: 1184326867210834, guid: 6970c6da3b18a71479df0ab2fd2e0e41,
     type: 2}
   speed: 2
+  LoseDisplay: {fileID: 1532574595332650, guid: be95f7f2a563e934f8e5da6382cc4f17,
+    type: 2}
+  WinDisplay: {fileID: 1736587172811782, guid: 7b314ce70abce1f4f9af11f51ba7ec88, type: 2}
 --- !u!137 &137012047904397600
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
