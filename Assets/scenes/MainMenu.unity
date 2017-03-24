@@ -269,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IpText: {fileID: 718809967}
   clientField: {fileID: 756397958}
+  labelPort: {fileID: 1785948616}
 --- !u!114 &81208010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,7 +751,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter text...
+  m_Text: 
 --- !u!222 &391254796
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1190,7 +1191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 298, y: -185}
+  m_AnchoredPosition: {x: 298, y: -173}
   m_SizeDelta: {x: 308, y: 44.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &756397960
@@ -2018,7 +2019,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 143, y: -112}
+  m_AnchoredPosition: {x: 143, y: -92}
   m_SizeDelta: {x: 210.6, y: 34.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1758847304
@@ -2148,7 +2149,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'LAN Client :'
+  m_Text: 'Port : '
 --- !u!222 &1785948617
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -59,7 +59,8 @@ public class NavigationScript : MonoBehaviour {
         if (t.isOn)
         {
             //set network host
-
+            InputField i = play.GetComponentInChildren<InputField>();
+            network.networkPort = int.Parse(i.text);
             network.StartHost();
         }
         else
@@ -68,8 +69,9 @@ public class NavigationScript : MonoBehaviour {
             
             InputField i = play.GetComponentInChildren<InputField>();
             String ipHost = i.text;
-            Debug.Log(ipHost);
-            network.SetMatchHost(ipHost, 7777,false);
+
+            String[] ip = ipHost.Split(':');
+            network.SetMatchHost(ip[0],int.Parse(ip[1]),false);
             network.StartClient();
             
         }

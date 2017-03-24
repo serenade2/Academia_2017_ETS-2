@@ -13,7 +13,9 @@ public class LanHostToggleScript : MonoBehaviour
     
     public Text IpText;
     public InputField clientField;
+    public Text labelPort;
     private bool isSelected;
+
 
     // Use this for initialization
     void Start()
@@ -35,9 +37,11 @@ public class LanHostToggleScript : MonoBehaviour
             Debug.Log(clientField.isActiveAndEnabled);
             IpText.text = "IP Adresse : " + LocalIPAddress();
             IpText.enabled = true;
-            clientField.interactable = false;
+            labelPort.text = "Port : ";
             //clientField.enabled = false;
             
+
+
         }
         else {
             isSelected = false;
@@ -46,6 +50,8 @@ public class LanHostToggleScript : MonoBehaviour
             //clientField.enabled = true;
             clientField.interactable = true;
             IpText.text = "";
+
+            labelPort.text = "Ip sever :  ";
         }
     }
 
