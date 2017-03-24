@@ -30,8 +30,11 @@ public class WatcherCameraController : MonoBehaviour
         {
             transform.Rotate(Vector3.up, Input.GetAxis("RHorizontal1") * lookAngleIncrement * Time.deltaTime, Space.World);
             transform.Rotate(transform.right, -Input.GetAxis("RVertical1") * lookAngleIncrement * Time.deltaTime, Space.World);
+
             transform.Translate(new Vector3(transform.forward.x, 0, transform.forward.z).normalized * Input.GetAxis("Vertical1") * moveSpeed * Time.deltaTime, Space.World);
             transform.Translate(transform.right * Input.GetAxis("Horizontal1") * moveSpeed * Time.deltaTime, Space.World);
+
+
             transform.Translate(Vector3.up * -Input.GetAxis("Zoom") * moveSpeed * Time.deltaTime, Space.World);
         }
         else

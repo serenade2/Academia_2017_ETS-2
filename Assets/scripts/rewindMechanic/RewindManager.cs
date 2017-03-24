@@ -64,13 +64,13 @@ public class RewindManager : NetworkBehaviour, Observable
             return;
 
         // rewind button down
-        if (Input.GetKeyDown(KeyCode.Joystick1Button4))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button2))
         {
             StartRewind();
         }
 
         // rewind button up
-        else if (Input.GetKeyUp(KeyCode.Joystick1Button4))
+        else if (Input.GetKeyUp(KeyCode.Joystick1Button2))
         {
             StopRewind();
             activeCooldown();

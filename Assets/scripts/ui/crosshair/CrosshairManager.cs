@@ -74,7 +74,7 @@ public class CrosshairManager : NetworkBehaviour {
 
     private void destroyEvent()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button5))
         {
             Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
             if (Physics.Raycast(ray.origin, ray.direction, out hit, 50f, layer))
@@ -112,7 +112,7 @@ public class CrosshairManager : NetworkBehaviour {
 
     private void tagEvent()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
             debugLog("1");
             Ray ray = worldCamera.ScreenPointToRay(crossHair.transform.position);
